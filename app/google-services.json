@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:155736443458:android:34e27480fedf008aa9fbdb",
         "android_client_info": {
-          "package_name": "Orbital.project"
+          "package_name": "orbital.project"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "155736443458-4aoul4jocjn8ulpsj6auigmdtr4eqos3.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "Orbital.project",
+            "package_name": "orbital.project",
             "certificate_hash": "1404b530f603139467fa4f94c09da71a90d61368"
           }
         },

@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 
 class Login_page : AppCompatActivity() {
@@ -16,8 +17,8 @@ class Login_page : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_page)
 
-        val loginusername : EditText = findViewById(R.id.loginusername)
-        val loginpassword: EditText = findViewById(R.id.loginpassword)
+        val loginusername : TextInputEditText = findViewById(R.id.loginusername)
+        val loginpassword: TextInputEditText = findViewById(R.id.loginpassword)
         val forgetpassword: TextView = findViewById(R.id.forgetpassword)
         val login: Button = findViewById(R.id.login)
         val signup: TextView = findViewById(R.id.signup)

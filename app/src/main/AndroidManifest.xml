@@ -10,7 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MCQueue">
         <activity
-            android:name="orbital.project.StartScreen"
+            android:name=".BookingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".StartScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,16 +22,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="orbital.project.RegisterActivity"
+            android:name=".RegisterActivity"
             android:exported="false" />
         <activity
-            android:name="orbital.project.ForgotPasswordActivity"
+            android:name=".ForgotPasswordActivity"
             android:exported="false" />
         <activity
-            android:name="orbital.project.Login_page"
+            android:name=".Login_page"
             android:exported="false" />
         <activity
-            android:name="orbital.project.MainActivity"
+            android:name=".MainActivity"
             android:exported="true" />
 
         <meta-data
