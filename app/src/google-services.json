@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "155736443458",
+    "project_id": "trial-5a93c",
+    "storage_bucket": "trial-5a93c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:155736443458:android:34e27480fedf008aa9fbdb",
+        "android_client_info": {
+          "package_name": "orbital.project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "155736443458-4aoul4jocjn8ulpsj6auigmdtr4eqos3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "orbital.project",
+            "certificate_hash": "1404b530f603139467fa4f94c09da71a90d61368"
+          }
+        },
+        {
+          "client_id": "155736443458-lo52mqh9rblk0tug3glfkfc0u9sokj58.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-Y6-Dgc-RhTUQmOiL7c8STDu_P0M6cDA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "155736443458-lo52mqh9rblk0tug3glfkfc0u9sokj58.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
