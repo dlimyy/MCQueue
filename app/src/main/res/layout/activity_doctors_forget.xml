@@ -6,14 +6,10 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     android:background="@drawable/background_colour"
-    tools:context=".ForgotPasswordActivity">
+    tools:context=".DoctorsForget">
 
     <TextView
-<<<<<<< HEAD
-        android:id="@+id/forgetpassword"
-=======
-        android:id="@+id/troubleloggingin"
->>>>>>> remotes/origin/Update3.0
+        android:id="@+id/troubleloggingind"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -21,33 +17,6 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="120dp"
         android:gravity="center"
-<<<<<<< HEAD
-        android:text="Forgot Password"
-        android:textSize="30sp"
-        />
-
-    <EditText
-        android:id="@+id/forgotpasswordemail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:hint="username"
-        android:textSize="25sp"
-        android:inputType="textEmailAddress"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/forgetpassword" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/forgotpasswordbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/forgotpasswordemail"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="30dp"
-        android:text="Reset"
-=======
         android:text="Trouble Logging in?"
         android:textStyle="bold|italic"
         android:textColor="@color/black"
@@ -55,7 +24,7 @@
         />
 
     <TextView
-        android:id="@+id/text"
+        android:id="@+id/textd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -67,16 +36,16 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/troubleloggingin"
+        app:layout_constraintTop_toBottomOf="@+id/troubleloggingind"
         tools:ignore="HardcodedText"
 
         />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/emaillayoutd"
+        android:id="@+id/emaillayoutdoc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/text"
+        app:layout_constraintTop_toBottomOf="@id/textd"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:endIconMode="clear_text"
@@ -93,7 +62,7 @@
         >
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/resetemaild"
+            android:id="@+id/resetemaildoc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
@@ -103,7 +72,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/reset"
+        android:id="@+id/resetd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -114,21 +83,20 @@
         app:layout_constraintRight_toRightOf="parent"
         android:background="@drawable/roundbutton"
         app:backgroundTint="#5E60BC"
-        app:layout_constraintTop_toBottomOf="@id/emaillayoutd"
+        app:layout_constraintTop_toBottomOf="@id/emaillayoutdoc"
         android:text="Reset!"
         android:textAllCaps="false"
         />
 
     <TextView
-        android:id="@+id/back"
+        android:id="@+id/backd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/reset"
+        app:layout_constraintTop_toBottomOf="@id/resetd"
         android:text="Back to Login"
         android:layout_marginTop="40dp"
->>>>>>> remotes/origin/Update3.0
         />
 
 

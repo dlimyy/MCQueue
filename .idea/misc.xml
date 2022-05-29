@@ -35,6 +35,21 @@
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/layout/activity_start_screen.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1805" />
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1805" />
+<<<<<<< HEAD
+=======
+        <entry key="..\:/Users/zaiya/Downloads/MCQueue-master (1)/MCQueue-master/app/src/main/res/layout/activity_booking.xml" value="0.21784420289855072" />
+        <entry key="..\:/Users/zaiya/Downloads/MCQueue-master (1)/MCQueue-master/app/src/main/res/layout/activity_doctors_forget.xml" value="0.14375" />
+        <entry key="..\:/Users/zaiya/Downloads/MCQueue-master (1)/MCQueue-master/app/src/main/res/layout/activity_forgot_password.xml" value="0.21784420289855072" />
+        <entry key="..\:/Users/zaiya/Downloads/MCQueue-master (1)/MCQueue-master/app/src/main/res/layout/activity_login_doctors.xml" value="0.17708333333333334" />
+        <entry key="..\:/Users/zaiya/Downloads/MCQueue-master (1)/MCQueue-master/app/src/main/res/layout/activity_login_page.xml" value="0.21784420289855072" />
+        <entry key="..\:/Users/zaiya/Downloads/MCQueue-master (1)/MCQueue-master/app/src/main/res/layout/activity_login_pagePatients.xml" value="0.11302083333333333" />
+        <entry key="..\:/Users/zaiya/Downloads/MCQueue-master (1)/MCQueue-master/app/src/main/res/layout/activity_login_page_Doctors.xml" value="0.264" />
+        <entry key="..\:/Users/zaiya/Downloads/MCQueue-master (1)/MCQueue-master/app/src/main/res/layout/activity_main.xml" value="0.21784420289855072" />
+        <entry key="..\:/Users/zaiya/Downloads/MCQueue-master (1)/MCQueue-master/app/src/main/res/layout/activity_mainDoctors.xml" value="0.21784420289855072" />
+        <entry key="..\:/Users/zaiya/Downloads/MCQueue-master (1)/MCQueue-master/app/src/main/res/layout/activity_register.xml" value="0.21784420289855072" />
+        <entry key="..\:/Users/zaiya/Downloads/MCQueue-master (1)/MCQueue-master/app/src/main/res/layout/activity_register_doctors.xml" value="0.2" />
+        <entry key="..\:/Users/zaiya/Downloads/MCQueue-master (1)/MCQueue-master/app/src/main/res/layout/activity_start_screen.xml" value="0.21784420289855072" />
+>>>>>>> remotes/origin/Update3.0
       </map>
     </option>
   </component>

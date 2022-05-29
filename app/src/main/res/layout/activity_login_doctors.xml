@@ -4,17 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context=".Login_Doctors"
     android:background="@drawable/background_colour"
-    android:padding="16dp"
-<<<<<<< HEAD
-    tools:context=".Login_page">
-=======
-    tools:context=".Login_page"
-    >
->>>>>>> remotes/origin/Update3.0
+    android:padding="16dp">
 
     <TextView
-        android:id="@+id/loginlogo"
+        android:id="@+id/loginlogod"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
@@ -28,19 +23,16 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-<<<<<<< HEAD
-        tools:ignore="HardcodedText" />
-=======
         tools:ignore="HardcodedText"
         />
 
     <TextView
-        android:id="@+id/label"
+        android:id="@+id/labeld"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="110dp"
         android:drawablePadding="5dp"
-        android:text="For Patients"
+        android:text="For Doctors"
         android:gravity="center"
         android:textColor="@color/black"
         android:textSize="20sp"
@@ -48,16 +40,15 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/loginlogo"
+        app:layout_constraintTop_toBottomOf="@id/loginlogod"
         tools:ignore="HardcodedText"
         />
->>>>>>> remotes/origin/Update3.0
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/usernamelayout"
+        android:id="@+id/usernamelayoutd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/loginlogo"
+        app:layout_constraintTop_toBottomOf="@id/loginlogod"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:endIconMode="clear_text"
@@ -74,7 +65,7 @@
         app:startIconDrawable="@drawable/useraccount">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/loginusername"
+            android:id="@+id/loginusernamed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
@@ -84,10 +75,10 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/passwordlayout"
+        android:id="@+id/passwordlayoutd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/usernamelayout"
+        app:layout_constraintTop_toBottomOf="@id/usernamelayoutd"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:endIconMode="password_toggle"
@@ -104,7 +95,7 @@
         >
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/loginpassword"
+            android:id="@+id/loginpasswordd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
@@ -115,18 +106,18 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:id="@+id/forgetpassword"
+        android:id="@+id/forgetpasswordd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/passwordlayout"
+        app:layout_constraintTop_toBottomOf="@id/passwordlayoutd"
         android:layout_marginRight="15dp"
         android:textSize="15sp"
         android:text="Forgot password?"
         />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/login"
+        android:id="@+id/logind"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -137,25 +128,20 @@
         app:layout_constraintRight_toRightOf="parent"
         android:background="@drawable/roundbutton"
         app:backgroundTint="#5E60BC"
-        app:layout_constraintTop_toBottomOf="@id/forgetpassword"
+        app:layout_constraintTop_toBottomOf="@id/forgetpasswordd"
         android:text="Login"
         android:textAllCaps="false"
         />
 
     <TextView
-        android:id="@+id/signup"
+        android:id="@+id/signupd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="192dp"
-<<<<<<< HEAD
-        android:text="sign up"
-=======
         android:text="Sign Up Instead"
->>>>>>> remotes/origin/Update3.0
         app:layout_constraintHorizontal_bias="0.879"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/login" />
-
+        app:layout_constraintTop_toBottomOf="@id/logind" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

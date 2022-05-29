@@ -6,6 +6,10 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Button
 import android.widget.EditText
+<<<<<<< HEAD
+=======
+import android.widget.TextView
+>>>>>>> remotes/origin/Update3.0
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -18,6 +22,14 @@ class RegisterActivity : AppCompatActivity() {
         val registeremail : EditText = findViewById(R.id.registeremail)
         val registerpassword: EditText = findViewById(R.id.registerpassword)
         val registerButton : Button = findViewById(R.id.registerbutton)
+<<<<<<< HEAD
+=======
+        val loginredirect : TextView = findViewById(R.id.signupredirect)
+
+        loginredirect.setOnClickListener {
+            val intent : Intent = Intent(this,Login_page::class.java)
+            startActivity(intent)
+>>>>>>> remotes/origin/Update3.0
 
         registerButton.setOnClickListener {
             when {
@@ -64,4 +76,8 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
     }
+<<<<<<< HEAD
 }
+=======
+}}
+>>>>>>> remotes/origin/Update3.0
