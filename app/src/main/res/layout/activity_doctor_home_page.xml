@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_colour"
-    android:padding= "16dp"
-    tools:context=".MainActivity">
+    android:padding="16dp"
+    tools:context=".DoctorHomePage">
 
     <ImageView
         android:id="@+id/useraccount"
@@ -36,10 +36,12 @@
             android:orientation="vertical"
             android:padding="16dp">
 
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Queue Number: --"
+                android:text="Current Clinic"
+                android:gravity="center"
                 android:fontFamily="@font/work_sans"
                 android:textSize="30sp"
                 android:textColor="@color/black"
@@ -47,15 +49,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Clinic: --"
-                android:fontFamily="@font/work_sans"
-                android:textSize="30sp"
-                android:textColor="@color/black"
-                />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Doctor: --"
+                android:text="--"
+                android:gravity="center"
                 android:fontFamily="@font/work_sans"
                 android:textSize="30sp"
                 android:textColor="@color/black"
@@ -70,72 +65,35 @@
         app:layout_constraintTop_toBottomOf="@id/userinformationcardview"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="40dp"
-        android:paddingVertical="20dp"
+        android:layout_marginTop="100dp"
+        android:paddingVertical="10dp"
         android:paddingHorizontal="40dp"
         android:orientation="horizontal">
-
-       <LinearLayout
-           android:id="@+id/bookingcontainer"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:orientation="vertical">
-
-           <ImageView
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:src="@drawable/calendaricon"
-               />
-           <TextView
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:text="Booking"
-               android:gravity="center"
-               android:textSize="20sp"/>
-       </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/queuecontainer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="90dp"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/queuelocatoricon" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Queue Locator"
-                android:gravity="center"
-                android:textSize="20sp"/>
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/iconcontainer"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/doctoricon" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Find Doctor"
+            android:drawableTop="@drawable/dataanalyticsicon"
+            android:drawablePadding="5dp"
+            android:gravity="center"
+            android:paddingTop="5dp"
+            android:text="Data Analysis"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:drawablePadding="3dp"
+            android:paddingTop="5dp"
+            android:drawableTop="@drawable/crowdicon"
+            android:text="Crowd Insight"
             android:gravity="center"
             android:textSize="20sp"/>
 
     </LinearLayout>
+
+
 
 
 

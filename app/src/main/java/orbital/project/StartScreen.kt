@@ -12,7 +12,7 @@ class StartScreen : AppCompatActivity() {
 
         val patientlogin : Button = findViewById(R.id.patient)
         patientlogin.setOnClickListener {
-            val intent: Intent = Intent(this, Login_page::class.java)
+            val intent: Intent = Intent(this, Loginpage::class.java)
             startActivity(intent)
         }
     }
