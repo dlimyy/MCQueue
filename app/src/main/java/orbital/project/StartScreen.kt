@@ -6,13 +6,21 @@ import android.os.Bundle
 import android.widget.Button
 
 class StartScreen : AppCompatActivity() {
+    private lateinit var patientlogin : Button;
+    private lateinit var doctorlogin : Button;
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_start_screen)
 
-        val patientlogin : Button = findViewById(R.id.patient)
+        patientlogin = findViewById(R.id.patient)
         patientlogin.setOnClickListener {
             val intent: Intent = Intent(this, Loginpage::class.java)
+            startActivity(intent)
+        }
+        doctorlogin = findViewById(R.id.doctor)
+        doctorlogin.setOnClickListener {
+            val intent : Intent = Intent(this, DoctorLoginpage::class.java)
             startActivity(intent)
         }
     }

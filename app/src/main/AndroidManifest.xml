@@ -9,28 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MCQueue">
-        <activity
-<<<<<<< HEAD
-=======
-            android:name=".DoctorsForget"
-            android:exported="false" />
-        <activity
-            android:name=".RegisterDoctors"
-            android:exported="false" />
-        <activity
-            android:name=".Login_Doctors"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity
-            android:name=".activity_login_doctors"
-            android:exported="false" />
-        <activity
->>>>>>> remotes/origin/Update3.0
             android:name=".BookingActivity"
             android:exported="false" />
         <activity
@@ -49,11 +29,28 @@
             android:name=".ForgotPasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".Login_page"
+            android:name=".Loginpage"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true" />
+            android:exported="false" />
+        <activity
+            android:name=".DoctorLoginpage"
+            android:exported="false" />
+
+        <activity
+            android:name=".DoctorRegisterActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".DoctorForgotPasswordActivity"
+            android:exported="false"
+            />
+
+        <activity
+            android:name=".DoctorHomePage"
+            android:exported="false"
+            />
 
         <meta-data
             android:name="preloaded_fonts"
