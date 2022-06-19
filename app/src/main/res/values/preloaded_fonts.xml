@@ -2,11 +2,11 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
 
-        <item>@font/</item>
         <item>@font/actor</item>
         <item>@font/akronim</item>
         <item>@font/open_sans_bold</item>
         <item>@font/open_sans_extrabold</item>
+        <item>@font/sora</item>
         <item>@font/sora_bold</item>
         <item>@font/work_sans</item>
         <item>@font/work_sans_medium</item>

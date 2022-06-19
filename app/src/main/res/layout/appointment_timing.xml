@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_marginHorizontal="20dp"
+    android:layout_marginBottom="15dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="@color/purple_200"
+    app:cardCornerRadius="20dp">
+
+    <TextView
+        android:id="@+id/appointmentTiming"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:textSize="30sp"
+        tools:text="Hello"
+        android:gravity="center"/>
+
+
+</com.google.android.material.card.MaterialCardView>

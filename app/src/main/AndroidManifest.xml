@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="orbital.project">
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -9,10 +13,30 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MCQueue">
-
+        <activity
+            android:name=".BookingConfirmationScreen"
+            android:exported="false" />
+        <activity
+            android:name=".BookingScreenTiming"
+            android:exported="false" />
+        <activity
+            android:name=".BookingScreenDoctor"
+            android:exported="false" />
         <activity
             android:name=".BookingActivity"
             android:exported="false" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDqfTQG7rwWPMDS8AnbSW73vj6y-6JUpeE" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name=".QueueLocator"
+            android:exported="false"
+            android:label="@string/title_activity_queue_locator" />
         <activity
             android:name=".StartScreen"
             android:exported="true">
@@ -37,20 +61,15 @@
         <activity
             android:name=".DoctorLoginpage"
             android:exported="false" />
-
         <activity
             android:name=".DoctorRegisterActivity"
             android:exported="false" />
-
         <activity
             android:name=".DoctorForgotPasswordActivity"
-            android:exported="false"
-            />
-
+            android:exported="false" />
         <activity
             android:name=".DoctorHomePage"
-            android:exported="false"
-            />
+            android:exported="false" />
 
         <meta-data
             android:name="preloaded_fonts"
