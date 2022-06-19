@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_colour"
+    tools:context=".BookingConfirmationScreen">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/appointmentTimingCardView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:cardCornerRadius="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.85"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/sora"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:text="Select Appointment" />
+
+            <TextView
+                android:id="@+id/confirmationDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text = "Date: "/>
+
+            <TextView
+                android:id="@+id/confirmationClinic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Clinic: "/>
+            <TextView
+                android:id="@+id/confirmationDoctor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text = "Doctor: "/>
+
+            <TextView
+                android:id="@+id/confirmationTiming"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Timing: "/>
+
+
+
+            <Button
+                android:id="@+id/nextBookingScreenConfirmation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:text="Next" />
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

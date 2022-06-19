@@ -149,7 +149,7 @@
             android:id="@+id/doc_registerpassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
+            android:inputType="textPassword"
             />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -175,7 +175,7 @@
             android:id="@+id/doc_confirmpassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
+            android:inputType="textPassword"
             />
     </com.google.android.material.textfield.TextInputLayout>
 

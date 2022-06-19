@@ -40,7 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Queue Number: --"
-                android:fontFamily="@font/work_sans"
+                android:fontFamily="@font/aguafina_script"
                 android:textSize="30sp"
                 android:textColor="@color/black"
                 />
@@ -82,6 +82,7 @@
            android:orientation="vertical">
 
            <ImageView
+               android:id="@+id/bookingcalendar"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:src="@drawable/calendaricon"
@@ -104,6 +105,7 @@
             android:orientation="vertical">
 
             <ImageView
+                android:id="@+id/queueicon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/queuelocatoricon" />

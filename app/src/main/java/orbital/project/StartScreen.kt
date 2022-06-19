@@ -6,8 +6,8 @@ import android.os.Bundle
 import android.widget.Button
 
 class StartScreen : AppCompatActivity() {
-    private lateinit var patientlogin : Button;
-    private lateinit var doctorlogin : Button;
+    private lateinit var patientlogin : Button
+    private lateinit var doctorlogin : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

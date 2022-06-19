@@ -33,20 +33,32 @@
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/font/open_sans_bold.xml" value="0.137890625" />
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/font/open_sans_extrabold.xml" value="0.130078125" />
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/font/open_sans_semibold.xml" value="0.137109375" />
+        <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/font/sora.xml" value="0.1864864864864865" />
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/font/sora_bold.xml" value="0.130078125" />
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/font/work_sans.xml" value="0.130078125" />
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/font/work_sans_medium.xml" value="0.14791666666666667" />
-        <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/layout/activity_booking.xml" value="0.10621584699453553" />
+        <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/layout/activity_booking.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/layout/activity_booking_confirmation_screen.xml" value="0.13080601092896174" />
+        <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/layout/activity_booking_screen.xml" value="0.166015625" />
+        <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/layout/activity_booking_screen_doctor.xml" value="0.1" />
+        <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/layout/activity_booking_screen_timing.xml" value="0.13080601092896174" />
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/layout/activity_doctor_forgot_password.xml" value="0.166015625" />
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/layout/activity_doctor_home_page.xml" value="0.16666666666666666" />
-        <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/layout/activity_doctor_loginpage.xml" value="0.15505464480874318" />
+        <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/layout/activity_doctor_loginpage.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/layout/activity_doctor_register.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/layout/activity_doctors_forget.xml" value="0.166015625" />
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/layout/activity_forgot_password.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/layout/activity_login_page.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/layout/activity_main.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/layout/activity_queue_locator.xml" value="0.1" />
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/layout/activity_register.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/layout/activity_start_screen.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/layout/appointment_timing.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/layout/booking_calendar_layout.xml" value="0.18084651560495937" />
+        <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/layout/calendar_day_cell.xml" value="0.165234375" />
+        <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/layout/calendar_day_header.xml" value="0.166015625" />
+        <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/layout/calendar_month_header.xml" value="0.165234375" />
+        <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/layout/calendar_month_legend.xml" value="0.166015625" />
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1805" />
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1805" />
       </map>
