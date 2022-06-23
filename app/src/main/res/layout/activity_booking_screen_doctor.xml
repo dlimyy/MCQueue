@@ -41,7 +41,7 @@
                 app:shapeAppearanceOverlay="@style/circleShape"
                 android:src="@drawable/crowdicon"
                 app:strokeWidth="5dp"
-                app:strokeColor="#00BCD4"
+                app:strokeColor="#00BBD4"
                 android:padding="5dp"
                 android:layout_gravity="center"/>
 
