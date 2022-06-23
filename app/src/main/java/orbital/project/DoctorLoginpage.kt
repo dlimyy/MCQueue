@@ -120,14 +120,12 @@ class DoctorLoginpage : AppCompatActivity() {
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             val intent =
-                                Intent(this, DoctorHomePage::class.java)
-                            intent.flags =
-                                Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                Intent(this, AddDoctor::class.java)
+
                             intent.putExtra(
                                 "user_id",
                                 FirebaseAuth.getInstance().currentUser!!.uid
                             )
-                            intent.putExtra("email_id", username)
                             startActivity(intent)
                             finish()
                         } else {

@@ -24,7 +24,6 @@ class BookingAdaptor(private val appointments: ArrayList<String>)
         val timing : TextView
 
         init {
-            // Define click listener for the ViewHolder's View.
             timing = view.findViewById(R.id.appointmentTiming)
             itemView.setOnClickListener {
                 listener.onItemClick(absoluteAdapterPosition)

@@ -37,13 +37,16 @@ class Loginpage : AppCompatActivity() {
         signup = findViewById(R.id.signup)
         usernamelayout= findViewById(R.id.usernamelayout)
         passwordlayout = findViewById(R.id.passwordlayout)
+    }
+
+    override fun onStart() {
+        super.onStart()
         signUpClickEvent()
         forgetPasswordClickEvent()
         userNameTextChange()
         passwordTextChange()
         loginClickEvent()
     }
-
     private fun isValidEmail(username : String?) : Boolean {
         if (TextUtils.isEmpty(username)) {
             usernamelayout.error = "Please enter username"
@@ -121,14 +124,8 @@ class Loginpage : AppCompatActivity() {
                         if (task.isSuccessful) {
                             val intent =
                                 Intent(this, MainActivity::class.java)
-                            intent.flags =
-                                Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                            intent.putExtra(
-                                "user_id",
-                                FirebaseAuth.getInstance().currentUser!!.uid
-                            )
-                            intent.putExtra("email_id", username)
                             startActivity(intent)
+                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                             finish()
                         } else {
                             // If the login is not successful then show error message.

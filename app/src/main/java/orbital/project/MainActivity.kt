@@ -20,6 +20,17 @@ class MainActivity : AppCompatActivity() {
         queueicon.setOnClickListener {
             startActivity(Intent(this,QueueLocator::class.java))
         }
+    }
 
+    override fun onStart() {
+        super.onStart()
+        bookingcalendar = findViewById(R.id.bookingcalendar)
+        queueicon = findViewById(R.id.queueicon)
+        bookingcalendar.setOnClickListener {
+            startActivity(Intent(this, BookingActivity::class.java))
+        }
+        queueicon.setOnClickListener {
+            startActivity(Intent(this,QueueLocator::class.java))
+        }
     }
 }
