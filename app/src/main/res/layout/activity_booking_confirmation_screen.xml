@@ -7,6 +7,32 @@
     android:background="@drawable/background_colour"
     tools:context=".BookingConfirmationScreen">
 
+
+    <RelativeLayout
+        android:id="@+id/topBarBookingConfirmation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent">
+
+        <ImageView
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/backarrow" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="40dp"
+            android:src="@drawable/progressbar_confirmation" />
+
+    </RelativeLayout>
+
+
     <androidx.cardview.widget.CardView
         android:id="@+id/appointmentTimingCardView"
         android:layout_width="match_parent"
@@ -16,7 +42,7 @@
         app:layout_constraintHeight_percent="0.85"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topBarBookingConfirmation"
         app:layout_constraintVertical_bias="1">
 
         <LinearLayout
@@ -33,29 +59,38 @@
                 android:textColor="@color/black"
                 android:textSize="32sp"
                 android:textStyle="bold"
-                android:text="Select Appointment" />
+                android:text="Confirm Booking" />
 
             <TextView
+                android:layout_marginTop="20dp"
                 android:id="@+id/confirmationDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="30sp"
+                android:textColor="@color/black"
                 android:text = "Date: "/>
 
             <TextView
                 android:id="@+id/confirmationClinic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="30sp"
+                android:textColor="@color/black"
                 android:text="Clinic: "/>
             <TextView
                 android:id="@+id/confirmationDoctor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="30sp"
+                android:textColor="@color/black"
                 android:text = "Doctor: "/>
 
             <TextView
                 android:id="@+id/confirmationTiming"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="30sp"
+                android:textColor="@color/black"
                 android:text="Timing: "/>
 
 
@@ -67,7 +102,7 @@
                 android:layout_gravity="right"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"
-                android:text="Next" />
+                android:text="Book Appointment" />
 
         </LinearLayout>
 

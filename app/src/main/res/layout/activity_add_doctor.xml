@@ -40,8 +40,10 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:cardCornerRadius="25dp"
-        app:layout_constraintVertical_bias="1">
+        app:cardCornerRadius="10dp"
+        app:cardElevation="20dp"
+        app:layout_constraintVertical_bias="1"
+        app:cardBackgroundColor="#26C6DA">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -69,6 +71,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/doctorNameAddDoctor"
+                    android:inputType="text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Name of Doctor"/>
@@ -92,6 +95,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/MCRnumberAddDoctor"
+                    android:inputType="text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="MCR number"/>
@@ -102,10 +106,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:paddingHorizontal="10dp"
-                app:errorEnabled="true"
-                app:errorTextColor="#A60F0F"
-                app:helperText="12341">
+                android:paddingHorizontal="10dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -124,6 +125,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 app:singleSelection="true"
+                app:errorEnabled="true"
+                app:helperText="donefor"
                 android:layout_marginTop="16dp">
 
                 <com.google.android.material.button.MaterialButton
@@ -131,9 +134,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:backgroundTint="@color/white"
                     android:text="Male"/>
 
                 <com.google.android.material.button.MaterialButton
+                    android:backgroundTint="@color/white"
                     android:id="@+id/doctorGenderFemale"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -146,10 +151,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:paddingHorizontal="10dp"
-                app:errorEnabled="true"
-                app:errorTextColor="#A60F0F"
-                app:helperText="12341">
+                android:paddingHorizontal="10dp">
 
             <TextView
                 android:layout_width="match_parent"
@@ -159,11 +161,11 @@
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:textSize="30sp"/>
+
             </com.google.android.material.textfield.TextInputLayout>
 
-
-
             <com.google.android.material.button.MaterialButtonToggleGroup
+                android:id="@+id/doctorInfoLanguagesFirstRow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -171,18 +173,24 @@
                 android:layout_marginTop="16dp">
 
                 <com.google.android.material.button.MaterialButton
-                    android:layout_width="wrap_content"
+                    android:backgroundTint="@color/white"
+                    android:id="@+id/doctorInfoEnglish"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:text="English"/>
 
                 <com.google.android.material.button.MaterialButton
-                    android:layout_width="wrap_content"
+                    android:backgroundTint="@color/white"
+                    android:id="@+id/doctorInfoChinese"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:text="Chinese"/>
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/doctorInfoMalay"
+                    android:backgroundTint="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
@@ -191,24 +199,31 @@
             </com.google.android.material.button.MaterialButtonToggleGroup>
 
             <com.google.android.material.button.MaterialButtonToggleGroup
+                android:id="@+id/doctorInfoLanguagesSecondRow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 app:singleSelection="false">
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/doctorInfoTamil"
+                    android:backgroundTint="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:text="Tamil"/>
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/doctorInfoHokkien"
+                    android:backgroundTint="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:text="Hokkien"/>
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/doctorInfoTeochew"
+                    android:backgroundTint="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
@@ -217,100 +232,27 @@
             </com.google.android.material.button.MaterialButtonToggleGroup>
 
             <com.google.android.material.button.MaterialButtonToggleGroup
+                android:id="@+id/doctorInfoLanguagesThirdRow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 app:singleSelection="false">
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/doctorInfoCantonese"
+                    android:backgroundTint="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:text="Cantonese"/>
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/doctorInfoHakka"
+                    android:backgroundTint="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:text="Hakka"/>
-
-            </com.google.android.material.button.MaterialButtonToggleGroup>
-
-            <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:paddingHorizontal="10dp"
-            android:text="Working Days"
-            android:fontFamily="@font/sora"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textSize="30sp"/>
-
-            <com.google.android.material.button.MaterialButtonToggleGroup
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                app:singleSelection="false"
-                android:layout_marginTop="16dp">
-
-                <com.google.android.material.button.MaterialButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:text="Monday"/>
-
-                <com.google.android.material.button.MaterialButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:text="Tuesday"/>
-
-                <com.google.android.material.button.MaterialButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:text="Wednesday"/>
-
-            </com.google.android.material.button.MaterialButtonToggleGroup>
-
-            <com.google.android.material.button.MaterialButtonToggleGroup
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                app:singleSelection="false">
-
-                <com.google.android.material.button.MaterialButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:text="Thursday"/>
-
-                <com.google.android.material.button.MaterialButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:text="Friday"/>
-
-                <com.google.android.material.button.MaterialButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:text="Saturday"/>
-
-            </com.google.android.material.button.MaterialButtonToggleGroup>
-
-            <com.google.android.material.button.MaterialButtonToggleGroup
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                app:singleSelection="false">
-
-                <com.google.android.material.button.MaterialButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:text="Sunday"/>
 
             </com.google.android.material.button.MaterialButtonToggleGroup>
 
@@ -324,72 +266,99 @@
                 android:textSize="30sp"
                 android:text="Working Hours"
                 android:paddingHorizontal="10dp"/>
-            
+
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="24dp"
-                app:cardCornerRadius="15dp">
+                app:cardCornerRadius="15dp"
+                app:cardBackgroundColor="#90E4EF">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                        <ImageView
-                            android:id="@+id/removeTimeInterval"
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:layout_alignParentRight="true"
-                            android:src="@drawable/ic_baseline_remove_24" />
-
-                        <ImageView
-                            android:id="@+id/addTimeInterval"
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:layout_toLeftOf="@+id/removeTimeInterval"
-                            android:src="@drawable/ic_baseline_add_24" />
-
-                    </RelativeLayout>
-
-<!--                <androidx.recyclerview.widget.RecyclerView-->
-<!--                    android:id="@+id/timeIntervalRecylcerView"-->
-<!--                    android:paddingHorizontal="16dp"-->
-<!--                    android:paddingBottom="16dp"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"/>-->
-
-                    <include
-                        android:id="@+id/timeInterval1"
+                    <LinearLayout
+                        android:paddingVertical="20dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="16dp"
-                        android:layout_marginVertical="16dp"
-                        layout="@layout/time_interval_doctorinfo"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_marginStart="12dp"
+                            android:paddingVertical="10dp"
+                            app:boxBackgroundColor="@color/white"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:hint="Day">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/doctorInfoDay"
+                                android:textSize="15sp"
+                                android:layout_width="150dp"
+                                android:dropDownHeight="150dp"
+                                android:inputType="none"
+                                android:layout_height="wrap_content"/>
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <LinearLayout
+                            android:layout_marginLeft="35dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/startTimeButton"
+                                android:layout_width="130dp"
+                                android:layout_height="wrap_content"
+                                android:text="Start Time"/>
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/endTimeButton"
+                                android:layout_width="130dp"
+                                android:layout_height="wrap_content"
+                                android:text="End Time"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/addDoctorInfoAddButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:backgroundTint="#CD2525"
+                        android:text="Add"/>
+
+                    <TextView
+                        android:id="@+id/doctorInfoDateTimeError"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        tools:text="Please key in valid time"/>
+
+                    <TextView
+                        android:padding="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="25sp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:text="Selected day and hours"
                         />
 
-                    <include
-                        android:id="@+id/timeInterval2"
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/doctorInfoChipGroup"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginVertical="16dp"
-                        android:layout_marginHorizontal="16dp"
-                        layout="@layout/time_interval_doctorinfo"/>
-
-                    <include
-                        android:id="@+id/timeInterval3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="16dp"
-                        android:layout_marginHorizontal="16dp"
-                        layout="@layout/time_interval_doctorinfo"/>
-
+                        android:paddingHorizontal="5dp"
+                        android:layout_gravity="center"/>
 
                 </LinearLayout>
 

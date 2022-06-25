@@ -47,7 +47,7 @@ class Loginpage : AppCompatActivity() {
         passwordTextChange()
         loginClickEvent()
     }
-    private fun isValidEmail(username : String?) : Boolean {
+    internal fun isValidEmail(username : String?) : Boolean {
         if (TextUtils.isEmpty(username)) {
             usernamelayout.error = "Please enter username"
             return false

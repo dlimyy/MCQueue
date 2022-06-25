@@ -39,12 +39,12 @@
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/font/sora_bold.xml" value="0.130078125" />
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/font/work_sans.xml" value="0.130078125" />
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/font/work_sans_medium.xml" value="0.14791666666666667" />
-        <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/layout/activity_add_doctor.xml" value="0.1" />
+        <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/layout/activity_add_doctor.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/layout/activity_booking.xml" value="0.16666666666666666" />
-        <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/layout/activity_booking_confirmation_screen.xml" value="0.13080601092896174" />
+        <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/layout/activity_booking_confirmation_screen.xml" value="0.14666666666666667" />
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/layout/activity_booking_screen.xml" value="0.166015625" />
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/layout/activity_booking_screen_doctor.xml" value="0.14666666666666667" />
-        <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/layout/activity_booking_screen_timing.xml" value="0.13080601092896174" />
+        <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/layout/activity_booking_screen_timing.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/layout/activity_doctor_forgot_password.xml" value="0.166015625" />
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/layout/activity_doctor_home_page.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/layout/activity_doctor_loginpage.xml" value="0.16666666666666666" />
@@ -63,7 +63,8 @@
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/layout/calendar_day_header.xml" value="0.166015625" />
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/layout/calendar_month_header.xml" value="0.165234375" />
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/layout/calendar_month_legend.xml" value="0.166015625" />
-        <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/layout/time_interval_doctorinfo.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/layout/tester.xml" value="0.165234375" />
+        <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/layout/time_interval_doctorinfo.xml" value="0.14666666666666667" />
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1805" />
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1805" />
       </map>

@@ -3,20 +3,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
-    android:layout_marginHorizontal="20dp"
-    android:layout_marginBottom="15dp"
+    android:layout_marginVertical="8dp"
+    android:layout_marginHorizontal="8dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardBackgroundColor="@color/purple_200"
+    app:cardBackgroundColor="#A779FA"
     app:cardCornerRadius="20dp">
 
-    <TextView
-        android:id="@+id/appointmentTiming"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="15dp"
-        android:textSize="30sp"
-        tools:text="Hello"
-        android:gravity="center"/>
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_marginStart="16dp"
+            android:layout_marginVertical="10dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/clock"/>
+        <TextView
+            android:id="@+id/appointmentTiming"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingVertical="15dp"
+            android:paddingLeft="8dp"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            tools:text="Time"
+            android:gravity="left"/>
+
+    </LinearLayout>
 
 
 </com.google.android.material.card.MaterialCardView>
