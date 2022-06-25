@@ -21,9 +21,9 @@ class BookingConfirmationScreen : AppCompatActivity() {
         confirmationDoctor = findViewById(R.id.confirmationDoctor)
         confirmationTiming = findViewById(R.id.confirmationTiming)
 
-        confirmationDate.text = intent.extras!!.getString("date")
-        confirmationClinic.text = intent.extras!!.getString("clinic")
-        confirmationDoctor.text = intent.extras!!.getString("doctor")
-        confirmationTiming.text = intent.extras!!.getString("time")
+        confirmationDate.text = confirmationDate.text.toString() + " " + intent.extras!!.getString("date")
+        confirmationClinic.text = confirmationClinic.text.toString() + " " + intent.extras!!.getString("clinic")
+        confirmationDoctor.text = confirmationDoctor.text.toString() + " " + intent.extras!!.getString("doctor")
+        confirmationTiming.text = confirmationTiming.text.toString() + " " + intent.extras!!.getString("time")
     }
 }

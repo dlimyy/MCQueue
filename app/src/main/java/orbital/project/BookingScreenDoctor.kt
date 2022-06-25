@@ -3,9 +3,11 @@ package orbital.project
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
+import com.google.android.material.snackbar.Snackbar
 
 class BookingScreenDoctor : AppCompatActivity() {
     private lateinit var nextButton: Button
@@ -26,11 +28,24 @@ class BookingScreenDoctor : AppCompatActivity() {
         bookingDoctor.setAdapter(adaptor)
         nextButton = findViewById(R.id.nextBookingScreenTiming)
         nextButton.setOnClickListener {
-            val intent = Intent(this, BookingScreenTiming::class.java)
-            intent.putExtra("date", bookingDate.toString())
-            intent.putExtra("clinic", clinicName.toString())
-            intent.putExtra("doctor", bookingDoctor.text.toString())
-            startActivity(intent)
+            if (!TextUtils.isEmpty(bookingDoctor.text.toString())) {
+                val intent = Intent(this, BookingScreenTiming::class.java)
+                intent.putExtra("date", bookingDate.toString())
+                intent.putExtra("clinic", clinicName.toString())
+                intent.putExtra("doctor", bookingDoctor.text.toString())
+                startActivity(intent)
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            } else {
+                Snackbar.make(bookingDoctor,
+                    "Please select a doctor", Snackbar.LENGTH_SHORT).show()
+            }
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+        startActivity(Intent(this, BookingActivity::class.java))
+        finish()
     }
 }

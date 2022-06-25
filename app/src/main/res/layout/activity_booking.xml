@@ -7,6 +7,30 @@
     android:background="@drawable/background_colour"
     tools:context=".BookingActivity">
 
+    <RelativeLayout
+        android:id="@+id/topBarBookingDateClinic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent">
+
+        <ImageView
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/backarrow" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="40dp"
+            android:src="@drawable/progressbar_dateclinic" />
+
+    </RelativeLayout>
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -15,9 +39,9 @@
         app:layout_constraintHeight_percent="0.85"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topBarBookingDateClinic"
         app:layout_constraintVertical_bias="1"
-        app:cardBackgroundColor="#03A9F4">
+        app:cardBackgroundColor="#69BCFF">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -25,6 +49,8 @@
             android:orientation="vertical">
 
             <TextView
+                android:paddingStart="24dp"
+                android:paddingEnd="48dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -33,7 +59,8 @@
                 android:textColor="@color/black"
                 android:textSize="32sp"
                 android:textStyle="bold"
-                android:text="Select Date" />
+                android:text="Select Date"
+                app:drawableLeftCompat="@drawable/calendar" />
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -41,13 +68,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 app:boxBackgroundColor="@color/white"
+                app:hintEnabled="false"
                 android:padding="20dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/bookingDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/ic_baseline_calendar_month_24"
+                    android:drawableEnd="@drawable/ic_baseline_calendar_month_24"
                     android:cursorVisible="false"
                     android:longClickable="false"
                     android:focusable="false"
@@ -65,7 +93,10 @@
                 android:textColor="@color/black"
                 android:textSize="32sp"
                 android:textStyle="bold"
-                android:text="Select Clinic" />
+                android:paddingStart="18dp"
+                android:paddingEnd="50dp"
+                android:text="Select Clinic"
+                app:drawableStartCompat="@drawable/hospital_2" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -74,7 +105,9 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 app:boxBackgroundMode="outline"
                 app:boxBackgroundColor="@color/white"
-                android:padding="20dp"
+                app:hintEnabled="false"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="10dp"
                 >
 
                 <AutoCompleteTextView
@@ -82,7 +115,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Select a Clinic"
-                    android:dropDownHeight="240dp"
+                    android:dropDownHeight="200dp"
                     android:inputType="none"
                     android:drawableRight="@drawable/ic_baseline_search_24"
                     />
@@ -93,7 +126,7 @@
                 android:id="@+id/nextBookingScreenDoctor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="120dp"
+                android:layout_marginTop="160dp"
                 android:layout_marginRight="20dp"
                 android:layout_gravity="right"
                 android:text="Next"/>

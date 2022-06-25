@@ -23,7 +23,7 @@ class BookingScreenTiming : AppCompatActivity() {
         val bookingDate = intent.extras!!.getString("date")
         val doctorName = intent.extras!!.getString("doctor")
         appointmentlist = findViewById(R.id.appointmentList)
-        appointmentlist.layoutManager = GridLayoutManager(this,2)
+        appointmentlist.layoutManager = GridLayoutManager(this,3)
         adaptor = BookingAdaptor(timinglist)
         appointmentlist.adapter = adaptor
         adaptor.setOnItemClickListener(object : BookingAdaptor.OnItemClickListener{
@@ -35,6 +35,7 @@ class BookingScreenTiming : AppCompatActivity() {
                 intent.putExtra("doctor", doctorName.toString())
                 intent.putExtra("time", timinglist[position])
                 startActivity(intent)
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
             }
         })
     }
@@ -42,15 +43,26 @@ class BookingScreenTiming : AppCompatActivity() {
 
     private fun database() {
         timinglist = ArrayList<String>()
-        timinglist.add("8.00am")
-        timinglist.add("9.00am")
-        timinglist.add("10.00am")
-        timinglist.add("11.00am")
-        timinglist.add("12.00pm")
-        timinglist.add("1.00pm")
-        timinglist.add("2.00pm")
-        timinglist.add("3.00am")
-        timinglist.add("4.00am")
-        timinglist.add("5.00am")
+        timinglist.add("08:00")
+        timinglist.add("08:30")
+        timinglist.add("09:00")
+        timinglist.add("09:30")
+        timinglist.add("10:00")
+        timinglist.add("10:30")
+        timinglist.add("11:00")
+        timinglist.add("11:30")
+        timinglist.add("12:00")
+        timinglist.add("12:30")
+        timinglist.add("13:00")
+        timinglist.add("13:30")
+        timinglist.add("14:00")
+        timinglist.add("14:30")
+        timinglist.add("15:00")
+        timinglist.add("15:30")
+        timinglist.add("16:00")
+        timinglist.add("16:30")
+        timinglist.add("17:00")
+        timinglist.add("17:30")
+        timinglist.add("18:00")
     }
 }
