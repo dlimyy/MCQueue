@@ -6,13 +6,13 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
 
-//class AddDoctorAdaptor(private val timing: ArrayList<Timing>)
+//class DoctorInfoAdaptor(private val timing: ArrayList<Timing>)
 //    : RecyclerView.Adapter<AddDoctorAdaptor.ViewHolder>() {
 //
 //    private lateinit var timeIntervalListener: OnButtonClickListener
 //
-//    interface OnButtonClickListener {
-//        fun updateTime(button: Button)
+//    interface OnCardClickListener {
+//        fun changeActivity(button: Button)
 //    }
 //
 //    fun setOnButtonClickListener(listener: AddDoctorAdaptor.OnButtonClickListener) {
@@ -20,8 +20,6 @@ import androidx.recyclerview.widget.RecyclerView
 //    }
 //
 //    class ViewHolder(view: View, listener : OnButtonClickListener) : RecyclerView.ViewHolder(view) {
-//        val startTime: Button
-//        val endTime : Button
 //
 //        init {
 //            startTime = view.findViewById(R.id.startTimeButton)
@@ -52,7 +50,4 @@ import androidx.recyclerview.widget.RecyclerView
 //        return timing.size
 //    }
 //
-//    fun timeFormatString(holder: ViewHolder) : String{
-//        return holder.startTime.text.toString() + ":" + holder.endTime.text.toString()
-//    }
 //}
