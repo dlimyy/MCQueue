@@ -1,8 +1,11 @@
 package orbital.project
 
+import android.Manifest
 import android.app.AlertDialog
 import android.app.TimePickerDialog
 import android.app.TimePickerDialog.OnTimeSetListener
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
@@ -10,28 +13,29 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.*
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
-import androidx.core.view.ViewCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.size
+import com.canhub.cropper.CropImageContract
+import com.canhub.cropper.CropImageView
+import com.canhub.cropper.options
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
-import java.util.*
-import kotlin.Int
-import kotlin.collections.ArrayList
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
+import java.util.*
 
 
 class AddDoctor : AppCompatActivity() {
 
+    private lateinit var doctorProfilepic : ImageView
     private lateinit var submitButton: Button
     private lateinit var startTime : Button
     private lateinit var endTime : Button
@@ -47,13 +51,15 @@ class AddDoctor : AppCompatActivity() {
     private lateinit var doctorInfoLanguagesFirstRow : MaterialButtonToggleGroup
     private lateinit var doctorInfoLanguagesSecondRow : MaterialButtonToggleGroup
     private lateinit var doctorInfoLanguagesThirdRow : MaterialButtonToggleGroup
+    private lateinit var chooseProfileButton : Button
     private val daysOfWeek = arrayOf("Monday","Tuesday","Wednesday","Thursday"
         ,"Friday","Saturday","Sunday")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_doctor)
-
+        doctorProfilepic = findViewById(R.id.doctorProfilePic)
+        chooseProfileButton = findViewById(R.id.doctorInfoChooseProfilePicture)
         submitButton = findViewById(R.id.addDoctorSubmitButton)
         startTime = findViewById(R.id.startTimeButton)
         endTime = findViewById(R.id.endTimeButton)
@@ -75,6 +81,7 @@ class AddDoctor : AppCompatActivity() {
         day.setAdapter(adaptor)
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onStart() {
         super.onStart()
         doctorNameTextChange()
@@ -142,7 +149,10 @@ class AddDoctor : AppCompatActivity() {
             addChip(chipString)
         }
 
-        
+        chooseProfileButton.setOnClickListener {
+            showBottomSheetDialog()
+        }
+
         submitButton.setOnClickListener {
             val db = FirebaseFirestore.getInstance()
             val uid : String = FirebaseAuth.getInstance().currentUser!!.uid
@@ -265,5 +275,138 @@ class AddDoctor : AppCompatActivity() {
             Log.d("FINALLLY",findViewById<Chip>(chipGroup.getChildAt(pos).id).text.toString())
         }
         return arraylist
+    }
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    private fun showBottomSheetDialog() {
+        val bottomSheetDialog = BottomSheetDialog(this)
+        bottomSheetDialog.setContentView(R.layout.bottom_sheet_dialog)
+        val camera = bottomSheetDialog.findViewById<LinearLayout>(R.id.cameraBottomSheetDialog)
+        val gallery = bottomSheetDialog.findViewById<LinearLayout>(R.id.galleryBottomSheetDialog)
+        camera?.setOnClickListener {
+            if (!checkCameraPermission()) {
+               requestCameraPermission()
+            } else {
+                cropImage.launch(
+                    options {
+                        setGuidelines(CropImageView.Guidelines.ON)
+                        setCropShape(CropImageView.CropShape.OVAL)
+                        setFixAspectRatio(true)
+                        setAspectRatio(1,1)
+                        setImageSource(includeCamera = true, includeGallery = false)
+                    }
+                )
+            }
+            bottomSheetDialog.dismiss()
+        }
+        gallery?.setOnClickListener {
+            if (!checkStoragePermission()) {
+                Log.d("Here","CLicked")
+                requestStoragePermission()
+            } else {
+                Log.d("There","CLicked")
+                cropImage.launch(
+                    options {
+                        setGuidelines(CropImageView.Guidelines.ON)
+                        setCropShape(CropImageView.CropShape.OVAL)
+                        setFixAspectRatio(true)
+                        setAspectRatio(1,1)
+                        setImageSource(includeCamera = false, includeGallery = true)
+                    }
+                )
+            }
+            bottomSheetDialog.dismiss()
+        }
+        bottomSheetDialog.show()
+    }
+
+    private val cropImage = registerForActivityResult(CropImageContract()) { result ->
+        if (result.isSuccessful) {
+            // use the returned uri
+            val uriContent = result.uriContent
+            doctorProfilepic.setImageURI(uriContent)
+        } else {
+            // an error occurred
+            val exception = result.error
+        }
+    }
+
+    // checking camera permissions
+    private fun checkCameraPermission(): Boolean {
+        val result = ContextCompat.checkSelfPermission(
+            this,
+            Manifest.permission.CAMERA
+        ) == PackageManager.PERMISSION_GRANTED
+        return result
+    }
+
+    // checking storage permissions
+    private fun checkStoragePermission(): Boolean {
+        return ContextCompat.checkSelfPermission(
+            this,
+            Manifest.permission.READ_EXTERNAL_STORAGE
+        ) == PackageManager.PERMISSION_GRANTED
+    }
+
+    // Requesting  gallery permission
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private fun requestStoragePermission() {
+        requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), STORAGE_REQUEST)
+    }
+
+    // Requesting camera permission
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private fun requestCameraPermission() {
+        requestPermissions(arrayOf(Manifest.permission.CAMERA), CAMERA_REQUEST)
+    }
+
+    // Action after requesting permission
+    override fun onRequestPermissionsResult(requestCode: Int,
+                                           permissions: Array<String>, grantResults: IntArray) {
+        when (requestCode) {
+            CAMERA_REQUEST -> {
+                if (grantResults.isNotEmpty() &&
+                            grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    cropImage.launch(
+                        options {
+                            setGuidelines(CropImageView.Guidelines.ON)
+                            setCropShape(CropImageView.CropShape.OVAL)
+                            setFixAspectRatio(true)
+                            setAspectRatio(1,1)
+                            setImageSource(includeCamera = true, includeGallery = false)
+                        }
+                    )
+                } else {
+                    Snackbar.make(doctorProfilepic, "Please enable permissions for camera"
+                        , Snackbar.LENGTH_LONG).show()
+                }
+            }
+            STORAGE_REQUEST -> {
+                if ((grantResults.isNotEmpty() &&
+                            grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                    cropImage.launch(
+                        options {
+                            setGuidelines(CropImageView.Guidelines.ON)
+                            setCropShape(CropImageView.CropShape.OVAL)
+                            setFixAspectRatio(true)
+                            setAspectRatio(1,1)
+                            setImageSource(includeCamera = false, includeGallery = true)
+                        }
+                    )
+                } else {
+                    Snackbar.make(doctorProfilepic, "Please enable permissions under Files and Media"
+                        , Snackbar.LENGTH_LONG).show()
+                }
+            }
+
+            else -> {
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+            }
+        }
+    }
+
+    companion object {
+        const val CAMERA_REQUEST = 100
+        const val STORAGE_REQUEST = 150
     }
 }
