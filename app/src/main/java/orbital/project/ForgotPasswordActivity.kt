@@ -7,10 +7,7 @@ import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.util.Patterns
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -20,7 +17,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
     private lateinit var resetemail : TextInputEditText
     private lateinit var resetemaillayout : TextInputLayout
     private lateinit var resetbutton : Button
-    private lateinit var backlogintext : TextView
+    private lateinit var backlogin : ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +26,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
         resetemail = findViewById(R.id.patient_resetemail)
         resetemaillayout = findViewById(R.id.patient_resetemaillayout)
         resetbutton = findViewById(R.id.resetbutton)
-        backlogintext = findViewById(R.id.backlogin)
+        backlogin = findViewById(R.id.navigateForgettoLogin)
         backloginClickEvent()
         resetEmailTextChange()
         resetbuttonClickEvent()
@@ -62,11 +59,16 @@ class ForgotPasswordActivity : AppCompatActivity() {
     }
 
     private fun backloginClickEvent() {
-        backlogintext.setOnClickListener {
+        backlogin.setOnClickListener {
             val intent: Intent = Intent(this, Loginpage::class.java)
             startActivity(intent)
             finish()
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
     }
 
     private fun resetbuttonClickEvent() {

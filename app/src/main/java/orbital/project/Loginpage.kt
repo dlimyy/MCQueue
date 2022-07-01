@@ -7,6 +7,7 @@ import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.util.Patterns
+import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -15,6 +16,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import java.util.regex.Pattern
 
 class Loginpage : AppCompatActivity() {
@@ -23,9 +25,12 @@ class Loginpage : AppCompatActivity() {
     private lateinit var loginpassword: TextInputEditText
     private lateinit var forgetpassword : TextView
     private lateinit var loginbutton: Button
-    private lateinit var signup : TextView
+    private lateinit var signup : Button
     private lateinit var usernamelayout : TextInputLayout
     private lateinit var passwordlayout : TextInputLayout
+    private lateinit var emailValidator: EmailValidator
+    private lateinit var passwordValidator : PasswordValidator
+    private val db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,34 +42,23 @@ class Loginpage : AppCompatActivity() {
         signup = findViewById(R.id.signup)
         usernamelayout= findViewById(R.id.usernamelayout)
         passwordlayout = findViewById(R.id.passwordlayout)
+        emailValidator = EmailValidator()
+        passwordValidator = PasswordValidator()
     }
 
     override fun onStart() {
         super.onStart()
         signUpClickEvent()
         forgetPasswordClickEvent()
-        userNameTextChange()
-        passwordTextChange()
+        emailValidator.textChange(loginusername,usernamelayout)
+        passwordValidator.textChange(loginpassword,passwordlayout)
         loginClickEvent()
     }
-    internal fun isValidEmail(username : String?) : Boolean {
-        if (TextUtils.isEmpty(username)) {
-            usernamelayout.error = "Please enter username"
-            return false
-        }
-        if (!Patterns.EMAIL_ADDRESS.matcher(username).matches()) {
-            usernamelayout.error = "Please key in a valid email address"
-            return false
-        }
-        return true
-    }
 
-    private fun isValidPassword(password : String?) : Boolean {
-        if (TextUtils.isEmpty(password)) {
-            passwordlayout.error = "Please enter password"
-            return false
-        }
-        return true
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity(Intent(this, StartScreen::class.java))
+        finish()
     }
 
     private fun signUpClickEvent() {
@@ -83,54 +77,40 @@ class Loginpage : AppCompatActivity() {
         }
     }
 
-    private fun userNameTextChange() {
-        loginusername.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                usernamelayout.error = null;
-            }
-        })
-    }
-
-    private fun passwordTextChange() {
-        loginpassword.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                passwordlayout.error = null;
-            }
-        })
-    }
-
     private fun loginClickEvent() {
         loginbutton.setOnClickListener {
-            val username: String = loginusername.text.toString().trim { it <= ' ' }
-            val password: String = loginpassword.text.toString().trim { it <= ' ' }
-            val emailvalidity : Boolean = isValidEmail(username)
-            val passwordvalidity : Boolean = isValidPassword(password)
+            val emailvalidity : Boolean = emailValidator.layoutErrorChange(loginusername,usernamelayout)
+            val passwordvalidity : Boolean = passwordValidator.layoutErrorChange(loginpassword,passwordlayout)
+            loginpassword.onEditorAction(EditorInfo.IME_ACTION_DONE)
 
             if (emailvalidity && passwordvalidity){
-                FirebaseAuth.getInstance().signInWithEmailAndPassword(username, password)
+                FirebaseAuth.getInstance().signInWithEmailAndPassword(loginusername.text.toString()
+                    , loginpassword.text.toString())
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            val intent =
-                                Intent(this, MainActivity::class.java)
-                            startActivity(intent)
-                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-                            finish()
+                            val uid = FirebaseAuth.getInstance().currentUser!!.uid
+                            var role : String? = null
+                            db.collection("Users")
+                                .document(uid).get().addOnSuccessListener { document ->
+                                    role = document.get("Role") as String?
+                                    if (role == null || role == "Clinic") {
+                                        Snackbar.make(loginusername
+                                            ,"The username or password is incorrect",
+                                            Snackbar.LENGTH_SHORT
+                                        ).show()
+                                        return@addOnSuccessListener
+                                    } else {
+                                        val intent =
+                                            Intent(this, MainActivity::class.java)
+                                        startActivity(intent)
+                                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                                        finish()
+                                    }
+                                }
                         } else {
                             // If the login is not successful then show error message.
                             Snackbar.make(loginusername
-                                ,task.exception!!.message.toString(),
+                                ,"The username or password is incorrect",
                                 Snackbar.LENGTH_SHORT
                             ).show()
                         }

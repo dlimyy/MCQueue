@@ -16,10 +16,11 @@
         app:layout_constraintLeft_toLeftOf="parent">
 
         <ImageView
-            android:layout_marginTop="16dp"
+            android:id="@+id/navigateBookingActivityMainActivity"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:layout_marginStart="4dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:src="@drawable/backarrow" />
 
         <ImageView
@@ -42,7 +43,7 @@
         app:layout_constraintTop_toBottomOf="@+id/topBarBookingDateClinic"
         app:layout_constraintVertical_bias="1"
         app:cardMaxElevation="20dp"
-        app:cardBackgroundColor="#69BCFF">
+        app:cardBackgroundColor="#FF00BCD4">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -116,7 +117,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Select a Clinic"
-                    android:dropDownHeight="200dp"
                     android:inputType="none"
                     android:drawableRight="@drawable/ic_baseline_search_24"
                     />

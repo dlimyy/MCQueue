@@ -3,25 +3,36 @@ package orbital.project
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.AdapterView
+import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.firestore.FirebaseFirestore
 
 class BookingScreenTiming : AppCompatActivity() {
 
     private lateinit var timinglist : ArrayList<String>
     private lateinit var appointmentlist : RecyclerView
     private lateinit var adaptor: BookingAdaptor
+    private lateinit var noTiming : TextView
+    private lateinit var bookingDate : String
+    private lateinit var mcrNumber : String
+    private lateinit var backButton : ImageView
+    private val db = FirebaseFirestore.getInstance()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_booking_screen_timing)
-        database()
         val clinicName = intent.extras!!.getString("clinic")
-        val bookingDate = intent.extras!!.getString("date")
+        bookingDate = intent.extras!!.getString("date").toString()
         val doctorName = intent.extras!!.getString("doctor")
+        mcrNumber = intent.extras!!.getString("mcrNumber").toString()
+        timinglist = ArrayList()
+        backButton = findViewById(R.id.navigateBookingTimingBookDoctor)
+        noTiming = findViewById(R.id.noTimingsAvailable)
+        database()
         appointmentlist = findViewById(R.id.appointmentList)
         appointmentlist.layoutManager = GridLayoutManager(this,3)
         adaptor = BookingAdaptor(timinglist)
@@ -34,35 +45,39 @@ class BookingScreenTiming : AppCompatActivity() {
                 intent.putExtra("date", bookingDate.toString())
                 intent.putExtra("doctor", doctorName.toString())
                 intent.putExtra("time", timinglist[position])
+                intent.putExtra("mcrNumber",mcrNumber)
                 startActivity(intent)
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
             }
         })
+        backButton.setOnClickListener {
+            super.onBackPressed()
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+        }
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+    }
 
     private fun database() {
-        timinglist = ArrayList<String>()
-        timinglist.add("08:00")
-        timinglist.add("08:30")
-        timinglist.add("09:00")
-        timinglist.add("09:30")
-        timinglist.add("10:00")
-        timinglist.add("10:30")
-        timinglist.add("11:00")
-        timinglist.add("11:30")
-        timinglist.add("12:00")
-        timinglist.add("12:30")
-        timinglist.add("13:00")
-        timinglist.add("13:30")
-        timinglist.add("14:00")
-        timinglist.add("14:30")
-        timinglist.add("15:00")
-        timinglist.add("15:30")
-        timinglist.add("16:00")
-        timinglist.add("16:30")
-        timinglist.add("17:00")
-        timinglist.add("17:30")
-        timinglist.add("18:00")
+        db.collection("Doctors").document(mcrNumber).collection("Dates")
+            .document(bookingDate.replace('/','-'))
+            .get().addOnSuccessListener { result ->
+                val allTiming = result.data
+                var counter : Int = 1
+                allTiming?.forEach { time ->
+                    val canBook = time.value as String
+                    if (canBook.isEmpty()) {
+                        timinglist.add(time.key as String)
+                        adaptor.notifyItemInserted(counter)
+                        counter++
+                    }
+                }
+                if (adaptor.itemCount > 0) {
+                    noTiming.visibility = View.GONE
+                }
+            }
     }
 }

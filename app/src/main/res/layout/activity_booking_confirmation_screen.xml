@@ -17,10 +17,11 @@
         app:layout_constraintLeft_toLeftOf="parent">
 
         <ImageView
-            android:layout_marginTop="16dp"
+            android:id="@+id/navigateConfirmationtoTiming"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:layout_marginStart="4dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:src="@drawable/backarrow" />
 
         <ImageView
@@ -38,6 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:cardCornerRadius="32dp"
+        app:cardBackgroundColor="#00BCD4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHeight_percent="0.85"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -62,45 +64,151 @@
                 android:text="Confirm Booking" />
 
             <TextView
-                android:layout_marginTop="20dp"
-                android:id="@+id/confirmationDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="30sp"
+                android:text="Date"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/work_sans"
                 android:textColor="@color/black"
-                android:text = "Date: "/>
+                android:paddingHorizontal="25dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxBackgroundColor="#90E4EF"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxStrokeWidth="2dp"
+                app:boxStrokeColor="@color/purple_200"
+                app:hintEnabled="false"
+                android:paddingHorizontal="20dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/confirmationDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:cursorVisible="false"
+                    android:longClickable="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
-                android:id="@+id/confirmationClinic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="30sp"
+                android:text="Clinic"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/work_sans"
                 android:textColor="@color/black"
-                android:text="Clinic: "/>
-            <TextView
-                android:id="@+id/confirmationDoctor"
+                android:paddingHorizontal="25dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="30sp"
-                android:textColor="@color/black"
-                android:text = "Doctor: "/>
+                app:boxBackgroundColor="#90E4EF"
+                app:boxStrokeWidth="2dp"
+                app:boxStrokeColor="@color/purple_200"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:hintEnabled="false"
+                android:paddingHorizontal="20dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/confirmationClinic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:cursorVisible="false"
+                    android:longClickable="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
-                android:id="@+id/confirmationTiming"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="30sp"
+                android:text="Doctor"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/work_sans"
                 android:textColor="@color/black"
-                android:text="Timing: "/>
+                android:paddingHorizontal="25dp" />
 
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxBackgroundColor="#90E4EF"
+                app:boxStrokeWidth="2dp"
+                app:boxStrokeColor="@color/purple_200"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:hintEnabled="false"
+                android:paddingHorizontal="20dp">
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/confirmationDoctor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:cursorVisible="false"
+                    android:longClickable="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Timing"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/work_sans"
+                android:textColor="@color/black"
+                android:paddingHorizontal="25dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxBackgroundColor="#90E4EF"
+                app:boxStrokeWidth="2dp"
+                app:boxStrokeColor="@color/purple_200"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:hintEnabled="false"
+                android:paddingHorizontal="20dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/confirmationTiming"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:cursorVisible="false"
+                    android:longClickable="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/nextBookingScreenConfirmation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginRight="20dp"
                 android:text="Book Appointment" />
 

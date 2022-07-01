@@ -14,12 +14,14 @@
         tools:context=".DoctorHomePage">
 
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/ClinicProfilePic"
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_marginTop="12dp"
-            android:src="@drawable/crowdicon"
+            app:shapeAppearanceOverlay="@style/circleShape"
+            android:background="@color/white"
+            android:src="@drawable/hospital_2"
             app:layout_constraintHorizontal_bias="0.91"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -48,7 +50,8 @@
                     android:layout_marginLeft="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/doctoricon"/>
+                    android:paddingVertical="20dp"
+                    android:src="@drawable/doctor2"/>
 
                 <TextView
                     android:layout_marginLeft="28dp"
@@ -85,10 +88,11 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:paddingVertical="15dp"
                     android:layout_marginLeft="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/doctoricon"/>
+                    android:src="@drawable/patient1"/>
 
                 <TextView
                     android:layout_marginLeft="28dp"

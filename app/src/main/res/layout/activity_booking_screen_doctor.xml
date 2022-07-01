@@ -16,10 +16,11 @@
         app:layout_constraintLeft_toLeftOf="parent">
 
         <ImageView
-            android:layout_marginTop="16dp"
+            android:id="@+id/navigateBookingDoctorBookingActivity"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:layout_marginStart="4dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:src="@drawable/backarrow" />
 
         <ImageView
@@ -35,6 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:cardCornerRadius="32dp"
+        app:cardBackgroundColor="#FF00BCD4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHeight_percent="0.85"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -64,8 +66,9 @@
                 android:layout_marginTop="20dp"
                 app:shapeAppearanceOverlay="@style/circleShape"
                 android:src="@drawable/doctor__1_"
+                android:background="@color/white"
                 app:strokeWidth="5dp"
-                app:strokeColor="#00BBD4"
+                app:strokeColor="#BA68C8"
                 android:padding="5dp"
                 android:layout_gravity="center"/>
 
@@ -73,6 +76,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                app:boxBackgroundColor="@color/white"
                 app:hintEnabled="false"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:padding="20dp"
@@ -84,7 +88,6 @@
                     android:layout_height="wrap_content"
                     android:padding="15dp"
                     android:focusable="false"
-                    android:dropDownHeight="240dp"
                     android:hint="Select a Doctor"
                     android:drawableRight="@drawable/ic_baseline_search_24"
                     />

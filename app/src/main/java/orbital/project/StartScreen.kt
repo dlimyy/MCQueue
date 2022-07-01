@@ -17,11 +17,13 @@ class StartScreen : AppCompatActivity() {
         patientlogin.setOnClickListener {
             val intent: Intent = Intent(this, Loginpage::class.java)
             startActivity(intent)
+            finish()
         }
-        doctorlogin = findViewById(R.id.doctor)
+        doctorlogin = findViewById(R.id.clinic)
         doctorlogin.setOnClickListener {
             val intent : Intent = Intent(this, DoctorLoginpage::class.java)
             startActivity(intent)
+            finish()
         }
     }
 }

@@ -22,6 +22,7 @@ class LoginpageTest {
 
     @get:Rule var activityScenarioRule = activityScenarioRule<Loginpage>()
 
+
     @Test
     fun checkActivityVisibility() {
         onView(withId(R.id.layout_loginActivity)).check(matches(isDisplayed()))
@@ -31,7 +32,7 @@ class LoginpageTest {
     fun loginWithoutUsernameAndPassword() {
         onView(withId(R.id.login)).perform(click())
         onView(withId(R.id.usernamelayout))
-            .check(matches(hasTextInputLayoutError("Please enter username")))
+            .check(matches(hasTextInputLayoutError("Please enter a valid email")))
         onView(withId(R.id.passwordlayout))
             .check(matches(hasTextInputLayoutError("Please enter password")))
     }
@@ -46,7 +47,8 @@ class LoginpageTest {
 
 
     //Helper function
-    private fun hasTextInputLayoutError(expectedErrorText: String): Matcher<View> = object : TypeSafeMatcher<View>() {
+    private fun hasTextInputLayoutError(expectedErrorText: String): Matcher<View>
+    = object : TypeSafeMatcher<View>() {
 
         override fun describeTo(description: Description?) { }
 

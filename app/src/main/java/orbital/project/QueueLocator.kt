@@ -21,6 +21,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.firestore.FirebaseFirestore
 import orbital.project.databinding.ActivityQueueLocatorBinding
@@ -36,7 +37,7 @@ class QueueLocator : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private val defaultLocation = LatLng(1.340956, 103.841799)
     private var locationPermissionGranted = false
-    private var lastKnownLocation: Location? = null
+    private var currentLocation: Location? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,8 +80,11 @@ class QueueLocator : AppCompatActivity(), OnMapReadyCallback {
             .addOnSuccessListener { result ->
                 for (document in result) {
                     val geoPoint = document.getGeoPoint("geoPoint")
-                    val queue = document.get("Queue") as Long
+                    val queue = document.get("Queue") as? Long
                     val location = LatLng(geoPoint!!.latitude, geoPoint.longitude)
+                    if (queue == null) {
+                        continue
+                    }
                     val colour : Int = if (queue > 10) {
                         R.color.red
                     } else if(queue > 5) {
@@ -92,8 +96,10 @@ class QueueLocator : AppCompatActivity(), OnMapReadyCallback {
                         val color = ContextCompat.getColor(this, colour)
                         BitmapHelper.vectorToBitmap(this, R.drawable.queue_clinic_icon, color)
                     }
-                    mMap.addMarker(MarkerOptions().position(location))
-                        ?.setIcon(clinicIcon)
+                    val marker = mMap.addMarker(MarkerOptions().position(location))
+                    marker?.setIcon(clinicIcon)
+                    marker?.tag = MarkerInfo(document.id,document.get("Address") as String
+                        ,document.get("Queue") as Long)
                 }
             }
     }
@@ -143,7 +149,7 @@ class QueueLocator : AppCompatActivity(), OnMapReadyCallback {
             } else {
                 mMap.isMyLocationEnabled = false
                 mMap.uiSettings.isMyLocationButtonEnabled = false
-                lastKnownLocation = null
+                currentLocation = null
             }
         } catch (e: SecurityException) {
             Log.e("Exception: %s", e.message, e)
@@ -163,15 +169,12 @@ class QueueLocator : AppCompatActivity(), OnMapReadyCallback {
                 locationResult.addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         // Set the map's camera position to the current location of the device.
-                        lastKnownLocation = task.result
-                        Log.d("HELPP","Places")
-                        if (lastKnownLocation != null) {
-                            Log.d("Timeeeee","NOWW")
+                        currentLocation = task.result
+                        if (currentLocation != null) {
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                                LatLng(lastKnownLocation!!.latitude,
-                                    lastKnownLocation!!.longitude), DEFAULT_ZOOM.toFloat()))
+                                LatLng(currentLocation!!.latitude,
+                                    currentLocation!!.longitude), DEFAULT_ZOOM.toFloat()))
                         }
-                        Log.d("FATE","SAD")
                     } else {
                         Log.d(TAG, "Current location is null. Using defaults.")
                         Log.e(TAG, "Exception: %s", task.exception)
@@ -193,7 +196,7 @@ class QueueLocator : AppCompatActivity(), OnMapReadyCallback {
     override fun onSaveInstanceState(outState: Bundle) {
         mMap.let { map ->
             outState.putParcelable(KEY_CAMERA_POSITION, map.cameraPosition)
-            outState.putParcelable(KEY_LOCATION, lastKnownLocation)
+            outState.putParcelable(KEY_LOCATION, currentLocation)
         }
         super.onSaveInstanceState(outState)
     }

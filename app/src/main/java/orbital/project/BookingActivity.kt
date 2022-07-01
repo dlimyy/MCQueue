@@ -6,10 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
-import android.widget.Button
-import android.widget.EditText
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
@@ -24,12 +21,14 @@ class BookingActivity : AppCompatActivity() {
     private lateinit var bookingClinic : AutoCompleteTextView
     private lateinit var nextButton : Button
     private lateinit var clinics : ArrayList<String>
+    private lateinit var backButton : ImageView
     private lateinit var db : FirebaseFirestore
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_booking)
         bookingDate = findViewById(R.id.bookingDate)
+        backButton = findViewById(R.id.navigateBookingActivityMainActivity)
         clinics = ArrayList()
         db = FirebaseFirestore.getInstance()
         db.collection("Clinics").get().addOnSuccessListener { result ->
@@ -55,8 +54,8 @@ class BookingActivity : AppCompatActivity() {
 
         bookingClinic = findViewById(R.id.bookingClinic)
         bookingClinic.setAdapter(adaptor)
-
         nextButton = findViewById(R.id.nextBookingScreenDoctor)
+
         nextButton.setOnClickListener {
             if (!TextUtils.isEmpty(bookingDate.text.toString())
                 && !TextUtils.isEmpty(bookingClinic.text.toString())) {
@@ -72,10 +71,19 @@ class BookingActivity : AppCompatActivity() {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        backButton.setOnClickListener {
+            startActivity(Intent(this,MainActivity::class.java))
+            finish()
+        }
+    }
+
 
     private fun updateLabel() {
         val myFormat = "dd/MM/yy"
         val dateFormat = SimpleDateFormat(myFormat, Locale.CHINA)
         bookingDate.setText(dateFormat.format(bookCalendar.time))
     }
+
 }

@@ -113,7 +113,10 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/passwordlayout"
         android:layout_marginRight="15dp"
-        android:textSize="15sp"
+        android:fontFamily="@font/roboto"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="17sp"
         android:text="Forgot password?"
         />
 
@@ -128,23 +131,27 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:background="@drawable/roundbutton"
-        app:backgroundTint="#5E60BC"
+        android:textAllCaps="false"
+        app:backgroundTint="#673AB7"
         app:layout_constraintTop_toBottomOf="@id/forgetpassword"
         android:text="Login"
-        android:textAllCaps="false"
         />
 
-    <TextView
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/signup"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:textSize="15sp"
-        android:text="Sign Up Instead"
-        app:layout_constraintHorizontal_bias="0.879"
+        android:paddingVertical="15dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginHorizontal="45dp"
+        android:textSize="20sp"
+        android:text="Create New Account"
+        android:backgroundTint="#673AB7"
+        app:cornerRadius="25dp"
+        android:textAllCaps="false"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/login"/>
 
 
 

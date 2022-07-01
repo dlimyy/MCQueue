@@ -4,9 +4,15 @@ import android.Manifest
 import android.app.AlertDialog
 import android.app.TimePickerDialog
 import android.app.TimePickerDialog.OnTimeSetListener
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
+import android.media.Image
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
@@ -30,12 +36,16 @@ import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
+import com.google.firebase.storage.FirebaseStorage
+import java.io.ByteArrayOutputStream
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class AddDoctor : AppCompatActivity() {
 
-    private lateinit var doctorProfilepic : ImageView
+    private lateinit var backButton : ImageView
+    private lateinit var doctorProfilePic : ImageView
     private lateinit var submitButton: Button
     private lateinit var startTime : Button
     private lateinit var endTime : Button
@@ -52,13 +62,26 @@ class AddDoctor : AppCompatActivity() {
     private lateinit var doctorInfoLanguagesSecondRow : MaterialButtonToggleGroup
     private lateinit var doctorInfoLanguagesThirdRow : MaterialButtonToggleGroup
     private lateinit var chooseProfileButton : Button
+    private val monArray : ArrayList<String> = arrayListOf()
+    private val tuesArray : ArrayList<String> = arrayListOf()
+    private val wedArray : ArrayList<String> = arrayListOf()
+    private val thursArray : ArrayList<String> = arrayListOf()
+    private val friArray : ArrayList<String> = arrayListOf()
+    private val satArray : ArrayList<String> = arrayListOf()
+    private val sunArray : ArrayList<String> = arrayListOf()
+    private lateinit var mcrValidator :McrValidator
+    private val chipArray = ArrayList<Chip>()
+    private val storageRef = FirebaseStorage.getInstance().reference
     private val daysOfWeek = arrayOf("Monday","Tuesday","Wednesday","Thursday"
         ,"Friday","Saturday","Sunday")
+    private lateinit var genderError : TextView
+    private lateinit var languageError : TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_doctor)
-        doctorProfilepic = findViewById(R.id.doctorProfilePic)
+        backButton = findViewById(R.id.navigateAddDoctorToDoctorInfo)
+        doctorProfilePic = findViewById(R.id.doctorProfilePic)
         chooseProfileButton = findViewById(R.id.doctorInfoChooseProfilePicture)
         submitButton = findViewById(R.id.addDoctorSubmitButton)
         startTime = findViewById(R.id.startTimeButton)
@@ -75,17 +98,37 @@ class AddDoctor : AppCompatActivity() {
         doctorInfoLanguagesFirstRow = findViewById(R.id.doctorInfoLanguagesFirstRow)
         doctorInfoLanguagesSecondRow = findViewById(R.id.doctorInfoLanguagesSecondRow)
         doctorInfoLanguagesThirdRow = findViewById(R.id.doctorInfoLanguagesThirdRow)
+        mcrValidator = McrValidator()
         doctorInfoDateTimeError.visibility = View.GONE
         val adaptor = ArrayAdapter<String>(this,
             com.google.android.material.R.layout.support_simple_spinner_dropdown_item,daysOfWeek)
         day.setAdapter(adaptor)
+        genderError = findViewById(R.id.addDoctorGender)
+        languageError = findViewById(R.id.addDoctorLanguage)
+        genderError.visibility = View.GONE
+        languageError.visibility = View.GONE
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onStart() {
         super.onStart()
         doctorNameTextChange()
-        MCRTextChange()
+        dayTextChange()
+        mcrValidator.textChange(mcrNumber,mcrNumberLayout)
+        toggleGender.addOnButtonCheckedListener { _, _, _ ->
+            genderError.visibility = View.GONE
+        }
+
+        doctorInfoLanguagesFirstRow.addOnButtonCheckedListener { _, _, _ ->
+            languageError.visibility = View.GONE
+        }
+
+        doctorInfoLanguagesSecondRow.addOnButtonCheckedListener { _, _, _ ->
+            languageError.visibility = View.GONE
+        }
+        doctorInfoLanguagesThirdRow.addOnButtonCheckedListener { _, _, _ ->
+            languageError.visibility = View.GONE
+        }
 
         startTime.setOnClickListener {
             doctorInfoDateTimeError.visibility = View.GONE
@@ -145,6 +188,12 @@ class AddDoctor : AppCompatActivity() {
             if (chipGroup.size > 15) {
                 return@setOnClickListener
             }
+            if (!isDayTimeValid(day,startTime,endTime)) {
+                doctorInfoDateTimeError.text = "Please select non-overlapping time range"
+                doctorInfoDateTimeError.visibility = View.VISIBLE
+                return@setOnClickListener
+            }
+
             val chipString = day.text.toString().substring(0,3) + " " + startTime.text.toString() + "-" + endTime.text.toString()
             addChip(chipString)
         }
@@ -157,16 +206,38 @@ class AddDoctor : AppCompatActivity() {
             val db = FirebaseFirestore.getInstance()
             val uid : String = FirebaseAuth.getInstance().currentUser!!.uid
             val validDoc = isValidDoctorName(doctorName)
-            val validMCR = isValidMCR(mcrNumber)
+            val validMCR = mcrValidator.layoutErrorChange(mcrNumber,mcrNumberLayout)
             val isGender = checkGender()
             val languageArray = getLanguageArray()
-            val chipArray = getDayAndTime()
+            val daysArray = getDayArray()
+            val bitImage = (doctorProfilePic.drawable as BitmapDrawable).bitmap
+            val outputStream = ByteArrayOutputStream()
+            bitImage.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+            val data  = outputStream.toByteArray()
+            val imageRef = storageRef.child("Images")
+
 
             if (validDoc && validMCR && isGender && languageArray.size > 0 && chipArray.size > 0) {
+                getWorkingHours()
+                val ref = imageRef.child(mcrNumber.text.toString())
                 val docData = hashMapOf("Name" to doctorName.text.toString(), "Gender"
                         to findViewById<Button>(toggleGender.checkedButtonId).text.toString()
-                    , "Clinic uid" to uid, "Languages" to languageArray, "DayAndTime" to chipArray)
-                db.collection("Doctors").document(mcrNumber.text.toString()).set(docData)
+                    , "Clinic uid" to uid, "Languages" to languageArray, "Days" to daysArray,
+                    "monArray" to monArray, "tuesArray" to tuesArray, "wedArray" to wedArray,
+                    "thursArray" to thursArray, "friArray" to friArray, "satArray" to satArray
+                    ,"sunArray" to sunArray)
+                ref.putBytes(data).addOnSuccessListener {
+                    Snackbar.make(submitButton,"Submitted successfully",Snackbar.LENGTH_SHORT).show()
+                }.addOnFailureListener {
+                    monArray.clear()
+                    tuesArray.clear()
+                    wedArray.clear()
+                    thursArray.clear()
+                    friArray.clear()
+                    satArray.clear()
+                    sunArray.clear()
+                    Snackbar.make(submitButton,"Failure",Snackbar.LENGTH_SHORT).show()
+                }
                 db.collection("Clinics").document(uid).get()
                     .addOnSuccessListener{ document ->
                         if (document == null) {
@@ -185,9 +256,34 @@ class AddDoctor : AppCompatActivity() {
                                 .set(hashMapOf("Doctor" to docArray), SetOptions.merge())
                         }
                     }
+                db.collection("Doctors").document(mcrNumber.text.toString()).set(docData).addOnFailureListener {
+                    monArray.clear()
+                    tuesArray.clear()
+                    wedArray.clear()
+                    thursArray.clear()
+                    friArray.clear()
+                    satArray.clear()
+                    sunArray.clear()
+                }.addOnSuccessListener {
+                    Handler().postDelayed({
+                        startActivity(Intent(this, DoctorHomePage::class.java))
+                        finishAffinity()
+                    },2500)
+                }
+
+                monArray.clear()
+                tuesArray.clear()
+                wedArray.clear()
+                thursArray.clear()
+                friArray.clear()
+                satArray.clear()
+                sunArray.clear()
             }
         }
 
+        backButton.setOnClickListener {
+            super.onBackPressed()
+        }
     }
 
 
@@ -205,17 +301,20 @@ class AddDoctor : AppCompatActivity() {
         })
     }
 
-    private fun MCRTextChange() {
-        mcrNumber.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-            }
-
+    private fun dayTextChange() {
+        day.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                mcrNumberLayout.error = null;
+                doctorInfoDateTimeError.visibility = View.GONE
             }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+
         })
     }
 
@@ -227,16 +326,9 @@ class AddDoctor : AppCompatActivity() {
         return true
     }
 
-    private fun isValidMCR(MCR: TextInputEditText) : Boolean {
-        if (TextUtils.isEmpty(MCR.text.toString())) {
-            mcrNumberLayout.error = "Please enter MCR"
-            return false
-        }
-        return true
-    }
-
     private fun checkGender() : Boolean {
         if (toggleGender.checkedButtonId == View.NO_ID) {
+            genderError.visibility = View.VISIBLE
             return false
         }
         return true
@@ -249,8 +341,10 @@ class AddDoctor : AppCompatActivity() {
         chip.id = View.generateViewId()
         chip.setOnCloseIconClickListener {
             chipGroup.removeView(chip)
+            chipArray.remove(chip)
         }
         chipGroup.addView(chip)
+        chipArray.add(chip)
     }
 
     private fun getLanguageArray() : ArrayList<String> {
@@ -264,17 +358,42 @@ class AddDoctor : AppCompatActivity() {
         for (language in doctorInfoLanguagesThirdRow.checkedButtonIds) {
             arraylist.add(findViewById<Button>(language).text.toString())
         }
+        if (arraylist.size == 0) {
+            languageError.visibility = View.VISIBLE
+        }
         return arraylist
     }
 
-    private fun getDayAndTime() : ArrayList<String> {
-        val arraylist = ArrayList<String>()
-        for (pos in 0 until chipGroup.childCount) {
-            Log.d("Trying",chipGroup.getChildAt(pos).id.toString())
-            arraylist.add(findViewById<Chip>(chipGroup.getChildAt(pos).id).text.toString())
-            Log.d("FINALLLY",findViewById<Chip>(chipGroup.getChildAt(pos).id).text.toString())
+    private fun getDayArray() : ArrayList<String> {
+        val arraylist = arrayListOf<String>()
+        for (i in 0 until chipArray.size) {
+            if (!arraylist.contains(chipArray[i].text.toString().substring(0,3))) {
+                arraylist.add(chipArray[i].text.toString().substring(0,3))
+            }
+        }
+        if (arraylist.size == 0) {
+            doctorInfoDateTimeError.text = "Please select a timing"
+            doctorInfoDateTimeError.visibility = View.VISIBLE
         }
         return arraylist
+    }
+
+    private fun getWorkingHours() {
+        for (chip in chipArray) {
+            when (chip.text.toString().substring(0,3)) {
+                "Mon" -> monArray.add(chip.text.toString().substring(4))
+                "Tue" -> tuesArray.add(chip.text.toString().substring(4))
+                "Wed" -> wedArray.add(chip.text.toString().substring(4))
+                "Thu" -> thursArray.add(chip.text.toString().substring(4))
+                "Fri" -> friArray.add(chip.text.toString().substring(4))
+                "Sat" -> satArray.add(chip.text.toString().substring(4))
+                "Sun" -> sunArray.add(chip.text.toString().substring(4))
+                else -> {
+
+                }
+            }
+        }
+
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -324,7 +443,7 @@ class AddDoctor : AppCompatActivity() {
         if (result.isSuccessful) {
             // use the returned uri
             val uriContent = result.uriContent
-            doctorProfilepic.setImageURI(uriContent)
+            doctorProfilePic.setImageURI(uriContent)
         } else {
             // an error occurred
             val exception = result.error
@@ -377,7 +496,7 @@ class AddDoctor : AppCompatActivity() {
                         }
                     )
                 } else {
-                    Snackbar.make(doctorProfilepic, "Please enable permissions for camera"
+                    Snackbar.make(doctorProfilePic, "Please enable permissions for camera"
                         , Snackbar.LENGTH_LONG).show()
                 }
             }
@@ -394,7 +513,7 @@ class AddDoctor : AppCompatActivity() {
                         }
                     )
                 } else {
-                    Snackbar.make(doctorProfilepic, "Please enable permissions under Files and Media"
+                    Snackbar.make(doctorProfilePic, "Please enable permissions under Files and Media"
                         , Snackbar.LENGTH_LONG).show()
                 }
             }
@@ -403,6 +522,42 @@ class AddDoctor : AppCompatActivity() {
                 super.onRequestPermissionsResult(requestCode, permissions, grantResults)
             }
         }
+    }
+
+    private fun isDayTimeValid(day : TextView, startTime : Button, endTime : Button) : Boolean {
+        var minTime : Int? = null
+        var maxTime : Int? = null
+        val startTimeInt = Integer.parseInt(startTime.text.toString().substring(0,2)
+                + startTime.text.toString().substring(3))
+        val endTimeInt = Integer.parseInt(endTime.text.toString().substring(0,2)
+                + endTime.text.toString().substring(3))
+        if (startTimeInt >= endTimeInt) {
+            return false
+        }
+        for (chip in chipArray) {
+            if(chip.text.toString().substring(0,3) == day.text.toString().substring(0,3)) {
+                val starting : Int = Integer.parseInt(chip.text.toString().substring(4,6)
+                        + chip.text.toString().substring(7,9))
+                val ending : Int = Integer.parseInt(chip.text.toString().substring(10,12)
+                        + chip.text.toString().substring(13))
+
+                minTime = starting
+                maxTime = ending
+                if (minTime <= startTimeInt && maxTime >= endTimeInt) {
+                    return false
+                }
+                if (startTimeInt >= minTime && startTimeInt <= maxTime) {
+                    return false
+                }
+                if (endTimeInt >= minTime && endTimeInt <= maxTime) {
+                    return false
+                }
+                if (minTime >= startTimeInt && endTimeInt >= maxTime) {
+                    return false
+                }
+            }
+        }
+        return true
     }
 
     companion object {

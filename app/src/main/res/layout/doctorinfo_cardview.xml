@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/doctorinfo_cardview"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="16dp"
+    app:cardBackgroundColor="#80DEEA"
+    app:cardCornerRadius="20dp">
+
+    <LinearLayout
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/doctorInfoProfilePicture"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:shapeAppearanceOverlay="@style/circleShape"
+            android:src="@drawable/doctor__1_"
+            app:strokeWidth="3dp"
+            app:strokeColor="#00BBD4"
+            android:background="@color/white"
+            android:padding="4dp"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:id="@+id/doctorInfoName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Doctor's Name"
+            android:textSize="30sp"
+            android:gravity="center"
+            android:layout_marginEnd="15dp"
+            android:textColor="@color/black"
+            android:layout_marginVertical="30dp"/>
+
+    </LinearLayout>
+
+
+
+
+
+
+</com.google.android.material.card.MaterialCardView>

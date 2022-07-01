@@ -1,11 +1,14 @@
 package orbital.project
 
 import android.content.Intent
+import android.location.Address
+import android.location.Geocoder
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
+import android.util.Log
 import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
@@ -16,126 +19,102 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.GeoPoint
+import java.io.IOException
+import java.util.*
 
 class DoctorRegisterActivity : AppCompatActivity() {
-    private lateinit var doc_registeremail : TextInputEditText
-    private lateinit var doc_emaillayout : TextInputLayout
-    private lateinit var doc_registerpassword : TextInputEditText
-    private lateinit var doc_passwordlayout : TextInputLayout
-    private lateinit var doc_registerbutton: Button
-    private lateinit var doc_backbutton : ImageView
-    private lateinit var doc_firstname : TextInputEditText
-    private lateinit var doc_firstnamelayout : TextInputLayout
-    private lateinit var doc_lastname : TextInputEditText
-    private lateinit var doc_lastnamelayout : TextInputLayout
-    private lateinit var doc_confirmpassword : TextInputEditText
-    private lateinit var doc_confirmpasswordlayout : TextInputLayout
-    private lateinit var doc_license : TextInputEditText
-    private lateinit var doc_licenselayout : TextInputLayout
+
+    private lateinit var clinicName : TextInputEditText
+    private lateinit var clinicNameLayout : TextInputLayout
+    private lateinit var address : TextInputEditText
+    private lateinit var addressLayout : TextInputLayout
+    private lateinit var registerButton: Button
+    private lateinit var backButton : ImageView
+    private lateinit var clinicEmail: TextInputEditText
+    private lateinit var clinicEmailLayout : TextInputLayout
+    private lateinit var password : TextInputEditText
+    private lateinit var passwordLayout : TextInputLayout
+    private lateinit var confirmPassword: TextInputEditText
+    private lateinit var confirmPasswordLayout : TextInputLayout
+    private lateinit var emailValidator: EmailValidator
+    private lateinit var passwordValidator : PasswordValidator
+    private val db = FirebaseFirestore.getInstance()
+    private lateinit var geocoder : Geocoder
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_doctor_register)
 
-        doc_registeremail = findViewById(R.id.doc_registeremail)
-        doc_emaillayout = findViewById(R.id.doc_registeremaillayout)
-        doc_registerpassword = findViewById(R.id.doc_registerpassword)
-        doc_passwordlayout = findViewById(R.id.doc_registerpasswordlayout)
-        doc_registerbutton = findViewById(R.id.doc_registerbutton)
-        doc_backbutton = findViewById(R.id.doc_backbutton)
-        doc_firstname = findViewById(R.id.doc_firstname)
-        doc_firstnamelayout = findViewById(R.id.doc_firstnamelayout)
-        doc_lastname = findViewById(R.id.doc_lastname)
-        doc_lastnamelayout = findViewById(R.id.doc_lastnamelayout)
-        doc_confirmpassword = findViewById(R.id.doc_confirmpassword)
-        doc_confirmpasswordlayout = findViewById(R.id.doc_confirmpasswordlayout)
-        doc_license = findViewById(R.id.doc_license)
-        doc_licenselayout = findViewById(R.id.doc_licenselayout)
+        clinicName = findViewById(R.id.clinicName)
+        clinicNameLayout= findViewById(R.id.clinicNameLayout)
+        address = findViewById(R.id.clinicAddress)
+        addressLayout = findViewById(R.id.clinicAddressLayout)
+        registerButton = findViewById(R.id.clinicRegisterButton)
+        backButton = findViewById(R.id.navigateClinicRegistertoLogin)
+        clinicEmail = findViewById(R.id.clinicEmail)
+        clinicEmailLayout = findViewById(R.id.clinicEmailLayout)
+        password = findViewById(R.id.clinicPassword)
+        passwordLayout = findViewById(R.id.clinicPasswordLayout)
+        confirmPassword = findViewById(R.id.clinicConfirmPassword)
+        confirmPasswordLayout= findViewById(R.id.clinicConfirmPasswordLayout)
+        geocoder = Geocoder(this, Locale.getDefault())
+        emailValidator = EmailValidator()
+        passwordValidator = PasswordValidator()
 
         backButtonClickEvent()
-        firstNameTextChange()
-        lastNameTextChange()
-        registerEmailTextChange()
-        passwordTextChange()
+        clinicNameTextChange()
+        addressTextChange()
+        emailValidator.textChange(clinicEmail,clinicEmailLayout)
+        passwordValidator.textChange(password,passwordLayout)
         confirmPasswordTextChange()
-        licenseTextChange()
         registerButtonClickEvent()
 
     }
 
     private fun backButtonClickEvent() {
-        doc_backbutton.setOnClickListener {
+        backButton.setOnClickListener {
             val intent : Intent = Intent(this, DoctorLoginpage::class.java)
             startActivity(intent)
             finish()
         }
     }
 
-    private fun isValidFirstName(firstname : String?) : Boolean {
+    private fun isValidClinicName(firstname : String?) : Boolean {
         if (TextUtils.isEmpty(firstname)) {
-            doc_firstnamelayout.error = "Please enter a valid name"
+            clinicNameLayout.error = "Please enter a valid name"
             return false
         }
         return true
     }
 
-    private fun isValidLastName(lastname : String?) : Boolean {
+    private fun isValidAddress(lastname : String?) : Boolean {
         if (TextUtils.isEmpty(lastname)) {
-            doc_lastnamelayout.error = "Please enter a valid name"
+            addressLayout.error = "Please enter a valid address"
             return false
         }
-        return true
-    }
 
-    private fun isValidEmail(email : String?) : Boolean {
-        if (TextUtils.isEmpty(email)) {
-            doc_emaillayout.error = "Please enter a valid email"
-            return false
-        }
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            doc_emaillayout.error = "Please key in a valid email address"
-            return false
-        }
-        return true
-    }
-
-    private fun isValidPassword(password: String?) : Boolean {
-        if (TextUtils.isEmpty(password)) {
-            doc_passwordlayout.error = "Please enter password"
-            return false
-        }
         return true
     }
 
     private fun isValidConfirmPassword(password: String?, confirmpassword: String?) : Boolean {
         if (TextUtils.isEmpty(confirmpassword)) {
-            doc_confirmpasswordlayout.error = "Please enter password"
+           confirmPasswordLayout.error = "Please enter password"
             return false
         }
 
         if (!confirmpassword.equals(password)) {
-            doc_confirmpasswordlayout.error = "Passwords do not match"
+            confirmPasswordLayout.error = "Passwords do not match"
             return false
         }
         return true
     }
 
-    private fun isValidLicense(license : String?) : Boolean {
-        if (TextUtils.isEmpty(license)) {
-            doc_licenselayout.error = "Please enter Medical License Number"
-            return false
-        }
-        if (!license!!.startsWith('M') || license.length != 7
-            || !(license.last() >= 'A') || !(license.last() <= 'Z')) {
-            doc_licenselayout.error = "Please enter valid Medical License Number"
-            return false
-        }
-        return true
-    }
 
-    private fun firstNameTextChange() {
-        doc_firstname.addTextChangedListener(object : TextWatcher {
+    private fun clinicNameTextChange() {
+        clinicName.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
             }
 
@@ -143,13 +122,13 @@ class DoctorRegisterActivity : AppCompatActivity() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                doc_firstnamelayout.error = null;
+                clinicNameLayout.error = null;
             }
         })
     }
 
-    private fun lastNameTextChange() {
-        doc_lastname.addTextChangedListener(object : TextWatcher {
+    private fun addressTextChange() {
+       address.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
             }
 
@@ -157,41 +136,13 @@ class DoctorRegisterActivity : AppCompatActivity() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                doc_lastnamelayout.error = null;
-            }
-        })
-    }
-
-    private fun registerEmailTextChange() {
-        doc_registeremail.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                doc_emaillayout.error = null;
-            }
-        })
-    }
-
-    private fun passwordTextChange() {
-        doc_registerpassword.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                doc_passwordlayout.error = null;
+                addressLayout.error = null;
             }
         })
     }
 
     private fun confirmPasswordTextChange() {
-        doc_confirmpassword.addTextChangedListener(object : TextWatcher {
+        confirmPassword.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
             }
 
@@ -199,65 +150,63 @@ class DoctorRegisterActivity : AppCompatActivity() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                doc_confirmpasswordlayout.error = null;
+                confirmPasswordLayout.error = null;
             }
         })
     }
 
-    private fun licenseTextChange() {
-        doc_license.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-            }
 
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                doc_licenselayout.error = null;
-            }
-        })
-    }
 
     private fun registerButtonClickEvent() {
-        doc_registerbutton.setOnClickListener {
-            val trimmedemail: String = doc_registeremail.text.toString().trim { it <= ' ' }
-            val trimmedpassword: String = doc_registerpassword.text.toString().trim { it <= ' ' }
-            val trimmedfirstname : String = doc_firstname.text.toString().trim { it <= ' ' }
-            val trimmedlastname : String = doc_lastname.text.toString().trim { it <= ' ' }
-            val trimmedconfirmpassword : String = doc_confirmpassword.text
-                .toString().trim { it <= ' ' }
-            val trimmedlicense : String = doc_license.text.toString().trim { it <= ' ' }
+        registerButton.setOnClickListener {
+            val trimmedclinicname : String = clinicName.text.toString().trim { it <= ' ' }
+            val trimmedaddress : String = address.text.toString().trim { it <= ' ' }
 
-            val firstnameValidity : Boolean = isValidFirstName(trimmedfirstname)
-            val lastnameValidity : Boolean = isValidLastName(trimmedlastname)
-            val emailValidity : Boolean = isValidEmail(trimmedemail)
-            val passwordValidity : Boolean = isValidPassword(trimmedpassword)
-            val confirmPasswordValidity : Boolean = isValidConfirmPassword(trimmedpassword,
-                trimmedconfirmpassword)
-            val licenseValidity : Boolean = isValidLicense(trimmedlicense)
-
-
-
-            if (firstnameValidity && lastnameValidity && emailValidity
-                && passwordValidity && confirmPasswordValidity && licenseValidity){
-
-                FirebaseAuth.getInstance().createUserWithEmailAndPassword(trimmedemail,
-                    trimmedpassword).addOnCompleteListener { task ->
+            val clinicNameValidity : Boolean = isValidClinicName(trimmedclinicname)
+            val addressValidity : Boolean = isValidAddress(trimmedaddress)
+            val emailValidity : Boolean = emailValidator.layoutErrorChange(clinicEmail,clinicEmailLayout)
+            val passwordValidity : Boolean = passwordValidator.layoutErrorChange(password,passwordLayout)
+            val confirmPasswordValidity : Boolean = isValidConfirmPassword(password.text.toString(),
+                confirmPassword.text.toString())
+            var tempaddress = Address(Locale.getDefault())
+            var addressList: List<Address> = listOf()
+            if (trimmedaddress != "") {
+                addressList =
+                    geocoder.getFromLocationName(address.text.toString(),1)
+                if (addressList.isNotEmpty()) {
+                    tempaddress = addressList[0]
+                } else {
+                    addressLayout.error = "Please key in a valid address"
+                }
+            }
+            if (clinicNameValidity && addressValidity && emailValidity
+                && passwordValidity && confirmPasswordValidity && addressList.isNotEmpty()
+            ){
+                FirebaseAuth.getInstance().createUserWithEmailAndPassword(clinicEmail.text.toString(),
+                    password.text.toString()).addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        // Firebase registered user
+                        val tempdata = hashMapOf("Address" to address.text.toString(),
+                            "geoPoint" to GeoPoint(tempaddress.latitude,tempaddress.longitude))
+                        db.collection("Mapdata")
+                        .document(clinicName.text.toString())
+                        .set(tempdata)
+                        val data = hashMapOf("Name" to clinicName.text.toString()
+                            , "Address" to address.text.toString())
                         val firebaseUser: FirebaseUser = task.result!!.user!!
+                        db.collection("Clinics")
+                            .document(firebaseUser.uid)
+                            .set(data)
+                        db.collection("Users")
+                            .document(firebaseUser.uid)
+                            .set(hashMapOf("Role" to "Clinic"))
                         val intent =
                             Intent(this, DoctorHomePage::class.java)
-                        intent.flags =
-                            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                        intent.putExtra("user_id",firebaseUser.uid)
-                        intent.putExtra("email_id", trimmedemail)
                         startActivity(intent)
                         finish()
                     } else {
                         // If the login is not successful then show error message.
-                        Snackbar.make(doc_registeremail
-                            ,task.exception!!.message.toString(),
+                        Snackbar.make(clinicEmail
+                            ,"Sorry, please try a different email address or use a password with 6 characters",
                             Snackbar.LENGTH_SHORT
                         ).show()
                     }

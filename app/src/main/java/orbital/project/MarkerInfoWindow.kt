@@ -26,7 +26,7 @@ class MarkerInfoWindowAdapter(
         ).text = clinic.address
         view.findViewById<TextView>(
             R.id.markerInfoQueue
-        ).text = "Queue: %d".format(clinic.name)
+        ).text = "Queue: %d".format(clinic.queue)
 
         return view
     }

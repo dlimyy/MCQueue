@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Gender"
+        android:textSize="22sp"
+        android:textColor="@color/black"
+        android:padding="16dp" />
+
+    <LinearLayout
+        android:gravity="right"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/genderCancelButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:textSize="18sp"
+            android:textColor="#5BA1F6"/>
+
+        <TextView
+            android:id="@+id/genderDoneButton"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Done"
+            android:textSize="18sp"
+            android:textColor="#5BA1F6"/>
+
+    </LinearLayout>
+
+   <com.google.android.material.chip.ChipGroup
+       android:layout_marginVertical="24dp"
+       android:id="@+id/genderChipGroup"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:paddingHorizontal="16dp"
+       app:singleSelection="true"
+       android:layout_gravity="center">
+
+       <com.google.android.material.chip.Chip
+           android:layout_marginEnd="16dp"
+           android:id="@+id/AllChip"
+           android:layout_width="100dp"
+           android:layout_height="wrap_content"
+           android:textAlignment="center"
+           app:chipStrokeColor="#979797"
+           app:chipStrokeWidth="1dp"
+           app:chipBackgroundColor="@color/white"
+           android:checkable="true"
+           app:checkedIconTint="@color/black"
+           app:checkedIcon="@drawable/ic_baseline_check_24"
+           app:checkedIconVisible="true"
+           android:text="All" />
+
+
+       <com.google.android.material.chip.Chip
+           android:id="@+id/maleChip"
+           android:layout_width="100dp"
+           android:layout_height="wrap_content"
+           android:textAlignment="center"
+           android:layout_marginEnd="16dp"
+           app:chipStrokeColor="#979797"
+           app:chipStrokeWidth="1dp"
+           app:chipBackgroundColor="@color/white"
+           android:text="Male"
+           app:checkedIconTint="@color/black"
+           app:checkedIcon="@drawable/ic_baseline_check_24"
+           app:checkedIconVisible="true"
+           android:checkable="true"/>
+
+       <com.google.android.material.chip.Chip
+           android:id="@+id/femaleChip"
+           android:layout_width="100dp"
+           android:layout_height="wrap_content"
+           android:textAlignment="center"
+           app:chipStrokeColor="#979797"
+           app:chipStrokeWidth="1dp"
+           app:chipBackgroundColor="@color/white"
+           android:checkable="true"
+           app:checkedIconTint="@color/black"
+           app:checkedIcon="@drawable/ic_baseline_check_24"
+           app:checkedIconVisible="true"
+           android:text="Female" />
+
+
+
+   </com.google.android.material.chip.ChipGroup>
+
+
+</LinearLayout>

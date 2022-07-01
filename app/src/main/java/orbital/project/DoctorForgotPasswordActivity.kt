@@ -9,6 +9,7 @@ import android.text.TextWatcher
 import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
@@ -16,38 +17,38 @@ import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 
 class DoctorForgotPasswordActivity : AppCompatActivity() {
-    private lateinit var doc_resetemail : TextInputEditText
-    private lateinit var doc_resetemaillayout : TextInputLayout
-    private lateinit var doc_resetbutton : Button
-    private lateinit var doc_backlogintext : TextView
+    private lateinit var email : TextInputEditText
+    private lateinit var emailLayout: TextInputLayout
+    private lateinit var resetButton : Button
+    private lateinit var backButton : ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_doctor_forgot_password)
 
-        doc_resetemail = findViewById(R.id.doc_resetemail)
-        doc_resetemaillayout = findViewById(R.id.doc_resetemaillayout)
-        doc_resetbutton = findViewById(R.id.doc_resetbutton)
-        doc_backlogintext = findViewById(R.id.doc_backlogin)
-        backloginClickEvent()
+        email = findViewById(R.id.clinicResetEmail)
+        emailLayout = findViewById(R.id.clinicResetEmailLayout)
+        resetButton = findViewById(R.id.clinicResetButton)
+        backButton = findViewById(R.id.navigateClinicForgettoLogin)
+        backLoginClickEvent()
         resetEmailTextChange()
-        resetbuttonClickEvent()
+        resetButtonClickEvent()
     }
 
     private fun isValidEmail(resetemail : String?) : Boolean {
         if (TextUtils.isEmpty(resetemail)) {
-            doc_resetemaillayout.error = "Please enter a valid email"
+            emailLayout.error = "Please enter a valid email"
             return false
         }
         if (!Patterns.EMAIL_ADDRESS.matcher(resetemail).matches()) {
-            doc_resetemaillayout.error = "Please key in a valid email address"
+            emailLayout.error = "Please key in a valid email address"
             return false
         }
         return true
     }
 
     private fun resetEmailTextChange() {
-        doc_resetemail.addTextChangedListener(object : TextWatcher {
+        email.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
             }
 
@@ -55,22 +56,28 @@ class DoctorForgotPasswordActivity : AppCompatActivity() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                doc_resetemaillayout.error = null;
+                emailLayout.error = null;
             }
         })
     }
 
-    private fun backloginClickEvent() {
-        doc_backlogintext.setOnClickListener {
+    private fun backLoginClickEvent() {
+        backButton.setOnClickListener {
             val intent: Intent = Intent(this, DoctorLoginpage::class.java)
             startActivity(intent)
             finish()
         }
     }
 
-    private fun resetbuttonClickEvent() {
-        doc_resetbutton.setOnClickListener {
-            val trimmedemail: String = doc_resetemail.text.toString().trim { it <= ' ' }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity(Intent(this, DoctorLoginpage::class.java))
+        finish()
+    }
+
+    private fun resetButtonClickEvent() {
+        resetButton.setOnClickListener {
+            val trimmedemail: String = email.text.toString().trim { it <= ' ' }
             val emailValidity: Boolean = isValidEmail(trimmedemail)
 
             if (emailValidity) {
@@ -78,14 +85,14 @@ class DoctorForgotPasswordActivity : AppCompatActivity() {
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             Snackbar.make(
-                                doc_resetemail,
+                                email,
                                 "Password has been successfully reset",
                                 Snackbar.LENGTH_SHORT
                             ).show()
                         } else {
                             Snackbar.make(
-                                doc_resetemail,
-                                task.exception!!.message.toString(),
+                                email,
+                                "Please key in a valid email address",
                                 Snackbar.LENGTH_SHORT
                             ).show()
                         }

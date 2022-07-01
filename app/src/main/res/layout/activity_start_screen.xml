@@ -26,19 +26,19 @@
         tools:ignore="HardcodedText" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/doctor"
+        android:id="@+id/clinic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="292dp"
         android:background="@drawable/roundbutton"
-        android:drawableLeft="@drawable/doctor2"
+        android:drawableLeft="@drawable/clinic"
         android:paddingVertical="10dp"
-        android:text="Doctor"
+        android:text="Clinic"
         android:textAllCaps="false"
         android:textColor="@color/black"
         android:textSize="30sp"
-        app:backgroundTint="#E9F1F0"
+        app:backgroundTint="#26C6DA"
         app:layout_constraintHorizontal_bias="0.692"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -62,6 +62,6 @@
         android:textSize="30sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/doctor" />
+        app:layout_constraintTop_toBottomOf="@+id/clinic" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
