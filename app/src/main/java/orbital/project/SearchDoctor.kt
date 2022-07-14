@@ -234,7 +234,6 @@ class SearchDoctor : AppCompatActivity() {
 
     private fun filter(gender : String, language: String, day: String) {
         filterArray = ArrayList()
-        var counter : Int = 0
         for (doc in docArray) {
 
             if (doc.gender == gender || gender == "All" || gender == "Gender") {

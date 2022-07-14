@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         bookingcalendar.setOnClickListener {
-            startActivity(Intent(this, BookingActivity::class.java))
+            startActivity(Intent(this, BookingScreenDate::class.java))
         }
         queueLocator.setOnClickListener {
             startActivity(Intent(this,QueueLocator::class.java))

@@ -63,9 +63,9 @@ class AddDoctor : AppCompatActivity() {
     private lateinit var doctorInfoLanguagesThirdRow : MaterialButtonToggleGroup
     private lateinit var chooseProfileButton : Button
     private val monArray : ArrayList<String> = arrayListOf()
-    private val tuesArray : ArrayList<String> = arrayListOf()
+    private val tueArray : ArrayList<String> = arrayListOf()
     private val wedArray : ArrayList<String> = arrayListOf()
-    private val thursArray : ArrayList<String> = arrayListOf()
+    private val thuArray : ArrayList<String> = arrayListOf()
     private val friArray : ArrayList<String> = arrayListOf()
     private val satArray : ArrayList<String> = arrayListOf()
     private val sunArray : ArrayList<String> = arrayListOf()
@@ -223,16 +223,16 @@ class AddDoctor : AppCompatActivity() {
                 val docData = hashMapOf("Name" to doctorName.text.toString(), "Gender"
                         to findViewById<Button>(toggleGender.checkedButtonId).text.toString()
                     , "Clinic uid" to uid, "Languages" to languageArray, "Days" to daysArray,
-                    "monArray" to monArray, "tuesArray" to tuesArray, "wedArray" to wedArray,
-                    "thursArray" to thursArray, "friArray" to friArray, "satArray" to satArray
+                    "monArray" to monArray, "tueArray" to tueArray, "wedArray" to wedArray,
+                    "thuArray" to thuArray, "friArray" to friArray, "satArray" to satArray
                     ,"sunArray" to sunArray)
                 ref.putBytes(data).addOnSuccessListener {
                     Snackbar.make(submitButton,"Submitted successfully",Snackbar.LENGTH_SHORT).show()
                 }.addOnFailureListener {
                     monArray.clear()
-                    tuesArray.clear()
+                    tueArray.clear()
                     wedArray.clear()
-                    thursArray.clear()
+                    thuArray.clear()
                     friArray.clear()
                     satArray.clear()
                     sunArray.clear()
@@ -258,9 +258,9 @@ class AddDoctor : AppCompatActivity() {
                     }
                 db.collection("Doctors").document(mcrNumber.text.toString()).set(docData).addOnFailureListener {
                     monArray.clear()
-                    tuesArray.clear()
+                    tueArray.clear()
                     wedArray.clear()
-                    thursArray.clear()
+                    thuArray.clear()
                     friArray.clear()
                     satArray.clear()
                     sunArray.clear()
@@ -272,9 +272,9 @@ class AddDoctor : AppCompatActivity() {
                 }
 
                 monArray.clear()
-                tuesArray.clear()
+                tueArray.clear()
                 wedArray.clear()
-                thursArray.clear()
+                thuArray.clear()
                 friArray.clear()
                 satArray.clear()
                 sunArray.clear()
@@ -382,9 +382,9 @@ class AddDoctor : AppCompatActivity() {
         for (chip in chipArray) {
             when (chip.text.toString().substring(0,3)) {
                 "Mon" -> monArray.add(chip.text.toString().substring(4))
-                "Tue" -> tuesArray.add(chip.text.toString().substring(4))
+                "Tue" -> tueArray.add(chip.text.toString().substring(4))
                 "Wed" -> wedArray.add(chip.text.toString().substring(4))
-                "Thu" -> thursArray.add(chip.text.toString().substring(4))
+                "Thu" -> thuArray.add(chip.text.toString().substring(4))
                 "Fri" -> friArray.add(chip.text.toString().substring(4))
                 "Sat" -> satArray.add(chip.text.toString().substring(4))
                 "Sun" -> sunArray.add(chip.text.toString().substring(4))

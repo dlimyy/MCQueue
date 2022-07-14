@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 
 class BookingScreenTiming : AppCompatActivity() {
 
@@ -19,6 +20,7 @@ class BookingScreenTiming : AppCompatActivity() {
     private lateinit var bookingDate : String
     private lateinit var mcrNumber : String
     private lateinit var backButton : ImageView
+    private lateinit var currentDay : String
     private val db = FirebaseFirestore.getInstance()
 
 
@@ -29,14 +31,15 @@ class BookingScreenTiming : AppCompatActivity() {
         bookingDate = intent.extras!!.getString("date").toString()
         val doctorName = intent.extras!!.getString("doctor")
         mcrNumber = intent.extras!!.getString("mcrNumber").toString()
+        currentDay = intent.extras!!.getString("Day").toString()
         timinglist = ArrayList()
         backButton = findViewById(R.id.navigateBookingTimingBookDoctor)
         noTiming = findViewById(R.id.noTimingsAvailable)
-        database()
         appointmentlist = findViewById(R.id.appointmentList)
         appointmentlist.layoutManager = GridLayoutManager(this,3)
         adaptor = BookingAdaptor(timinglist)
         appointmentlist.adapter = adaptor
+        database()
         adaptor.setOnItemClickListener(object : BookingAdaptor.OnItemClickListener{
             override fun onItemClick(position: Int) {
                 intent = Intent(this@BookingScreenTiming,
@@ -62,22 +65,67 @@ class BookingScreenTiming : AppCompatActivity() {
     }
 
     private fun database() {
-        db.collection("Doctors").document(mcrNumber).collection("Dates")
-            .document(bookingDate.replace('/','-'))
-            .get().addOnSuccessListener { result ->
-                val allTiming = result.data
-                var counter : Int = 1
-                allTiming?.forEach { time ->
-                    val canBook = time.value as String
-                    if (canBook.isEmpty()) {
-                        timinglist.add(time.key as String)
-                        adaptor.notifyItemInserted(counter)
-                        counter++
+        val tempTimeArray = ArrayList<String>()
+        db.collection("Doctors").document(mcrNumber).get()
+            .addOnSuccessListener { document ->
+               val timings = document.get(currentDay.lowercase() + "Array") as ArrayList<String>
+                for (time in timings) {
+                    var startTime = (time.substring(0,2) + time.substring(3,5)).toInt()
+                    val endTime = (time.substring(6,8) + time.substring(9)).toInt()
+                    while (startTime <= endTime) {
+                        if (startTime < 1000) {
+                            tempTimeArray.add(
+                                StringBuilder("0" + startTime.toString())
+                                    .insert(2, ":").toString()
+                            )
+                        } else {
+                            tempTimeArray.add(
+                                StringBuilder(startTime.toString())
+                                    .insert(2, ":").toString()
+                            )
+                        }
+                        startTime += 30
+                        if (startTime % 100 >= 60) {
+                            startTime += 40
+                        }
                     }
                 }
-                if (adaptor.itemCount > 0) {
-                    noTiming.visibility = View.GONE
+                var counter = 0
+                for (timing in tempTimeArray) {
+                    db.collection("Doctors").document(mcrNumber).collection("Dates")
+                        .document(bookingDate.replace('/','-'))
+                        .get().addOnSuccessListener { result ->
+                            if (result == null) {
+                                val data = hashMapOf(timing to "")
+                                db.collection("Doctors").document(mcrNumber)
+                                    .collection("Dates")
+                                    .document(bookingDate.replace('/','-'))
+                                    .set(data, SetOptions.merge())
+                                timinglist.add(timing)
+                                adaptor.notifyItemInserted(counter)
+                                counter++
+                            } else {
+                                if (!result.contains(timing)) {
+                                    val data = hashMapOf(timing to "")
+                                    db.collection("Doctors").document(mcrNumber)
+                                        .collection("Dates")
+                                        .document(bookingDate.replace('/','-'))
+                                        .set(data, SetOptions.merge())
+                                    timinglist.add(timing)
+                                    adaptor.notifyItemInserted(counter)
+                                    counter++
+                                } else if ((result.get(timing) as String) == "") {
+                                    timinglist.add(timing)
+                                    adaptor.notifyItemInserted(counter)
+                                    counter++
+                                }
+                            }
+                            if (adaptor.itemCount > 0) {
+                                noTiming.visibility = View.GONE
+                            }
+                        }
                 }
-            }
+
+        }
     }
 }

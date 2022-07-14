@@ -54,8 +54,8 @@ class SearchDoctorAdaptor(private val docArray : ArrayList<Doctor>)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val doctor = docArray[position]
         holder.name.text = doctor.name
-//        Glide.with(holder.itemView).load(Firebase.storage.reference.child("Images/"
-//                + doctor.mcrNumber)).placeholder(R.drawable.doctor__1_).into(holder.profilePic)
+        GlideApp.with(holder.itemView).load(Firebase.storage.reference.child("Images/"
+                + doctor.mcrNumber)).placeholder(R.drawable.doctor__1_).into(holder.profilePic)
     }
 
     override fun getItemCount(): Int {

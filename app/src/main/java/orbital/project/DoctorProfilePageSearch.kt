@@ -12,6 +12,8 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 
 class DoctorProfilePageSearch : AppCompatActivity() {
     private lateinit var name : TextInputEditText
@@ -22,6 +24,7 @@ class DoctorProfilePageSearch : AppCompatActivity() {
     private lateinit var languageChipGroup: ChipGroup
     private lateinit var dayChipGroup: ChipGroup
     private lateinit var backButton : ImageView
+    private lateinit var profilePic : ImageView
     private val db = FirebaseFirestore.getInstance()
 
 
@@ -33,10 +36,14 @@ class DoctorProfilePageSearch : AppCompatActivity() {
         clinic = findViewById(R.id.doctorProfilePageClinic)
         languageChipGroup = findViewById(R.id.doctorProfileLanguageGroup)
         dayChipGroup = findViewById(R.id.doctorProfileDays)
+        profilePic = findViewById(R.id.profilePageSearchpic)
         languagesArray = ArrayList()
         daysArray = ArrayList()
         backButton = findViewById(R.id.navigateProfileToFindDoctor)
         val mcrNumber = intent.extras!!.get("mcrNumber").toString()
+        GlideApp.with(profilePic).load(
+            Firebase.storage.reference.child("Images/"
+                + mcrNumber)).placeholder(R.drawable.doctor__1_).into(profilePic)
         db.collection("Doctors").document(mcrNumber).get().addOnSuccessListener { it ->
             name.setText(it.get("Name") as String)
             gender.setText(it.get("Gender") as String)

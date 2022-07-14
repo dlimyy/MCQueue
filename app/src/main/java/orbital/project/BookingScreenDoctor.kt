@@ -25,6 +25,8 @@ class BookingScreenDoctor : AppCompatActivity() {
         setContentView(R.layout.activity_booking_screen_doctor)
         val clinicName = intent?.extras!!.getString("clinic")
         val bookingDate = intent?.extras!!.getString("date")
+        val currentDay = intent?.extras!!.getString("day")
+        Log.d("Day",currentDay as String)
         backButton = findViewById(R.id.navigateBookingDoctorBookingActivity)
         db.collection("Clinics").whereEqualTo("Name",clinicName).get()
             .addOnSuccessListener { documents ->
@@ -36,8 +38,11 @@ class BookingScreenDoctor : AppCompatActivity() {
                     for (doc in tempdocArray) {
                         db.collection("Doctors").document(doc).get()
                             .addOnSuccessListener { physician ->
-                                docArray.add(physician.get("Name") as String)
-                                mcrNumberArray.add(doc)
+                                if ((physician.get("Days") as ArrayList<String>)
+                                        .contains(currentDay)) {
+                                    docArray.add(physician.get("Name") as String)
+                                    mcrNumberArray.add(doc)
+                                }
                             }.addOnFailureListener {
                                 Log.d("Search error","Unable to find doctor")
                             }
@@ -59,6 +64,7 @@ class BookingScreenDoctor : AppCompatActivity() {
                 intent.putExtra("clinic", clinicName.toString())
                 intent.putExtra("doctor", bookingDoctor.text.toString())
                 intent.putExtra("mcrNumber",mcrNumber)
+                intent.putExtra("Day", currentDay)
                 startActivity(intent)
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
             } else {
