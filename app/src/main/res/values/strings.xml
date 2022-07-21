@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">MCQueue</string>
     <string name="title_activity_queue_locator">QueueLocator</string>
+    <string name="channel_id">MCQueue101</string>
 </resources>

@@ -74,6 +74,12 @@ class BookingScreenDate : AppCompatActivity() {
                     "Please key in a valid date or clinic", Snackbar.LENGTH_SHORT).show()
             }
         }
+
+        backButton.setOnClickListener {
+            super.onBackPressed()
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+            finish()
+        }
     }
 
     override fun onStart() {
@@ -88,6 +94,12 @@ class BookingScreenDate : AppCompatActivity() {
         val myFormat = "dd/MM/yy"
         val dateFormat = SimpleDateFormat(myFormat, Locale.ENGLISH)
         bookingDate.setText(dateFormat.format(bookCalendar.time))
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+        finish()
     }
 
 }

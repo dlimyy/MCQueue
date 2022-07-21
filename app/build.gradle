@@ -53,6 +53,7 @@ dependencies {
     implementation 'com.github.kizitonwose:CalendarView:1.0.4'
     implementation 'com.google.android.gms:play-services-location:20.0.0'
     implementation 'com.google.firebase:firebase-storage-ktx:20.0.1'
+    implementation 'com.google.firebase:firebase-messaging-ktx:23.0.6'
     testImplementation 'org.junit.jupiter:junit-jupiter'
     testImplementation 'org.junit.jupiter:junit-jupiter'
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
