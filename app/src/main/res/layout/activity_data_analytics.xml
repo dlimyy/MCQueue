@@ -24,42 +24,147 @@
             android:layout_marginStart="@dimen/_8sdp"
             android:src="@drawable/backarrow"/>
 
-        <com.github.mikephil.charting.charts.PieChart
-            android:id="@+id/agePieChart"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_250sdp"
-            android:layout_marginTop="@dimen/_20sdp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/navigateDataAnalyticsToMain" />
-
-        <com.github.mikephil.charting.charts.PieChart
-            android:id="@+id/dayPieChart"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_250sdp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/agePieChart" />
-
-        <com.github.mikephil.charting.charts.PieChart
-            android:id="@+id/timingPieChart"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_250sdp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dayPieChart" />
-
-        <TextView
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/agePieChartCardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp"
-            app:layout_constraintTop_toBottomOf="@+id/timingPieChart"
+            android:layout_marginHorizontal="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            app:cardCornerRadius="@dimen/_10sdp"
+            app:cardBackgroundColor="#B592F3"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:gravity="center"
-            android:textSize="@dimen/_22ssp"
-            android:textColor="@color/black"
-            android:text="Predicted Patient Load: 0"/>
+            app:layout_constraintTop_toBottomOf="@+id/navigateDataAnalyticsToMain">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/ageLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Age"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:gravity="center"
+                    android:textSize="@dimen/_25ssp"
+                    android:textColor="@color/black"/>
+
+
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/agePieChart"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_250sdp"
+                    android:layout_below="@+id/ageLabel"
+                    android:layout_marginHorizontal="@dimen/_5sdp"
+                    android:layout_marginVertical="@dimen/_10sdp" />
+
+                <TextView
+                    android:id="@+id/noAgeAvailable"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/agePieChart"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:layout_gravity="bottom"
+                    android:gravity="center"
+                    android:text="No Age data is available"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_20ssp" />
+
+            </RelativeLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/dayPieChartCardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            app:cardCornerRadius="@dimen/_10sdp"
+            app:cardBackgroundColor="#B592F3"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/agePieChartCardView">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/dayLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:gravity="center"
+                    android:text="Day"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_25ssp" />
+
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/dayPieChart"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_250sdp"
+                    android:layout_below="@id/dayLabel"
+                    android:layout_marginVertical="@dimen/_10sdp"
+                    android:layout_marginHorizontal="@dimen/_5sdp"/>
+
+                <TextView
+                    android:id="@+id/noDayAvailable"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/dayPieChart"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:layout_gravity="bottom"
+                    android:gravity="center"
+                    android:text="No data on days is available"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_20ssp" />
+
+            </RelativeLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/timingPieChartCardView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_250sdp"
+            android:layout_marginTop="@dimen/_16sdp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dayPieChartCardView">
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/timingPieChart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/predictedLoadCardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            app:layout_constraintTop_toBottomOf="@+id/timingPieChartCardView"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <TextView
+                android:id="@+id/predictedLoad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="@dimen/_22ssp"
+                android:textColor="@color/black"
+                android:text="Predicted Patient Load: 0"/>
+
+        </com.google.android.material.card.MaterialCardView>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
