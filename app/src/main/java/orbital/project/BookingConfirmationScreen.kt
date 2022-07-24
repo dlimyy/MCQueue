@@ -39,21 +39,24 @@ class BookingConfirmationScreen : AppCompatActivity() {
         confirmationTiming.setText(intent.extras!!.getString("time"))
         mcrNumber = intent.extras!!.getString("mcrNumber").toString()
         confirmationButton.setOnClickListener {
-            db.collection("Doctors").document(mcrNumber)
-                .collection("Dates")
-                .document(confirmationDate.text.toString().replace('/','-')).get()
+            db.collection("Queue").document(mcrNumber)
+                .collection(confirmationDate.text.toString().replace('/','-'))
+                .document(confirmationTiming.text.toString())
+                .get()
                 .addOnSuccessListener { document ->
-                    val canBook = document.get(confirmationTiming.text.toString()) as String?
-
-                    if (canBook == null || canBook.isNotEmpty()) {
+                    if (document.exists()) {
                         Snackbar.make(confirmationTiming
                             ,"Sorry, please make a booking at another available slot"
                             ,Snackbar.LENGTH_SHORT).show()
                     } else {
                         val uid : String = FirebaseAuth.getInstance().currentUser!!.uid
                         var tempArray = ArrayList<String>()
+                        var age = "0"
+                        var name = "Anon"
                         db.collection("Users").document(uid).get()
                             .addOnSuccessListener { doc ->
+                                age = doc.get("Age") as String
+                                name = doc.get("Name") as String
                                 val yearMonthDate
                                 = confirmationDate.text.toString()
                                     .substring(6) + "-" + confirmationDate.text
@@ -61,28 +64,29 @@ class BookingConfirmationScreen : AppCompatActivity() {
                                     .toString().substring(0,2) + " " + confirmationTiming
                                     .text.toString()
                                 var clinicWithDate
-                                = hashMapOf<String, String>()
+                                = hashMapOf<String, ArrayList<String>>()
                                 if (doc.get("DateTime") == null || doc.get("Clinics") == null) {
                                     tempArray.add(yearMonthDate)
-                                    clinicWithDate[yearMonthDate] = confirmationClinic
-                                        .text.toString()
+                                    clinicWithDate[yearMonthDate] = arrayListOf(confirmationClinic
+                                        .text.toString(), mcrNumber)
                                 } else {
                                     tempArray = doc.get("DateTime") as ArrayList<String>
                                     tempArray.add(yearMonthDate)
                                     tempArray.sort()
-                                    clinicWithDate = doc.get("Clinics") as HashMap<String, String>
-                                    clinicWithDate.put(yearMonthDate, confirmationClinic
-                                        .text.toString())
+                                    clinicWithDate = doc.get("Clinics") as HashMap<String, ArrayList<String>>
+                                    clinicWithDate[yearMonthDate] = arrayListOf(confirmationClinic
+                                        .text.toString(), mcrNumber)
                                 }
                                 db.collection("Users").document(uid)
                                     .set(hashMapOf("Clinics" to clinicWithDate,
                                         "DateTime" to tempArray), SetOptions.merge())
 
+                                db.collection("Queue").document(mcrNumber)
+                                    .collection(confirmationDate.text.toString().replace('/','-'))
+                                    .document(confirmationTiming.text.toString())
+                                    .set(hashMapOf("Age" to age, "Name" to name, "uid" to uid))
+
                         }
-                        db.collection("Doctors").document(mcrNumber)
-                            .collection("Dates")
-                            .document(confirmationDate.text.toString().replace('/','-'))
-                            .update(confirmationTiming.text.toString(), uid)
                         Snackbar.make(confirmationTiming,"Appointment has been successfully booked"
                             ,Snackbar.LENGTH_SHORT).show()
                         Handler().postDelayed({

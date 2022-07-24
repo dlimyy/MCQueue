@@ -3,6 +3,7 @@ package orbital.project
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -10,6 +11,10 @@ import androidx.cardview.widget.CardView
 import androidx.core.view.ContentInfoCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 class MainActivity : AppCompatActivity() {
     private lateinit var bookingcalendar : CardView
@@ -32,13 +37,16 @@ class MainActivity : AppCompatActivity() {
         db.collection("Users").document(FirebaseAuth.getInstance().currentUser!!.uid)
             .get().addOnSuccessListener { it ->
                 val appointmentTime = it.get("DateTime") as? ArrayList<String>
-                val clinicPlace = it.get("Clinics") as? HashMap<String, String>
-                if (clinicPlace != null && appointmentTime != null) {
+                val clinicPlace = it.get("Clinics") as? HashMap<String, ArrayList<String>>
+                if (clinicPlace != null && appointmentTime != null
+                    && clinicPlace.isNotEmpty() && appointmentTime.isNotEmpty()) {
+
                     appointmentText.text =  appointmentTime[0]
                         .substring(6,8) + "-" + appointmentTime[0]
                         .substring(3,5) + "-" + appointmentTime[0]
                         .substring(0,2) + "\n" + appointmentTime[0].substring(9)
                     clinic.text = clinicPlace[appointmentTime[0]]
+                        ?.get(0) ?: "No Queue Number issued yet"
                 }
             }
     }
@@ -46,7 +54,7 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         bookingcalendar.setOnClickListener {
-            startActivity(Intent(this, BookingScreenDate::class.java))
+            startActivity(Intent(this, BookingActivity::class.java))
         }
         queueLocator.setOnClickListener {
             startActivity(Intent(this,QueueLocator::class.java))

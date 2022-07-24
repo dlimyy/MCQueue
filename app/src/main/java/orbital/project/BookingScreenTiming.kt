@@ -3,11 +3,13 @@ package orbital.project
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 
@@ -91,30 +93,29 @@ class BookingScreenTiming : AppCompatActivity() {
                     }
                 }
                 var counter = 0
-                for (timing in tempTimeArray) {
-                    db.collection("Doctors").document(mcrNumber).collection("Dates")
-                        .document(bookingDate.replace('/','-'))
-                        .get().addOnSuccessListener { result ->
-                            if (result == null) {
-                                val data = hashMapOf(timing to "")
-                                db.collection("Doctors").document(mcrNumber)
-                                    .collection("Dates")
-                                    .document(bookingDate.replace('/','-'))
-                                    .set(data, SetOptions.merge())
+                db.collection("Queue").document(mcrNumber)
+                    .collection(bookingDate.replace('/','-'))
+                    .get().addOnSuccessListener { result ->
+                        Log.d("here",result.size().toString())
+                        for (timing in tempTimeArray) {
+                            if (result.size() == 0) {
                                 timinglist.add(timing)
                                 adaptor.notifyItemInserted(counter)
                                 counter++
                             } else {
-                                if (!result.contains(timing)) {
-                                    val data = hashMapOf(timing to "")
-                                    db.collection("Doctors").document(mcrNumber)
-                                        .collection("Dates")
-                                        .document(bookingDate.replace('/','-'))
-                                        .set(data, SetOptions.merge())
-                                    timinglist.add(timing)
-                                    adaptor.notifyItemInserted(counter)
-                                    counter++
-                                } else if ((result.get(timing) as String) == "") {
+                                var indicator = 0
+                                for (doc in result.documents) {
+                                    if (timing == doc.id) {
+                                        if ((doc.get("Name") as String) == "") {
+                                            timinglist.add(timing)
+                                            adaptor.notifyItemInserted(counter)
+                                            counter++
+                                        }
+                                        break
+                                    }
+                                    indicator++
+                                }
+                                if (indicator == result.size()) {
                                     timinglist.add(timing)
                                     adaptor.notifyItemInserted(counter)
                                     counter++
@@ -124,7 +125,7 @@ class BookingScreenTiming : AppCompatActivity() {
                                 noTiming.visibility = View.GONE
                             }
                         }
-                }
+                    }
 
         }
     }

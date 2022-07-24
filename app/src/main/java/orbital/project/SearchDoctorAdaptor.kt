@@ -38,7 +38,7 @@ class SearchDoctorAdaptor(private val docArray : ArrayList<Doctor>)
 
         init {
             itemView.setOnClickListener {
-                listener.onItemClick(absoluteAdapterPosition)
+                listener.onItemClick(adapterPosition)
             }
             name = view.findViewById(R.id.doctorInfoName)
             profilePic = view.findViewById(R.id.doctorInfoProfilePicture)

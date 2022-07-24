@@ -109,11 +109,11 @@
         android:layout_height="wrap_content"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/passwordlayout"
-        android:layout_marginRight="@dimen/_15sdp"
+        android:layout_marginRight="@dimen/_12sdp"
         android:fontFamily="@font/roboto"
         android:textStyle="bold"
         android:textColor="@color/black"
-        android:textSize="@dimen/_15ssp"
+        android:textSize="@dimen/_13ssp"
         android:text="Forgot password?"
         />
 
@@ -143,7 +143,7 @@
         android:textSize="@dimen/_18ssp"
         android:text="Create New Account"
         android:backgroundTint="#673AB7"
-        app:cornerRadius="@dimen/_25sdp"
+        app:cornerRadius="@dimen/_15sdp"
         android:textAllCaps="false"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

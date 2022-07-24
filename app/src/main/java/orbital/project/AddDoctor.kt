@@ -210,53 +210,70 @@ class AddDoctor : AppCompatActivity() {
             val isGender = checkGender()
             val languageArray = getLanguageArray()
             val daysArray = getDayArray()
-            val bitImage = (doctorProfilePic.drawable as BitmapDrawable).bitmap
-            val outputStream = ByteArrayOutputStream()
-            bitImage.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
-            val data  = outputStream.toByteArray()
             val imageRef = storageRef.child("Images")
-
 
             if (validDoc && validMCR && isGender && languageArray.size > 0 && chipArray.size > 0) {
                 getWorkingHours()
+                val gender = findViewById<Button>(toggleGender.checkedButtonId).text.toString()
+                if (doctorProfilePic.drawable.constantState
+                    == getDrawable(R.drawable.doctor__1_)?.constantState
+                    && gender == "Male") {
+                    doctorProfilePic.setImageResource(R.drawable.male_doctor)
+                }
+                val bitImage = (doctorProfilePic.drawable as BitmapDrawable).bitmap
+                val outputStream = ByteArrayOutputStream()
+                bitImage.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+                val data  = outputStream.toByteArray()
                 val ref = imageRef.child(mcrNumber.text.toString())
                 val docData = hashMapOf("Name" to doctorName.text.toString(), "Gender"
-                        to findViewById<Button>(toggleGender.checkedButtonId).text.toString()
+                        to gender
                     , "Clinic uid" to uid, "Languages" to languageArray, "Days" to daysArray,
                     "monArray" to monArray, "tueArray" to tueArray, "wedArray" to wedArray,
                     "thuArray" to thuArray, "friArray" to friArray, "satArray" to satArray
                     ,"sunArray" to sunArray)
                 ref.putBytes(data).addOnSuccessListener {
-                    Snackbar.make(submitButton,"Submitted successfully",Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(submitButton,"Submitted successfully",Snackbar.LENGTH_SHORT)
+                        .show()
+                    db.collection("Clinics").document(uid).get()
+                        .addOnSuccessListener{ document ->
+                            if (document == null) {
+                                Log.d("Document error","Document does not exist")
+                                return@addOnSuccessListener
+                            }
+                            if (document.get("Doctor") == null) {
+                                val docArray = arrayListOf<String>(mcrNumber.text.toString())
+                                db.collection("Clinics").document(uid)
+                                    .set(hashMapOf("Doctor" to docArray), SetOptions.merge())
+                            }
+                            else {
+                                val docArray = document.get("Doctor") as ArrayList<String>
+                                docArray.add(mcrNumber.text.toString())
+                                db.collection("Clinics").document(uid)
+                                    .set(hashMapOf("Doctor" to docArray), SetOptions.merge())
+                            }
+                            db.collection("Doctors").document(mcrNumber.text.toString())
+                                .set(docData)
+                                .addOnSuccessListener {
+                                    val liveQueueData = hashMapOf("Current Day" to ""
+                                        , "First Appointment" to ""
+                                        , "Queueid" to ArrayList<String>()
+                                        , "TimingList" to ArrayList<String>())
+                                    db.collection("LiveQueue")
+                                        .document(mcrNumber.text.toString())
+                                        .set(liveQueueData)
+                                    val queueData = hashMapOf("Clinic" to uid)
+                                    db.collection("Queue")
+                                        .document(mcrNumber.text.toString())
+                                        .set(queueData)
+                                    Handler().postDelayed({
+                                        startActivity(Intent(this,
+                                            DoctorHomePage::class.java))
+                                        finishAffinity()
+                                    },2500)
+                                }
+                        }
                 }.addOnFailureListener {
-                    monArray.clear()
-                    tueArray.clear()
-                    wedArray.clear()
-                    thuArray.clear()
-                    friArray.clear()
-                    satArray.clear()
-                    sunArray.clear()
                     Snackbar.make(submitButton,"Failure",Snackbar.LENGTH_SHORT).show()
-                }
-                db.collection("Clinics").document(uid).get()
-                    .addOnSuccessListener{ document ->
-                        if (document == null) {
-                            Log.d("Document error","Document does not exist")
-                            return@addOnSuccessListener
-                        }
-                        if (document.get("Doctor") == null) {
-                            val docArray = arrayListOf<String>(mcrNumber.text.toString())
-                            db.collection("Clinics").document(uid)
-                                .set(hashMapOf("Doctor" to docArray), SetOptions.merge())
-                        }
-                        else {
-                            val docArray = document.get("Doctor") as ArrayList<String>
-                            docArray.add(mcrNumber.text.toString())
-                            db.collection("Clinics").document(uid)
-                                .set(hashMapOf("Doctor" to docArray), SetOptions.merge())
-                        }
-                    }
-                db.collection("Doctors").document(mcrNumber.text.toString()).set(docData).addOnFailureListener {
                     monArray.clear()
                     tueArray.clear()
                     wedArray.clear()
@@ -264,20 +281,8 @@ class AddDoctor : AppCompatActivity() {
                     friArray.clear()
                     satArray.clear()
                     sunArray.clear()
-                }.addOnSuccessListener {
-                    Handler().postDelayed({
-                        startActivity(Intent(this, DoctorHomePage::class.java))
-                        finishAffinity()
-                    },2500)
+                    return@addOnFailureListener
                 }
-
-                monArray.clear()
-                tueArray.clear()
-                wedArray.clear()
-                thuArray.clear()
-                friArray.clear()
-                satArray.clear()
-                sunArray.clear()
             }
         }
 

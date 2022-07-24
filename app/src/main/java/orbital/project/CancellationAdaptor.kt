@@ -5,10 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import android.content.Intent
 
-class BookingAdaptor(private val appointments: ArrayList<String>)
-    : RecyclerView.Adapter<BookingAdaptor.ViewHolder>(){
+class CancellationAdaptor(private val appointments: ArrayList<AppointmentDetails>)
+    : RecyclerView.Adapter<CancellationAdaptor.ViewHolder>(){
 
     private lateinit var appointmentListener : OnItemClickListener
 
@@ -21,10 +20,16 @@ class BookingAdaptor(private val appointments: ArrayList<String>)
     }
 
     class ViewHolder(view: View, listener: OnItemClickListener) : RecyclerView.ViewHolder(view) {
-        val timing : TextView
+        val name : TextView
+        val clinic : TextView
+        val date : TextView
+        val time : TextView
 
         init {
-            timing = view.findViewById(R.id.appointmentTiming)
+            name = view.findViewById(R.id.doctorName)
+            clinic = view.findViewById(R.id.clinicName)
+            date = view.findViewById(R.id.appointmentDate)
+            time = view.findViewById(R.id.appointmentTime)
             itemView.setOnClickListener {
                 listener.onItemClick(adapterPosition)
             }
@@ -33,13 +38,16 @@ class BookingAdaptor(private val appointments: ArrayList<String>)
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.appointment_timing, viewGroup, false)
+            .inflate(R.layout.appointment_cardview, viewGroup, false)
         return ViewHolder(view, appointmentListener)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val appointment = appointments[position]
-        holder.timing.text = appointment
+        holder.name.text = appointment.name
+        holder.clinic.text = appointment.clinic
+        holder.time.text = appointment.time
+        holder.date.text = appointment.date
     }
 
     override fun getItemCount(): Int {
