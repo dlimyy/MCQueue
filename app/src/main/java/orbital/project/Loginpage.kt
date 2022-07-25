@@ -101,25 +101,6 @@ class Loginpage : AppCompatActivity() {
                             val uid = FirebaseAuth.getInstance().currentUser!!.uid
                             var role : String? = null
                             var token = ""
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                                // Create the NotificationChannel
-                                val channelId = resources.getString(R.string.channel_id)
-                                val name = getString(R.string.app_name)
-                                val descriptionText = "MCQueue Channel"
-                                val importance = NotificationManager.IMPORTANCE_HIGH
-                                val channel = NotificationChannel(channelId, name, importance)
-                                channel.description = descriptionText
-                                channel.lockscreenVisibility = VISIBILITY_PUBLIC
-                                channel.enableVibration(true)
-                                channel.setSound(
-                                    Settings.System.DEFAULT_NOTIFICATION_URI,
-                                    Notification.AUDIO_ATTRIBUTES_DEFAULT)
-                                // Register the channel with the system; you can't change the importance
-                                // or other notification behaviors after this
-                                val notificationManager = getSystemService(NOTIFICATION_SERVICE)
-                                        as NotificationManager
-                                notificationManager.createNotificationChannel(channel)
-                            }
                             FirebaseMessaging.getInstance().token.addOnCompleteListener { mission ->
                                 if (mission.isSuccessful) {
                                     token = mission.result

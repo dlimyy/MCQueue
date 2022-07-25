@@ -23,7 +23,7 @@ exports.updateQueue = functions.region("asia-southeast1")
             await db.collection("LiveQueue")
                 .doc(snapshot.id).update({Queueid: []});
             await db.collection("LiveQueue")
-                .doc(snapshot.id).update({Timinglist: []});
+                .doc(snapshot.id).update({TimingList: []});
             await db.collection("LiveQueue")
                 .doc(snapshot.id).update({FirstAppointment: ""});
           } else {

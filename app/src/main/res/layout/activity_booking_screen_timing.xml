@@ -17,17 +17,17 @@
 
         <ImageView
             android:id="@+id/navigateBookingTimingBookDoctor"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="16dp"
+            android:layout_width="@dimen/_28sdp"
+            android:layout_height="@dimen/_28sdp"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginTop="@dimen/_12sdp"
             android:src="@drawable/backarrow" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="40dp"
+            android:layout_marginRight="@dimen/_20sdp"
             android:src="@drawable/progressbar_time" />
 
     </RelativeLayout>
@@ -36,10 +36,10 @@
         android:id="@+id/appointmentTimingCardView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:cardCornerRadius="32dp"
+        app:cardCornerRadius="@dimen/_28sdp"
         app:cardBackgroundColor="#FF00BCD4"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHeight_percent="0.85"
+        app:layout_constraintHeight_percent="0.83"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/topBarBookingTiming"
@@ -56,38 +56,38 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/_20sdp"
                 android:fontFamily="@font/sora"
                 android:gravity="center"
                 android:textColor="@color/black"
-                android:textSize="32sp"
+                android:textSize="@dimen/_28ssp"
                 android:textStyle="bold"
                 android:text="Select Appointment" />
 
             <RelativeLayout
-                android:paddingTop="16dp"
+                android:paddingTop="@dimen/_16sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginTop="12dp">
+                android:layout_marginTop="@dimen/_12sdp">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/appointmentList"
                     android:layout_width="match_parent"
-                    android:layout_height="400dp" />
+                    android:layout_height="@dimen/_380sdp" />
 
                 <TextView
                     android:id="@+id/noTimingsAvailable"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginBottom="30dp"
+                    android:layout_marginBottom="@dimen/_30sdp"
                     android:fontFamily="@font/sora"
                     android:gravity="center"
-                    android:padding="60dp"
+                    android:padding="@dimen/_50sdp"
                     android:text="Sorry, no timings are available"
                     android:textColor="@color/black"
-                    android:textSize="30sp"
+                    android:textSize="@dimen/_28ssp"
                     android:textStyle="bold" />
 
             </RelativeLayout>

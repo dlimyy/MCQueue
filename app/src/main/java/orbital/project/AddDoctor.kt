@@ -254,8 +254,8 @@ class AddDoctor : AppCompatActivity() {
                             db.collection("Doctors").document(mcrNumber.text.toString())
                                 .set(docData)
                                 .addOnSuccessListener {
-                                    val liveQueueData = hashMapOf("Current Day" to ""
-                                        , "First Appointment" to ""
+                                    val liveQueueData = hashMapOf("CurrentDay" to ""
+                                        , "FirstAppointment" to ""
                                         , "Queueid" to ArrayList<String>()
                                         , "TimingList" to ArrayList<String>())
                                     db.collection("LiveQueue")

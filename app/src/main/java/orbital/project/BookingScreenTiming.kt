@@ -1,6 +1,7 @@
 package orbital.project
 
 import android.content.Intent
+import java.text.SimpleDateFormat
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
+import java.util.*
+import kotlin.collections.ArrayList
 
 class BookingScreenTiming : AppCompatActivity() {
 
@@ -68,6 +71,10 @@ class BookingScreenTiming : AppCompatActivity() {
 
     private fun database() {
         val tempTimeArray = ArrayList<String>()
+        val currentDate = Calendar.getInstance().time
+        val timeFormatter = SimpleDateFormat("HH:mm", Locale.ENGLISH)
+        val currentTime = timeFormatter.format(currentDate)
+
         db.collection("Doctors").document(mcrNumber).get()
             .addOnSuccessListener { document ->
                val timings = document.get(currentDay.lowercase() + "Array") as ArrayList<String>
@@ -96,9 +103,11 @@ class BookingScreenTiming : AppCompatActivity() {
                 db.collection("Queue").document(mcrNumber)
                     .collection(bookingDate.replace('/','-'))
                     .get().addOnSuccessListener { result ->
-                        Log.d("here",result.size().toString())
                         for (timing in tempTimeArray) {
-                            if (result.size() == 0) {
+                            if (timing < currentTime) {
+                                continue
+                            }
+                            else if (result.size() == 0) {
                                 timinglist.add(timing)
                                 adaptor.notifyItemInserted(counter)
                                 counter++

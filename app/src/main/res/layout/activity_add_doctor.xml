@@ -9,21 +9,23 @@
 
     <ImageView
         android:id="@+id/navigateAddDoctorToDoctorInfo"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="@dimen/_28sdp"
+        android:layout_height="@dimen/_28sdp"
         android:src="@drawable/backarrow"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginStart="@dimen/_5sdp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/doctorProfilePic"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_100sdp"
         app:shapeAppearanceOverlay="@style/circleShape"
         app:layout_constraintTop_toBottomOf="@id/navigateAddDoctorToDoctorInfo"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:strokeWidth="5dp"
+        app:strokeWidth="@dimen/_3sdp"
         app:strokeColor="#AE4CE3"
         android:padding="5dp"
         android:src="@drawable/doctor__1_"
@@ -44,16 +46,14 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_10sdp"
         app:layout_constraintHeight_percent="0.65"
-        app:layout_constraintTop_toBottomOf="@id/doctorInfoChooseProfilePicture"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="20dp"
-        app:layout_constraintVertical_bias="1"
+        app:cardCornerRadius="@dimen/_10sdp"
+        app:cardElevation="@dimen/_16sdp"
         app:cardBackgroundColor="#26C6DA">
 
         <ScrollView
@@ -70,15 +70,15 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="@dimen/_25sdp"
+                android:layout_marginHorizontal="@dimen/_16sdp"
                 app:errorEnabled="true"
                 app:errorTextColor="#A60F0F"
                 app:boxBackgroundColor="@color/white"
-                app:boxCornerRadiusTopStart="10dp"
-                app:boxCornerRadiusTopEnd="10dp"
-                app:boxCornerRadiusBottomStart="10dp"
-                app:boxCornerRadiusBottomEnd="10dp">
+                app:boxCornerRadiusTopStart="@dimen/_8sdp"
+                app:boxCornerRadiusTopEnd="@dimen/_8sdp"
+                app:boxCornerRadiusBottomStart="@dimen/_8sdp"
+                app:boxCornerRadiusBottomEnd="@dimen/_8sdp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/doctorNameAddDoctor"
@@ -96,14 +96,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:boxBackgroundColor="@color/white"
-                android:layout_marginTop="8dp"
-                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginHorizontal="@dimen/_16sdp"
                 app:errorEnabled="true"
                 app:errorTextColor="#A60F0F"
-                app:boxCornerRadiusTopStart="10dp"
-                app:boxCornerRadiusTopEnd="10dp"
-                app:boxCornerRadiusBottomStart="10dp"
-                app:boxCornerRadiusBottomEnd="10dp">
+                app:boxCornerRadiusTopStart="@dimen/_8sdp"
+                app:boxCornerRadiusTopEnd="@dimen/_8sdp"
+                app:boxCornerRadiusBottomStart="@dimen/_8sdp"
+                app:boxCornerRadiusBottomEnd="@dimen/_8sdp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/MCRnumberAddDoctor"
@@ -118,8 +118,8 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:paddingHorizontal="10dp">
+                android:layout_marginTop="@dimen/_5sdp"
+                android:paddingHorizontal="@dimen/_8sdp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -128,7 +128,7 @@
                     android:fontFamily="@font/sora"
                     android:textStyle="bold"
                     android:textColor="@color/black"
-                    android:textSize="30sp"/>
+                    android:textSize="@dimen/_25ssp"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -139,8 +139,7 @@
                 android:layout_gravity="center"
                 app:singleSelection="true"
                 app:errorEnabled="true"
-                app:helperText="donefor"
-                android:layout_marginTop="16dp">
+                android:layout_marginTop="@dimen/_12sdp">
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/doctorGenderMale"
@@ -166,15 +165,15 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Please select a Gender"
-                android:textSize="18sp"
+                android:textSize="@dimen/_16ssp"
                 android:textColor="#B11212"
                 />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:paddingHorizontal="10dp">
+                android:layout_marginTop="@dimen/_12sdp"
+                android:paddingHorizontal="@dimen/_8sdp">
 
             <TextView
                 android:layout_width="match_parent"
@@ -183,7 +182,7 @@
                 android:fontFamily="@font/sora"
                 android:textStyle="bold"
                 android:textColor="@color/black"
-                android:textSize="30sp"/>
+                android:textSize="@dimen/_25ssp"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -193,12 +192,12 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 app:singleSelection="false"
-                android:layout_marginTop="16dp">
+                android:layout_marginTop="@dimen/_12sdp">
 
                 <com.google.android.material.button.MaterialButton
                     android:backgroundTint="@color/white"
                     android:id="@+id/doctorInfoEnglish"
-                    android:layout_width="100dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:text="English"/>
@@ -206,7 +205,7 @@
                 <com.google.android.material.button.MaterialButton
                     android:backgroundTint="@color/white"
                     android:id="@+id/doctorInfoChinese"
-                    android:layout_width="100dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:text="Chinese"/>
@@ -285,28 +284,28 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Please select a Language"
-                android:textSize="18sp"
+                android:textSize="@dimen/_16sdp"
                 android:textColor="#B11212"
                 />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/_12sdp"
                 android:fontFamily="@font/sora"
                 android:textStyle="bold"
                 android:textColor="@color/black"
-                android:textSize="30sp"
+                android:textSize="@dimen/_25ssp"
                 android:text="Working Hours"
                 android:paddingHorizontal="10dp"/>
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="24dp"
-                app:cardCornerRadius="15dp"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:layout_marginBottom="@dimen/_20sdp"
+                app:cardCornerRadius="@dimen/_10sdp"
                 app:cardBackgroundColor="#90E4EF">
 
                 <LinearLayout
@@ -315,14 +314,14 @@
                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:paddingVertical="20dp"
+                        android:paddingVertical="@dimen/_16sdp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
                         <com.google.android.material.textfield.TextInputLayout
-                            android:layout_marginStart="12dp"
-                            android:paddingVertical="10dp"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:paddingVertical="@dimen/_8sdp"
                             app:boxBackgroundColor="@color/white"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                             android:layout_width="wrap_content"
@@ -331,30 +330,30 @@
 
                             <AutoCompleteTextView
                                 android:id="@+id/doctorInfoDay"
-                                android:textSize="15sp"
+                                android:textSize="@dimen/_12ssp"
                                 android:imeOptions="actionDone"
-                                android:layout_width="150dp"
-                                android:dropDownHeight="150dp"
+                                android:layout_width="@dimen/_130sdp"
+                                android:dropDownHeight="@dimen/_130sdp"
                                 android:inputType="none"
                                 android:layout_height="wrap_content"/>
 
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <LinearLayout
-                            android:layout_marginLeft="35dp"
+                            android:layout_marginLeft="@dimen/_10sdp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
 
                             <com.google.android.material.button.MaterialButton
                                 android:id="@+id/startTimeButton"
-                                android:layout_width="130dp"
+                                android:layout_width="@dimen/_100sdp"
                                 android:layout_height="wrap_content"
                                 android:text="Start Time"/>
 
                             <com.google.android.material.button.MaterialButton
                                 android:id="@+id/endTimeButton"
-                                android:layout_width="130dp"
+                                android:layout_width="@dimen/_100sdp"
                                 android:layout_height="wrap_content"
                                 android:text="End Time"/>
 
@@ -376,13 +375,13 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:textColor="#DA2428"
-                        tools:text="Please key in valid time"/>
+                        android:text="Please key in valid time"/>
 
                     <TextView
-                        android:padding="16dp"
+                        android:padding="@dimen/_12sdp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="25sp"
+                        android:textSize="@dimen/_20ssp"
                         android:textColor="@color/black"
                         android:textStyle="bold"
                         android:text="Selected day and hours"
@@ -392,7 +391,7 @@
                         android:id="@+id/doctorInfoChipGroup"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingHorizontal="5dp"
+                        android:paddingHorizontal="@dimen/_3sdp"
                         android:layout_gravity="center"/>
 
                 </LinearLayout>
@@ -401,10 +400,10 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/addDoctorSubmitButton"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="@dimen/_12sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="40dp"
+                android:layout_marginHorizontal="@dimen/_30sdp"
                 android:text="Submit"/>
 
         </LinearLayout>

@@ -26,10 +26,10 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var passwordlayout : TextInputLayout
     private lateinit var registerbutton: Button
     private lateinit var backbutton : ImageView
-    private lateinit var firstname : TextInputEditText
-    private lateinit var firstnamelayout : TextInputLayout
-    private lateinit var lastname : TextInputEditText
-    private lateinit var lastnamelayout : TextInputLayout
+    private lateinit var name : TextInputEditText
+    private lateinit var namelayout : TextInputLayout
+    private lateinit var age : TextInputEditText
+    private lateinit var agelayout : TextInputLayout
     private lateinit var confirmpassword : TextInputEditText
     private lateinit var confirmpasswordlayout : TextInputLayout
     private lateinit var emailValidator: EmailValidator
@@ -47,18 +47,18 @@ class RegisterActivity : AppCompatActivity() {
         passwordlayout = findViewById(R.id.registerpasswordlayout)
         registerbutton = findViewById(R.id.registerbutton)
         backbutton = findViewById(R.id.registerbackbutton)
-        firstname = findViewById(R.id.firstname)
-        firstnamelayout = findViewById(R.id.firstnamelayout)
-        lastname = findViewById(R.id.lastname)
-        lastnamelayout = findViewById(R.id.lastnamelayout)
+        name = findViewById(R.id.name)
+        namelayout = findViewById(R.id.namelayout)
+        age = findViewById(R.id.age)
+        agelayout = findViewById(R.id.ageLayout)
         confirmpassword = findViewById(R.id.confirmpassword)
         confirmpasswordlayout = findViewById(R.id.confirmpasswordlayout)
         emailValidator = EmailValidator()
         passwordValidator = PasswordValidator()
 
         backButtonClickEvent()
-        firstNameTextChange()
-        lastNameTextChange()
+        nameTextChange()
+        ageTextChange()
         emailValidator.textChange(registeremail,emaillayout)
         passwordValidator.textChange(registerpassword,passwordlayout)
         confirmPasswordTextChange()
@@ -80,17 +80,17 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    private fun isValidFirstName(firstname : String?) : Boolean {
-        if (TextUtils.isEmpty(firstname)) {
-            firstnamelayout.error = "Please enter a valid name"
+    private fun isValidName(name : String?) : Boolean {
+        if (TextUtils.isEmpty(name)) {
+            namelayout.error = "Please enter a valid name"
             return false
         }
         return true
     }
 
-    private fun isValidLastName(lastname : String?) : Boolean {
-        if (TextUtils.isEmpty(lastname)) {
-            lastnamelayout.error = "Please enter a valid name"
+    private fun isValidAge(age : String?) : Boolean {
+        if (TextUtils.isEmpty(age) || age!!.toInt() == 0 || age.toInt() > 120 ) {
+            agelayout.error = "Please enter a valid age"
             return false
         }
         return true
@@ -109,8 +109,8 @@ class RegisterActivity : AppCompatActivity() {
         return true
     }
 
-    private fun firstNameTextChange() {
-        firstname.addTextChangedListener(object : TextWatcher {
+    private fun nameTextChange() {
+        name.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
             }
 
@@ -118,13 +118,13 @@ class RegisterActivity : AppCompatActivity() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                firstnamelayout.error = null;
+                namelayout.error = null;
             }
         })
     }
 
-    private fun lastNameTextChange() {
-        lastname.addTextChangedListener(object : TextWatcher {
+    private fun ageTextChange() {
+        age.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
             }
 
@@ -132,7 +132,7 @@ class RegisterActivity : AppCompatActivity() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                lastnamelayout.error = null;
+               agelayout.error = null;
             }
         })
     }
@@ -153,11 +153,9 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun registerButtonClickEvent() {
         registerbutton.setOnClickListener {
-            val trimmedfirstname : String = firstname.text.toString().trim { it <= ' ' }
-            val trimmedlastname : String = lastname.text.toString().trim { it <= ' ' }
 
-            val firstnameValidity : Boolean = isValidFirstName(trimmedfirstname)
-            val lastnameValidity : Boolean = isValidLastName(trimmedlastname)
+            val nameValidity : Boolean = isValidName(name.text.toString())
+            val ageValidity : Boolean = isValidAge(age.text.toString())
             val emailValidity : Boolean = emailValidator
                 .layoutErrorChange(registeremail,emaillayout)
             val passwordValidity : Boolean = passwordValidator
@@ -167,7 +165,7 @@ class RegisterActivity : AppCompatActivity() {
 
 
 
-            if (firstnameValidity && lastnameValidity && emailValidity
+            if (nameValidity && ageValidity && emailValidity
                 && passwordValidity && confirmPasswordValidity){
                 Log.d("email",registeremail.text.toString())
                 Log.d("password",registerpassword.text.toString())
@@ -177,7 +175,8 @@ class RegisterActivity : AppCompatActivity() {
                         if (task.isSuccessful) {
                             val uid = FirebaseAuth.getInstance().currentUser!!.uid
                             db.collection("Users").document(uid)
-                                .set(hashMapOf("Role" to "Patient"))
+                                .set(hashMapOf("Role" to "Patient", "Name" to name.text.toString()
+                                , "Age" to age.text.toString()))
                             val intent =
                                 Intent(this, MainActivity::class.java)
                             startActivity(intent)

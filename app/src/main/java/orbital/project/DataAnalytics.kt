@@ -26,6 +26,7 @@ class DataAnalytics : AppCompatActivity() {
     private lateinit var predictedLoad : TextView
     private lateinit var noAgeAvailable : TextView
     private lateinit var noDayAvailable : TextView
+    private lateinit var noTimeAvailable : TextView
     private lateinit var uid : String
     private val db = FirebaseFirestore.getInstance()
     private val ageArray: ArrayList<PieEntry> = ArrayList()
@@ -43,6 +44,7 @@ class DataAnalytics : AppCompatActivity() {
         uid = FirebaseAuth.getInstance().currentUser!!.uid
         noAgeAvailable = findViewById(R.id.noAgeAvailable)
         noDayAvailable = findViewById(R.id.noDayAvailable)
+        noTimeAvailable = findViewById(R.id.noTimeAvailable)
         setupPieCharts();
         loadPieChartsData();
     }
@@ -58,27 +60,38 @@ class DataAnalytics : AppCompatActivity() {
         agePieChart.setCenterTextSize(resources.getDimension(com.intuit.ssp.R.dimen._16ssp) /
                 resources.displayMetrics.scaledDensity)
         agePieChart.description.isEnabled = false
+
         dayPieChart.isDrawHoleEnabled = true
         dayPieChart.setUsePercentValues(true)
-        agePieChart.setDrawEntryLabels(false)
-//        dayPieChart.setEntryLabelTextSize(resources.getDimension(com.intuit.ssp.R.dimen._8ssp) /
-//                resources.displayMetrics.scaledDensity)
-//        dayPieChart.setEntryLabelColor(Color.BLACK)
-        dayPieChart.centerText = "Working Day"
+        dayPieChart.setDrawEntryLabels(false)
+        dayPieChart.centerText = "Days visited by patient"
         dayPieChart.setCenterTextSize(resources.getDimension(com.intuit.ssp.R.dimen._16ssp) /
                 resources.displayMetrics.scaledDensity)
         dayPieChart.description.isEnabled = false
+
+        timePieChart.isDrawHoleEnabled = true
+        timePieChart.setUsePercentValues(true)
+        timePieChart.setDrawEntryLabels(false)
+
+        timePieChart.centerText = "Time visited by patient"
+        timePieChart.setCenterTextSize(resources.getDimension(com.intuit.ssp.R.dimen._16ssp) /
+                resources.displayMetrics.scaledDensity)
+        timePieChart.description.isEnabled = false
 
     }
 
     private fun loadPieChartsData() {
         val ageLegend = agePieChart.legend
         val dayLegend = dayPieChart.legend
+        val timeLegend = timePieChart.legend
+
+
         ageLegend.textSize = resources.getDimension(com.intuit.ssp.R.dimen._12ssp) /
                 resources.displayMetrics.scaledDensity
         dayLegend.textSize = resources.getDimension(com.intuit.ssp.R.dimen._12ssp) /
                 resources.displayMetrics.scaledDensity
-
+        timeLegend.textSize = resources.getDimension(com.intuit.ssp.R.dimen._12ssp) /
+                resources.displayMetrics.scaledDensity
 
         val colors: ArrayList<Int> = ArrayList()
         for (color in ColorTemplate.MATERIAL_COLORS) {
@@ -90,7 +103,10 @@ class DataAnalytics : AppCompatActivity() {
         db.collection("Users").document(uid).get().addOnSuccessListener { doc ->
             val ageList =doc.get("Age") as? HashMap<String, Float>
             val dayList = doc.get("Day") as? HashMap<String, Float>
-            if (ageList != null && dayList != null) {
+            val timeList = doc.get("Time") as? HashMap<String, Float>
+            val predictedPatientCount = doc.get("PredictedLoad") as? Long
+
+            if (ageList != null && dayList != null && timeList != null) {
                 ageLegend.isWordWrapEnabled = true
                 ageLegend.isEnabled = true
                 noAgeAvailable.visibility = View.GONE
@@ -119,7 +135,7 @@ class DataAnalytics : AppCompatActivity() {
                 daySet.colors = colors
                 val dayData = PieData(daySet)
                 dayData.setDrawValues(true)
-                dayData.setValueFormatter(PercentFormatter(agePieChart))
+                dayData.setValueFormatter(PercentFormatter(dayPieChart))
                 dayData.setValueTextSize(resources.getDimension(com.intuit.ssp.R.dimen._10ssp) /
                         resources.displayMetrics.scaledDensity)
                 dayData.setValueTextColor(Color.BLACK)
@@ -127,21 +143,69 @@ class DataAnalytics : AppCompatActivity() {
                 dayPieChart.invalidate()
                 dayPieChart.animateY(1400, Easing.EaseInOutQuad)
 
+                timeLegend.isWordWrapEnabled = true
+                timeLegend.isEnabled = true
+                noTimeAvailable.visibility = View.GONE
+                for ((key,value) in timeList) {
+                    timeArray.add(PieEntry(value,key))
+                }
+                val timeSet = PieDataSet(timeArray, "")
+                timeSet.colors = colors
+                val timeData = PieData(timeSet)
+                timeData.setDrawValues(true)
+                timeData.setValueFormatter(PercentFormatter(timePieChart))
+                timeData.setValueTextSize(resources.getDimension(com.intuit.ssp.R.dimen._10ssp) /
+                        resources.displayMetrics.scaledDensity)
+                timeData.setValueTextColor(Color.BLACK)
+                timePieChart.data = timeData
+                timePieChart.invalidate()
+                timePieChart.animateY(1400, Easing.EaseInOutQuad)
+
+                predictedLoad.text = "Predicted Patient Load:" + " " +
+                        predictedPatientCount.toString()
 
             } else {
                 ageLegend.isEnabled = false
                 ageArray.add(PieEntry(1f))
-                val dataSet = PieDataSet(ageArray, "")
-                dataSet.colors = colors
-                val data = PieData(dataSet)
-                data.setDrawValues(false)
-                data.setValueFormatter(PercentFormatter(agePieChart))
-                data.setValueTextSize(resources.getDimension(com.intuit.ssp.R.dimen._16ssp) /
+                val ageSet = PieDataSet(ageArray, "")
+                ageSet.colors = colors
+                val agedata = PieData(ageSet)
+                agedata.setDrawValues(false)
+                agedata.setValueFormatter(PercentFormatter(agePieChart))
+                agedata.setValueTextSize(resources.getDimension(com.intuit.ssp.R.dimen._16ssp) /
                         resources.displayMetrics.scaledDensity)
-                data.setValueTextColor(Color.BLACK)
-                agePieChart.data = data
+                agedata.setValueTextColor(Color.BLACK)
+                agePieChart.data = agedata
                 agePieChart.invalidate()
                 agePieChart.animateY(1400, Easing.EaseInOutQuad)
+
+                dayLegend.isEnabled = false
+                dayArray.add(PieEntry(1f))
+                val daySet = PieDataSet(dayArray, "")
+                daySet.colors = colors
+                val dayData = PieData(daySet)
+                dayData.setDrawValues(false)
+                dayData.setValueFormatter(PercentFormatter(dayPieChart))
+                dayData.setValueTextSize(resources.getDimension(com.intuit.ssp.R.dimen._16ssp) /
+                        resources.displayMetrics.scaledDensity)
+                dayData.setValueTextColor(Color.BLACK)
+                dayPieChart.data = dayData
+                dayPieChart.invalidate()
+                dayPieChart.animateY(1400, Easing.EaseInOutQuad)
+
+                timeLegend.isEnabled = false
+                timeArray.add(PieEntry(1f))
+                val timeSet = PieDataSet(timeArray, "")
+                timeSet.colors = colors
+                val timeData = PieData(timeSet)
+                timeData.setDrawValues(false)
+                timeData.setValueFormatter(PercentFormatter(timePieChart))
+                timeData.setValueTextSize(resources.getDimension(com.intuit.ssp.R.dimen._16ssp) /
+                        resources.displayMetrics.scaledDensity)
+                timeData.setValueTextColor(Color.BLACK)
+                timePieChart.data = timeData
+                timePieChart.invalidate()
+                timePieChart.animateY(1400, Easing.EaseInOutQuad)
             }
         }
     }

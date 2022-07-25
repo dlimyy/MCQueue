@@ -17,17 +17,17 @@
 
         <ImageView
             android:id="@+id/navigateBookingDoctorBookingActivity"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="16dp"
+            android:layout_width="@dimen/_28sdp"
+            android:layout_height="@dimen/_28sdp"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginTop="@dimen/_12sdp"
             android:src="@drawable/backarrow" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="40dp"
+            android:layout_marginEnd="@dimen/_20sdp"
             android:src="@drawable/progressbar_doctor" />
 
     </RelativeLayout>
@@ -35,10 +35,10 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:cardCornerRadius="32dp"
+        app:cardCornerRadius="@dimen/_28sdp"
         app:cardBackgroundColor="#FF00BCD4"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHeight_percent="0.85"
+        app:layout_constraintHeight_percent="0.83"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/topBarBookingDoctor"
@@ -52,41 +52,41 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/_20sdp"
                 android:fontFamily="@font/sora"
                 android:gravity="center"
                 android:textColor="@color/black"
-                android:textSize="32sp"
+                android:textSize="@dimen/_32ssp"
                 android:textStyle="bold"
                 android:text="Select Doctor" />
 
             <com.google.android.material.imageview.ShapeableImageView
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_marginTop="20dp"
+                android:layout_width="@dimen/_140sdp"
+                android:layout_height="@dimen/_140sdp"
+                android:layout_marginTop="@dimen/_20sdp"
                 app:shapeAppearanceOverlay="@style/circleShape"
                 android:src="@drawable/doctor__1_"
                 android:background="@color/white"
-                app:strokeWidth="5dp"
+                app:strokeWidth="@dimen/_5sdp"
                 app:strokeColor="#BA68C8"
-                android:padding="5dp"
+                android:padding="@dimen/_5sdp"
                 android:layout_gravity="center"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/_10sdp"
                 app:boxBackgroundColor="@color/white"
                 app:hintEnabled="false"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                android:padding="20dp"
+                android:padding="@dimen/_20sdp"
                 >
 
                 <AutoCompleteTextView
                     android:id="@+id/bookingDoctor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="15dp"
+                    android:padding="@dimen/_12sdp"
                     android:focusable="false"
                     android:hint="Select a Doctor"
                     android:drawableRight="@drawable/ic_baseline_search_24"
@@ -94,20 +94,19 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <Button
-                android:id="@+id/nextBookingScreenTiming"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="150dp"
-                android:layout_marginRight="20dp"
-                android:layout_gravity="right"
-                android:text="Next"/>
-
         </LinearLayout>
-
 
     </androidx.cardview.widget.CardView>
 
 
+    <Button
+        android:id="@+id/nextBookingScreenTiming"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginBottom="@dimen/_16sdp"
+        android:layout_marginRight="@dimen/_20sdp"
+        android:text="Next"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
