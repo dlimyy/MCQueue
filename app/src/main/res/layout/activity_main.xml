@@ -141,6 +141,7 @@
                     android:src="@drawable/queue"/>
 
                 <TextView
+                    android:id="@+id/queueNumber"
                     android:layout_marginLeft="@dimen/_25sdp"
                     android:layout_marginTop="@dimen/_25sdp"
                     android:layout_width="match_parent"

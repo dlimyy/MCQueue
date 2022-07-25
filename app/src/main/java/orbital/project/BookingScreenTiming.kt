@@ -74,6 +74,8 @@ class BookingScreenTiming : AppCompatActivity() {
         val currentDate = Calendar.getInstance().time
         val timeFormatter = SimpleDateFormat("HH:mm", Locale.ENGLISH)
         val currentTime = timeFormatter.format(currentDate)
+        val dateFormatter = SimpleDateFormat("dd/MM/yy", Locale.ENGLISH)
+        val date = dateFormatter.format(currentDate)
 
         db.collection("Doctors").document(mcrNumber).get()
             .addOnSuccessListener { document ->
@@ -104,10 +106,12 @@ class BookingScreenTiming : AppCompatActivity() {
                     .collection(bookingDate.replace('/','-'))
                     .get().addOnSuccessListener { result ->
                         for (timing in tempTimeArray) {
-                            if (timing < currentTime) {
-                                continue
+                            if (bookingDate == date) {
+                                if (timing < currentTime) {
+                                    continue
+                                }
                             }
-                            else if (result.size() == 0) {
+                            if (result.size() == 0) {
                                 timinglist.add(timing)
                                 adaptor.notifyItemInserted(counter)
                                 counter++

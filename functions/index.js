@@ -4,7 +4,7 @@ admin.initializeApp();
 const db = admin.firestore();
 
 exports.updateQueue = functions.region("asia-southeast1")
-    .pubsub.schedule("0 0 * * *")
+    .pubsub.schedule("*/5 * * * *")
     .onRun(async (context) => {
       const date = new Date();
       const today = date.toLocaleString("en-SG", {
@@ -38,7 +38,7 @@ exports.updateQueue = functions.region("asia-southeast1")
             await db.collection("LiveQueue")
                 .doc(snapshot.id).update({Queueid: queueid});
             await db.collection("LiveQueue")
-                .doc(snapshot.id).update({Timinglist: timinglist});
+                .doc(snapshot.id).update({TimingList: timinglist});
           }
         } else {
           const currqueue = snapshot.get("Queueid");
@@ -94,7 +94,14 @@ exports.updateQueue = functions.region("asia-southeast1")
  */
 function sendNotification(androidToken, msg) {
   const title = "MCQueue";
-  const body = `You are ${msg} patients away from your turn`;
+  let body = "";
+  if (msg == "1") {
+    body = `You are ${msg} patient away from your turn`;
+  }
+
+  if (msg == "3") {
+    body = `You are ${msg} patients away from your turn`;
+  }
 
   const message = {
     notification: {title: title, body: body},
