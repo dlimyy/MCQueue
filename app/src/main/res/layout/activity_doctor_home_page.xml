@@ -16,13 +16,13 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/ClinicProfilePic"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_marginTop="12dp"
+            android:layout_width="@dimen/_55sdp"
+            android:layout_height="@dimen/_55sdp"
+            android:layout_marginTop="@dimen/_12sdp"
             app:shapeAppearanceOverlay="@style/circleShape"
             android:background="@color/white"
             android:src="@drawable/hospital_2"
-            app:layout_constraintHorizontal_bias="0.91"
+            app:layout_constraintHorizontal_bias="0.9"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -31,37 +31,36 @@
             android:id="@+id/doctorInfoCardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_marginHorizontal="@dimen/_12sdp"
             app:layout_constraintTop_toBottomOf="@+id/ClinicProfilePic"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:cardCornerRadius="15dp"
+            app:cardCornerRadius="@dimen/_12sdp"
             app:cardBackgroundColor="#7A4EA6">
 
             <LinearLayout
-                android:paddingHorizontal="12dp"
-                android:paddingVertical="16dp"
+                android:paddingHorizontal="@dimen/_12sdp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingVertical="20dp"
+                    android:paddingVertical="@dimen/_20sdp"
                     android:src="@drawable/doctor2"/>
 
                 <TextView
-                    android:layout_marginLeft="28dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_marginVertical="@dimen/_30sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Doctor's Info"
                     android:fontFamily="@font/sora"
                     android:textColor="@color/white"
-                    android:textSize="32sp"
+                    android:textSize="@dimen/_26ssp"
                     android:textStyle="bold"/>
 
             </LinearLayout>
@@ -72,37 +71,36 @@
             android:id="@+id/patientInfoCardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_marginHorizontal="@dimen/_12sdp"
             app:layout_constraintTop_toBottomOf="@+id/doctorInfoCardView"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:cardCornerRadius="15dp"
+            app:cardCornerRadius="@dimen/_12sdp"
             app:cardBackgroundColor="#3465AD">
 
             <LinearLayout
-                android:paddingHorizontal="12dp"
-                android:paddingVertical="16dp"
+                android:paddingHorizontal="@dimen/_12sdp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:paddingVertical="15dp"
-                    android:layout_marginLeft="10dp"
+                    android:paddingVertical="@dimen/_20sdp"
+                    android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/patient1"/>
 
                 <TextView
-                    android:layout_marginLeft="28dp"
-                    android:layout_marginTop="24dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_marginVertical="@dimen/_25sdp"
                     android:text="Patient's Info"
                     android:fontFamily="@font/sora"
                     android:textColor="@color/white"
-                    android:textSize="32sp"
+                    android:textSize="@dimen/_26ssp"
                     android:textStyle="bold"/>
 
             </LinearLayout>
@@ -110,13 +108,14 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/dataAnalyticsCardView"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            app:cardCornerRadius="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:layout_marginHorizontal="@dimen/_12sdp"
             app:layout_constraintTop_toBottomOf="@+id/patientInfoCardView"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/crowdInsightCardView"
-            app:layout_constraintBottom_toTopOf="@+id/clinicLogOutButton">
+            app:layout_constraintRight_toRightOf="parent">
 
             <TextView
                 android:layout_width="match_parent"
@@ -124,47 +123,28 @@
                 android:fontFamily="@font/roboto"
                 android:gravity="center"
                 android:text="Data Analytics"
-                android:textSize="15sp"
+                android:paddingVertical="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:textSize="@dimen/_30ssp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
-                app:drawableTopCompat="@drawable/dataanalyticsicon" />
+                app:drawableLeftCompat="@drawable/dataanalyticsicon" />
 
         </androidx.cardview.widget.CardView>
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/crowdInsightCardView"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            app:cardCornerRadius="20dp"
-            app:layout_constraintTop_toBottomOf="@+id/patientInfoCardView"
-            app:layout_constraintLeft_toRightOf="@+id/dataAnalyticsCardView"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/clinicLogOutButton">
 
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto"
-                android:gravity="center"
-                android:text="Crowd Insights"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                app:drawableTopCompat="@drawable/crowdicon" />
-        </androidx.cardview.widget.CardView>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/clinicLogOutButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingVertical="10dp"
-            android:paddingHorizontal="40dp"
-            app:cornerRadius="15dp"
+            android:paddingVertical="@dimen/_10sdp"
+            android:paddingHorizontal="@dimen/_30sdp"
+            app:cornerRadius="@dimen/_15sdp"
             android:text="Log out"
-            android:textSize="15sp"
+            android:textSize="@dimen/_15ssp"
             android:backgroundTint="#7D50CC"
-            app:layout_constraintTop_toBottomOf="@id/crowdInsightCardView"
+            android:layout_marginBottom="@dimen/_10sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"/>

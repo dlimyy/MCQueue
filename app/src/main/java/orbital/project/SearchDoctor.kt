@@ -156,7 +156,7 @@ class SearchDoctor : AppCompatActivity() {
         doneText?.setOnClickListener {
             if (dayChipGroup!= null && dayChipGroup.checkedChipId != View.NO_ID) {
                 dayButton.text = bottomScreenDialog
-                    .findViewById<Chip>(dayChipGroup.checkedChipId)?.text.toString()
+                    .findViewById<Chip>(dayChipGroup.checkedChipId)?.text.toString().substring(0,3)
                 bottomScreenDialog.dismiss()
             }
             bottomScreenDialog.dismiss()
@@ -238,7 +238,7 @@ class SearchDoctor : AppCompatActivity() {
 
             if (doc.gender == gender || gender == "All" || gender == "Gender") {
                 if (doc.languages.contains(language) || language == "All" || language == "Language") {
-                    if (doc.days.contains(day.substring(0,3)) || day == "All" || day == "Day") {
+                    if (doc.days.contains(day) || day == "All" || day == "Day") {
                         if (currentSearchText == "") {
                             filterArray.add(doc)
                         } else if (doc.name.lowercase().contains(currentSearchText.lowercase())) {

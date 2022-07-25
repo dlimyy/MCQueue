@@ -143,7 +143,7 @@
         android:textSize="@dimen/_18ssp"
         android:text="Create New Account"
         android:backgroundTint="#673AB7"
-        app:cornerRadius="@dimen/_15sdp"
+        app:cornerRadius="@dimen/_25sdp"
         android:textAllCaps="false"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
