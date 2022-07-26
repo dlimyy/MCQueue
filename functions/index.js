@@ -109,7 +109,6 @@ function sendNotification(androidToken, msg) {
     android: {
       notification: {
         channel_id: "MCQueue101",
-        default_vibrate_timings: true,
       },
     },
   };

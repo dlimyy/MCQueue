@@ -106,7 +106,11 @@ class BookingScreenTiming : AppCompatActivity() {
                     .collection(bookingDate.replace('/','-'))
                     .get().addOnSuccessListener { result ->
                         for (timing in tempTimeArray) {
+                            Log.d("bookingdate", bookingDate)
+                            Log.d("date", date)
                             if (bookingDate == date) {
+                                Log.d("timing", timing)
+                                Log.d("currentTime", currentTime)
                                 if (timing < currentTime) {
                                     continue
                                 }

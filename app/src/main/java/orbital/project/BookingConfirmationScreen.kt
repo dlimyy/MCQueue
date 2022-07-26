@@ -12,6 +12,10 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 class BookingConfirmationScreen : AppCompatActivity() {
     private lateinit var confirmationDate: TextInputEditText
@@ -33,6 +37,9 @@ class BookingConfirmationScreen : AppCompatActivity() {
         confirmationTiming = findViewById(R.id.confirmationTiming)
         confirmationButton = findViewById(R.id.nextBookingScreenConfirmation)
         backButton = findViewById(R.id.navigateConfirmationtoTiming)
+        val currentDate = Calendar.getInstance().time
+        val dateFormatter = SimpleDateFormat("dd/MM/yy", Locale.ENGLISH)
+        val date = dateFormatter.format(currentDate)
         confirmationDate.setText(intent.extras!!.getString("date"))
         confirmationClinic.setText(intent.extras!!.getString("clinic"))
         confirmationDoctor.setText(intent.extras!!.getString("doctor"))
@@ -85,6 +92,23 @@ class BookingConfirmationScreen : AppCompatActivity() {
                                     .collection(confirmationDate.text.toString().replace('/','-'))
                                     .document(confirmationTiming.text.toString())
                                     .set(hashMapOf("Age" to age, "Name" to name, "uid" to uid))
+
+                                if (date == confirmationDate.text.toString()) {
+                                    db.collection("LiveQueue")
+                                        .document(mcrNumber).get().addOnSuccessListener {
+                                            val queueId = it.get("Queueid") as ArrayList<String>
+                                            val timingList = it.get("TimingList") as ArrayList<String>
+                                            timingList.add(confirmationTiming.text.toString())
+                                            timingList.sort()
+                                            val pos = timingList
+                                                .indexOf(confirmationTiming.text.toString())
+                                            queueId.add(pos,uid)
+                                            db.collection("LiveQueue")
+                                                .document(mcrNumber)
+                                                .update(mapOf("Queueid" to  queueId
+                                                    , "TimingList" to timingList))
+                                        }
+                                }
 
                         }
                         Snackbar.make(confirmationTiming,"Appointment has been successfully booked"

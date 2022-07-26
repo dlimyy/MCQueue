@@ -1,9 +1,11 @@
 package orbital.project
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.github.mikephil.charting.animation.Easing
@@ -27,6 +29,7 @@ class DataAnalytics : AppCompatActivity() {
     private lateinit var noAgeAvailable : TextView
     private lateinit var noDayAvailable : TextView
     private lateinit var noTimeAvailable : TextView
+    private lateinit var backButton : ImageView
     private lateinit var uid : String
     private val db = FirebaseFirestore.getInstance()
     private val ageArray: ArrayList<PieEntry> = ArrayList()
@@ -45,8 +48,13 @@ class DataAnalytics : AppCompatActivity() {
         noAgeAvailable = findViewById(R.id.noAgeAvailable)
         noDayAvailable = findViewById(R.id.noDayAvailable)
         noTimeAvailable = findViewById(R.id.noTimeAvailable)
+        backButton = findViewById(R.id.navigateDataAnalyticsToMain)
         setupPieCharts();
         loadPieChartsData();
+        backButton.setOnClickListener {
+            startActivity(Intent(this, DoctorHomePage::class.java))
+            finish()
+        }
     }
 
     private fun setupPieCharts() {
