@@ -1,6 +1,7 @@
 package orbital.project
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -54,8 +55,9 @@ class SearchDoctorAdaptor(private val docArray : ArrayList<Doctor>)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val doctor = docArray[position]
         holder.name.text = doctor.name
-        GlideApp.with(holder.itemView).load(Firebase.storage.reference.child("Images/"
-                + doctor.mcrNumber)).placeholder(R.drawable.doctor__1_).into(holder.profilePic)
+        GlideApp.with(holder.itemView)
+            .load(Firebase.storage.reference.child("Images/" + doctor.mcrNumber))
+            .placeholder(R.drawable.doctor__1_).into(holder.profilePic)
     }
 
     override fun getItemCount(): Int {

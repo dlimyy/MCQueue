@@ -4,7 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.health.UidHealthStats
+import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
@@ -14,6 +16,7 @@ class BookingCancellation : AppCompatActivity() {
     private lateinit var cancellationRecyclerView: RecyclerView
     private lateinit var backButton : ImageView
     private lateinit var adaptor: CancellationAdaptor
+    private lateinit var errorMessage : TextView
     private val db = FirebaseFirestore.getInstance()
     private lateinit var uid : String
     private val appointmentArrayList = ArrayList<AppointmentDetails>()
@@ -25,6 +28,7 @@ class BookingCancellation : AppCompatActivity() {
         backButton = findViewById(R.id.navigateBackToBooking)
         cancellationRecyclerView = findViewById(R.id.cancellationCardView)
         uid = FirebaseAuth.getInstance().currentUser!!.uid
+        errorMessage = findViewById(R.id.bookingAppointmentList)
         initialise()
         cancellationRecyclerView.layoutManager = LinearLayoutManager(this)
         adaptor = CancellationAdaptor(appointmentArrayList)
@@ -69,6 +73,9 @@ class BookingCancellation : AppCompatActivity() {
                             appointmentArrayList.add(AppointmentDetails(date,time,doctor,clinic))
                             adaptor.notifyItemInserted(counter)
                             counter++
+                            if (adaptor.itemCount > 0) {
+                                errorMessage.visibility = View.GONE
+                            }
                         }
                 }
             }

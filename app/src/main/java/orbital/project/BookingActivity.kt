@@ -2,8 +2,10 @@ package orbital.project
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,6 +19,7 @@ class BookingActivity : AppCompatActivity() {
     private lateinit var bookAppointmentButton: Button
     private lateinit var cancellationButton: Button
     private lateinit var bookingRecyclerView: RecyclerView
+    private lateinit var errorMessage : TextView
     private val db = FirebaseFirestore.getInstance()
     private lateinit var uid : String
     private val appointmentArrayList  = ArrayList<AppointmentDetails>()
@@ -29,6 +32,7 @@ class BookingActivity : AppCompatActivity() {
         bookAppointmentButton = findViewById(R.id.bookAppointmentButton)
         cancellationButton = findViewById(R.id.cancelAppointmentButton)
         bookingRecyclerView = findViewById(R.id.bookingRecyclerView)
+        errorMessage = findViewById(R.id.bookingAppointmentList)
         uid = FirebaseAuth.getInstance().currentUser!!.uid
     }
 
@@ -87,6 +91,9 @@ class BookingActivity : AppCompatActivity() {
                             appointmentArrayList.add(AppointmentDetails(date,time,doctor,clinic))
                             adaptor.notifyItemInserted(counter)
                             counter++
+                            if (adaptor.itemCount > 0) {
+                                errorMessage.visibility = View.GONE
+                            }
                         }
                 }
             }

@@ -19,7 +19,10 @@ exports.updateQueue = functions.region("asia-southeast1")
               .doc(snapshot.id).update({CurrentDay: currdate});
           const checkQuery = await db.collection("Queue")
               .doc(snapshot.id).collection(currdate.split("/").join("-")).get();
+          console.log(snapshot.id);
+          console.log(currdate.split("/").join("-"));
           if (checkQuery.empty) {
+            console.log("there");
             await db.collection("LiveQueue")
                 .doc(snapshot.id).update({Queueid: []});
             await db.collection("LiveQueue")
@@ -27,6 +30,7 @@ exports.updateQueue = functions.region("asia-southeast1")
             await db.collection("LiveQueue")
                 .doc(snapshot.id).update({FirstAppointment: ""});
           } else {
+            console.log("here");
             const queueid = [];
             const timinglist = [];
             checkQuery.docs.forEach((doc) => {
@@ -45,9 +49,9 @@ exports.updateQueue = functions.region("asia-southeast1")
           const currtime = snapshot.get("TimingList");
           const firstAppointment = String(snapshot.get("FirstAppointment"));
           const currqueuearr = Array.from(currqueue);
-          console.log(currqueuearr);
+          // console.log(currqueuearr);
           const currtimearr = Array.from(currtime);
-          console.log(currtimearr);
+          // console.log(currtimearr);
           if (String(currtimearr[0]) < today.substring(12, 17)) {
             currtimearr.shift();
             currqueuearr.shift();
@@ -56,18 +60,18 @@ exports.updateQueue = functions.region("asia-southeast1")
             await db.collection("LiveQueue")
                 .doc(snapshot.id).update({TimingList: currtimearr});
           }
-          console.log(currqueuearr.length);
-          console.log(String(currtimearr[0]));
-          console.log(firstAppointment);
+          // console.log(currqueuearr.length);
+          // console.log(String(currtimearr[0]));
+          // console.log(firstAppointment);
           if (currqueuearr
               .length >= 3 && String(currtimearr[0]) >= firstAppointment) {
             const thirdInQueue = await db.collection("Users")
                 .doc(String(currqueuearr[2])).get();
             const androidtokenthird = thirdInQueue.get("Token");
-            console.log("Token3");
+            // console.log("Token3");
             if (androidtokenthird != null) {
-              console.log("Third");
-              console.log(String(androidtokenthird));
+              // console.log("Third");
+              // console.log(String(androidtokenthird));
               sendNotification(String(androidtokenthird), "3");
             }
           }
@@ -76,10 +80,10 @@ exports.updateQueue = functions.region("asia-southeast1")
             const firstInQueue = await db.collection("Users")
                 .doc(String(currqueuearr[0])).get();
             const androidtokenfirst = firstInQueue.get("Token");
-            console.log("Token1");
+            // console.log("Token1");
             if (androidtokenfirst != null) {
-              console.log("First");
-              console.log(String(androidtokenfirst));
+              // console.log("First");
+              // console.log(String(androidtokenfirst));
               sendNotification(String(androidtokenfirst), "1");
             }
           }

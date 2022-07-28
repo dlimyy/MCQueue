@@ -79,7 +79,7 @@ class BookingCancellationConfirmationScreen : AppCompatActivity() {
                         .addOnSuccessListener { task ->
                             val queue = task.get("Queueid") as ArrayList<String>
                             val timinglist = task.get("TimingList") as ArrayList<String>
-                            val position = queue.indexOf(cancellationTime.text.toString())
+                            val position = timinglist.indexOf(cancellationTime.text.toString())
                             queue.removeAt(position)
                             timinglist.removeAt(position)
                             db.collection("LiveQueue").document(mcr)
@@ -87,7 +87,7 @@ class BookingCancellationConfirmationScreen : AppCompatActivity() {
                     }
                 }
                 Snackbar.make(cancellationTime,"Appointment has been successfully cancelled"
-                ,Snackbar.LENGTH_SHORT).show()
+                    ,Snackbar.LENGTH_SHORT).show()
                 Handler().postDelayed({
                     startActivity(Intent(this,MainActivity::class.java))
                     finish()

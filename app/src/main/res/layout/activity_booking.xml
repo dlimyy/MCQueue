@@ -59,8 +59,19 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/bookingRecyclerView"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/bookingAppointmentList"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:listitem="@layout/appointment_cardview"/>
+            android:layout_gravity="center"
+            android:text="No Appointment Booking has been made"
+            android:textSize="@dimen/_25ssp"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:fontFamily="@font/work_sans"
+            android:textStyle="bold"/>
 
     </androidx.cardview.widget.CardView>
 
