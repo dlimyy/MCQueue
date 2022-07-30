@@ -1,19 +1,17 @@
-package orbital.project
+package orbital.project.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
-import android.util.Log
 import android.view.View
-import android.widget.EditText
 import android.widget.ImageView
-import android.widget.TextView
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
+import orbital.project.helper_classes.GlideApp
+import orbital.project.R
 
 class DoctorProfilePageSearch : AppCompatActivity() {
     private lateinit var name : TextInputEditText

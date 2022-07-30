@@ -1,4 +1,4 @@
-package orbital.project
+package orbital.project.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import orbital.project.helper_classes.Doctor
+import orbital.project.R
+import orbital.project.helper_classes.SearchDoctorAdaptor
 
 class DoctorsInfo : AppCompatActivity() {
     private lateinit var addDoctor : CardView
@@ -38,9 +41,9 @@ class DoctorsInfo : AppCompatActivity() {
         doctorRecyclerView.layoutManager = LinearLayoutManager(this)
         adaptor = SearchDoctorAdaptor(docArray)
         doctorRecyclerView.adapter = adaptor
-        adaptor.setOnItemClickListener(object : SearchDoctorAdaptor.OnItemClickListener{
+        adaptor.setOnItemClickListener(object : SearchDoctorAdaptor.OnItemClickListener {
             override fun onItemClick(position: Int) {
-                intent = Intent(this@DoctorsInfo,DoctorProfilePageSearch::class.java)
+                intent = Intent(this@DoctorsInfo, DoctorProfilePageSearch::class.java)
                 intent.putExtra("mcrNumber", docArray[position].mcrNumber)
                 startActivity(intent)
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
@@ -66,9 +69,11 @@ class DoctorsInfo : AppCompatActivity() {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     for ((counter, doc) in task.result.withIndex()) {
-                    docArray.add(Doctor(doc.get("Name") as String,doc.id,
+                    docArray.add(
+                        Doctor(doc.get("Name") as String,doc.id,
                         doc.get("Languages") as ArrayList<String>, doc.get("Gender") as String
-                        ,doc.get("Days") as ArrayList<String>))
+                        ,doc.get("Days") as ArrayList<String>)
+                    )
                     adaptor.notifyItemInserted(counter)
                     if (adaptor.itemCount > 0) {
                         noDoctorText.visibility = View.GONE

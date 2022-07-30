@@ -1,13 +1,14 @@
-package orbital.project
+package orbital.project.helper_classes
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import orbital.project.R
 
-class CancellationAdaptor(private val appointments: ArrayList<AppointmentDetails>)
-    : RecyclerView.Adapter<CancellationAdaptor.ViewHolder>(){
+class BookingAdaptor(private val appointments: ArrayList<String>)
+    : RecyclerView.Adapter<BookingAdaptor.ViewHolder>(){
 
     private lateinit var appointmentListener : OnItemClickListener
 
@@ -20,16 +21,10 @@ class CancellationAdaptor(private val appointments: ArrayList<AppointmentDetails
     }
 
     class ViewHolder(view: View, listener: OnItemClickListener) : RecyclerView.ViewHolder(view) {
-        val name : TextView
-        val clinic : TextView
-        val date : TextView
-        val time : TextView
+        val timing : TextView
 
         init {
-            name = view.findViewById(R.id.doctorName)
-            clinic = view.findViewById(R.id.clinicName)
-            date = view.findViewById(R.id.appointmentDate)
-            time = view.findViewById(R.id.appointmentTime)
+            timing = view.findViewById(R.id.appointmentTiming)
             itemView.setOnClickListener {
                 listener.onItemClick(adapterPosition)
             }
@@ -38,16 +33,13 @@ class CancellationAdaptor(private val appointments: ArrayList<AppointmentDetails
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.appointment_cardview, viewGroup, false)
+            .inflate(R.layout.appointment_timing, viewGroup, false)
         return ViewHolder(view, appointmentListener)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val appointment = appointments[position]
-        holder.name.text = appointment.name
-        holder.clinic.text = appointment.clinic
-        holder.time.text = appointment.time
-        holder.date.text = appointment.date
+        holder.timing.text = appointment
     }
 
     override fun getItemCount(): Int {

@@ -1,4 +1,4 @@
-package orbital.project
+package orbital.project.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +12,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
+import orbital.project.R
 
 class ForgotPasswordActivity : AppCompatActivity() {
     private lateinit var resetemail : TextInputEditText

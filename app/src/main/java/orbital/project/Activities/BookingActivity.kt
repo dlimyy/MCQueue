@@ -1,4 +1,4 @@
-package orbital.project
+package orbital.project.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,6 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import orbital.project.helper_classes.AppointmentDetails
+import orbital.project.helper_classes.CancellationAdaptor
+import orbital.project.R
 
 
 class BookingActivity : AppCompatActivity() {
@@ -59,7 +62,7 @@ class BookingActivity : AppCompatActivity() {
         bookingRecyclerView.layoutManager = LinearLayoutManager(this)
         adaptor = CancellationAdaptor(appointmentArrayList)
         bookingRecyclerView.adapter = adaptor
-        adaptor.setOnItemClickListener(object : CancellationAdaptor.OnItemClickListener{
+        adaptor.setOnItemClickListener(object : CancellationAdaptor.OnItemClickListener {
             override fun onItemClick(position: Int) {
 
             }

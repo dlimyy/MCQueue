@@ -1,10 +1,11 @@
-package orbital.project
+package orbital.project.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import androidx.cardview.widget.CardView
+import orbital.project.R
 
 class DoctorHomePage : AppCompatActivity() {
     private lateinit var doctorInfo : CardView
@@ -22,15 +23,15 @@ class DoctorHomePage : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         doctorInfo.setOnClickListener {
-            val intent = Intent(this,DoctorsInfo::class.java)
+            val intent = Intent(this, DoctorsInfo::class.java)
             startActivity(intent)
         }
         dataAnalytics.setOnClickListener {
-            val intent = Intent(this,DataAnalytics::class.java)
+            val intent = Intent(this, DataAnalytics::class.java)
             startActivity(intent)
         }
         logout.setOnClickListener {
-            startActivity(Intent(this,DoctorLoginpage::class.java))
+            startActivity(Intent(this, DoctorLoginpage::class.java))
             finish()
         }
     }

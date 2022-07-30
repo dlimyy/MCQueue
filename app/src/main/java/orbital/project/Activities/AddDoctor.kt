@@ -1,4 +1,4 @@
-package orbital.project
+package orbital.project.activities
 
 import android.Manifest
 import android.app.AlertDialog
@@ -7,9 +7,7 @@ import android.app.TimePickerDialog.OnTimeSetListener
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
-import android.media.Image
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -37,6 +35,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
+import orbital.project.helper_classes.McrValidator
+import orbital.project.R
 import java.io.ByteArrayOutputStream
 import java.util.*
 import kotlin.collections.ArrayList
@@ -69,7 +69,7 @@ class AddDoctor : AppCompatActivity() {
     private val friArray : ArrayList<String> = arrayListOf()
     private val satArray : ArrayList<String> = arrayListOf()
     private val sunArray : ArrayList<String> = arrayListOf()
-    private lateinit var mcrValidator :McrValidator
+    private lateinit var mcrValidator : McrValidator
     private val chipArray = ArrayList<Chip>()
     private val storageRef = FirebaseStorage.getInstance().reference
     private val daysOfWeek = arrayOf("Monday","Tuesday","Wednesday","Thursday"

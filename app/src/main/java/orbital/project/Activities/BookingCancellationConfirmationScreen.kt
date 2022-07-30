@@ -1,9 +1,8 @@
-package orbital.project
+package orbital.project.activities
 
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +11,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
+import orbital.project.R
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -89,7 +89,7 @@ class BookingCancellationConfirmationScreen : AppCompatActivity() {
                 Snackbar.make(cancellationTime,"Appointment has been successfully cancelled"
                     ,Snackbar.LENGTH_SHORT).show()
                 Handler().postDelayed({
-                    startActivity(Intent(this,MainActivity::class.java))
+                    startActivity(Intent(this, MainActivity::class.java))
                     finish()
                 },2500)
             }

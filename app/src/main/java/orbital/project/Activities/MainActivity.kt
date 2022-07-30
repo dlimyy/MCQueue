@@ -1,16 +1,14 @@
-package orbital.project
+package orbital.project.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
-import androidx.core.view.ContentInfoCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import orbital.project.R
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -104,10 +102,10 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, BookingActivity::class.java))
         }
         queueLocator.setOnClickListener {
-            startActivity(Intent(this,QueueLocator::class.java))
+            startActivity(Intent(this, QueueLocator::class.java))
         }
         searchDoctor.setOnClickListener {
-            startActivity(Intent(this,SearchDoctor::class.java))
+            startActivity(Intent(this, SearchDoctor::class.java))
         }
         logout.setOnClickListener {
             val intent = Intent(this, Loginpage::class.java)

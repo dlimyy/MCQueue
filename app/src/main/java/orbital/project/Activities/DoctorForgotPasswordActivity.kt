@@ -1,4 +1,4 @@
-package orbital.project
+package orbital.project.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -8,13 +8,12 @@ import android.text.TextUtils
 import android.text.TextWatcher
 import android.util.Patterns
 import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageView
-import android.widget.TextView
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
+import orbital.project.R
 
 class DoctorForgotPasswordActivity : AppCompatActivity() {
     private lateinit var email : TextInputEditText

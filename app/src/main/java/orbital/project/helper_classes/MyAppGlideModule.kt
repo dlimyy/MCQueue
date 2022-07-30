@@ -1,4 +1,4 @@
-package orbital.project
+package orbital.project.helper_classes
 
 import com.bumptech.glide.Glide
 import com.bumptech.glide.Registry

@@ -1,5 +1,6 @@
 package orbital.project
 
+import orbital.project.helper_classes.EmailValidator
 import org.junit.Test
 import org.junit.Assert.*
 import org.junit.runner.RunWith

@@ -1,4 +1,4 @@
-package orbital.project
+package orbital.project.helper_classes
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.TextView
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
+import orbital.project.R
 
 class MarkerInfoWindowAdapter(
     private val context: Context

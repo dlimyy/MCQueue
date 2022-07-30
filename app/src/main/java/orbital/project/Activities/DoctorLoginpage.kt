@@ -1,12 +1,8 @@
-package orbital.project
+package orbital.project.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextUtils
-import android.text.TextWatcher
-import android.util.Patterns
 import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.TextView
@@ -15,6 +11,9 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import orbital.project.*
+import orbital.project.helper_classes.EmailValidator
+import orbital.project.helper_classes.PasswordValidator
 
 class DoctorLoginpage : AppCompatActivity() {
     private lateinit var doc_loginusername : TextInputEditText
@@ -56,7 +55,7 @@ class DoctorLoginpage : AppCompatActivity() {
 
     private fun signUpClickEvent() {
         doc_signup.setOnClickListener {
-            val intent : Intent = Intent(this,DoctorRegisterActivity::class.java)
+            val intent : Intent = Intent(this, DoctorRegisterActivity::class.java)
             startActivity(intent)
             finish()
         }
@@ -64,7 +63,7 @@ class DoctorLoginpage : AppCompatActivity() {
 
     private fun forgetPasswordClickEvent() {
         doc_forgetpassword.setOnClickListener {
-            val intent : Intent = Intent(this,DoctorForgotPasswordActivity::class.java)
+            val intent : Intent = Intent(this, DoctorForgotPasswordActivity::class.java)
             startActivity(intent)
             finish()
         }

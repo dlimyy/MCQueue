@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_colour"
     android:fillViewport="true"
-    tools:context=".DataAnalytics">
+    tools:context=".activities.DataAnalytics">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout

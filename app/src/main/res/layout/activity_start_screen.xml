@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_colour"
     android:padding= "@dimen/_14sdp"
-    tools:context=".StartScreen">
+    tools:context=".activities.StartScreen">
 
     <TextView
         android:id="@+id/Name"

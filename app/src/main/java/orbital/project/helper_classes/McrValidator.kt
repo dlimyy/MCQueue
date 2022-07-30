@@ -1,6 +1,5 @@
-package orbital.project
+package orbital.project.helper_classes
 
-import android.text.TextUtils
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 

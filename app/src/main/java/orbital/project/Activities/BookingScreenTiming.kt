@@ -1,4 +1,4 @@
-package orbital.project
+package orbital.project.activities
 
 import android.content.Intent
 import java.text.SimpleDateFormat
@@ -10,9 +10,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.SetOptions
+import orbital.project.helper_classes.BookingAdaptor
+import orbital.project.R
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -45,7 +45,7 @@ class BookingScreenTiming : AppCompatActivity() {
         adaptor = BookingAdaptor(timinglist)
         appointmentlist.adapter = adaptor
         database()
-        adaptor.setOnItemClickListener(object : BookingAdaptor.OnItemClickListener{
+        adaptor.setOnItemClickListener(object : BookingAdaptor.OnItemClickListener {
             override fun onItemClick(position: Int) {
                 intent = Intent(this@BookingScreenTiming,
                     BookingConfirmationScreen::class.java)
@@ -71,7 +71,9 @@ class BookingScreenTiming : AppCompatActivity() {
 
     private fun database() {
         val tempTimeArray = ArrayList<String>()
-        val currentDate = Calendar.getInstance().time
+        val timeZone = TimeZone.getTimeZone("GMT+8")
+        TimeZone.setDefault(timeZone)
+        val currentDate = Calendar.getInstance(timeZone).time
         val timeFormatter = SimpleDateFormat("HH:mm", Locale.ENGLISH)
         val currentTime = timeFormatter.format(currentDate)
         val dateFormatter = SimpleDateFormat("dd/MM/yy", Locale.ENGLISH)

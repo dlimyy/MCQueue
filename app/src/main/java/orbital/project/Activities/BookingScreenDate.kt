@@ -1,4 +1,4 @@
-package orbital.project
+package orbital.project.activities
 
 import android.app.DatePickerDialog
 import android.content.Intent
@@ -8,6 +8,8 @@ import android.text.TextUtils
 import android.widget.*
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
+import orbital.project.BookingScreenDoctor
+import orbital.project.R
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -85,7 +87,7 @@ class BookingScreenDate : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         backButton.setOnClickListener {
-            startActivity(Intent(this,BookingActivity::class.java))
+            startActivity(Intent(this, BookingActivity::class.java))
             finish()
         }
     }

@@ -1,22 +1,15 @@
-package orbital.project
+package orbital.project.helper_classes
 
-import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.Registry
-import com.bumptech.glide.annotation.GlideModule
-import com.bumptech.glide.module.AppGlideModule
-import com.firebase.ui.storage.images.FirebaseImageLoader
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
-import java.io.InputStream
+import orbital.project.helper_classes.GlideApp
+import orbital.project.R
 
 
 class SearchDoctorAdaptor(private val docArray : ArrayList<Doctor>)

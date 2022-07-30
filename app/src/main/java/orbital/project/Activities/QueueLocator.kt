@@ -1,14 +1,12 @@
-package orbital.project
+package orbital.project.activities
 
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
-import android.location.Geocoder
 import android.location.Location
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -21,11 +19,13 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.firestore.FirebaseFirestore
+import orbital.project.helper_classes.BitmapHelper
+import orbital.project.helper_classes.MarkerInfo
+import orbital.project.helper_classes.MarkerInfoWindowAdapter
+import orbital.project.R
 import orbital.project.databinding.ActivityQueueLocatorBinding
-import java.util.*
 
 
 class QueueLocator : AppCompatActivity(), OnMapReadyCallback {
@@ -116,7 +116,8 @@ class QueueLocator : AppCompatActivity(), OnMapReadyCallback {
             locationPermissionGranted = true
         } else {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION)
+                PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION
+            )
         }
     }
 

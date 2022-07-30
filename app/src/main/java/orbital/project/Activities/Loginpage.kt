@@ -1,25 +1,11 @@
-package orbital.project
+package orbital.project.activities
 
-import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
 import android.content.Intent
-import android.media.RingtoneManager
-import android.opengl.Visibility
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.Settings
-import android.text.Editable
-import android.text.TextUtils
-import android.text.TextWatcher
-import android.util.Patterns
 import android.view.inputmethod.EditorInfo
 import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
-import androidx.core.app.NotificationCompat.VISIBILITY_PUBLIC
-import androidx.core.widget.addTextChangedListener
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -27,7 +13,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.messaging.FirebaseMessaging
-import java.util.regex.Pattern
+import orbital.project.*
+import orbital.project.helper_classes.EmailValidator
+import orbital.project.helper_classes.PasswordValidator
 
 class Loginpage : AppCompatActivity() {
 
@@ -73,7 +61,7 @@ class Loginpage : AppCompatActivity() {
 
     private fun signUpClickEvent() {
         signup.setOnClickListener {
-            val intent : Intent = Intent(this,RegisterActivity::class.java)
+            val intent : Intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
             finish()
         }
@@ -81,7 +69,7 @@ class Loginpage : AppCompatActivity() {
 
     private fun forgetPasswordClickEvent() {
         forgetpassword.setOnClickListener {
-            val intent : Intent = Intent(this,ForgotPasswordActivity::class.java)
+            val intent : Intent = Intent(this, ForgotPasswordActivity::class.java)
             startActivity(intent)
             finish()
         }
@@ -133,7 +121,10 @@ class Loginpage : AppCompatActivity() {
                                         val intent =
                                             Intent(this, MainActivity::class.java)
                                         startActivity(intent)
-                                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                                        overridePendingTransition(
+                                            R.anim.slide_in_right,
+                                            R.anim.slide_out_left
+                                        )
                                         finish()
                                     }
                                 }

@@ -1,4 +1,4 @@
-package orbital.project
+package orbital.project.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,7 +11,6 @@ import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -19,7 +18,9 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
-import java.util.*
+import orbital.project.helper_classes.Doctor
+import orbital.project.R
+import orbital.project.helper_classes.SearchDoctorAdaptor
 import kotlin.collections.ArrayList
 
 
@@ -59,9 +60,9 @@ class SearchDoctor : AppCompatActivity() {
         doctorRecyclerView.layoutManager = LinearLayoutManager(this)
         adaptor = SearchDoctorAdaptor(filterArray)
         doctorRecyclerView.adapter = adaptor
-        adaptor.setOnItemClickListener(object : SearchDoctorAdaptor.OnItemClickListener{
+        adaptor.setOnItemClickListener(object : SearchDoctorAdaptor.OnItemClickListener {
             override fun onItemClick(position: Int) {
-                intent = Intent(this@SearchDoctor,DoctorProfilePageSearch::class.java)
+                intent = Intent(this@SearchDoctor, DoctorProfilePageSearch::class.java)
                 intent.putExtra("mcrNumber",filterArray[position].mcrNumber)
                 startActivity(intent)
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
@@ -170,12 +171,16 @@ class SearchDoctor : AppCompatActivity() {
             if (task.isSuccessful) {
                 var counter : Int = 0
                 for (doc in task.result) {
-                    docArray.add(Doctor(doc.get("Name") as String,doc.id,
+                    docArray.add(
+                        Doctor(doc.get("Name") as String,doc.id,
                         doc.get("Languages") as ArrayList<String>, doc.get("Gender") as String
-                        ,doc.get("Days") as ArrayList<String>))
-                    filterArray.add(Doctor(doc.get("Name") as String,doc.id,
+                        ,doc.get("Days") as ArrayList<String>)
+                    )
+                    filterArray.add(
+                        Doctor(doc.get("Name") as String,doc.id,
                         doc.get("Languages") as ArrayList<String>, doc.get("Gender") as String
-                        ,doc.get("Days") as ArrayList<String>))
+                        ,doc.get("Days") as ArrayList<String>)
+                    )
                     adaptor.notifyItemInserted(counter)
                     counter++
                 }
@@ -250,9 +255,9 @@ class SearchDoctor : AppCompatActivity() {
         }
         adaptor = SearchDoctorAdaptor(filterArray)
         doctorRecyclerView.adapter = adaptor
-        adaptor.setOnItemClickListener(object : SearchDoctorAdaptor.OnItemClickListener{
+        adaptor.setOnItemClickListener(object : SearchDoctorAdaptor.OnItemClickListener {
             override fun onItemClick(position: Int) {
-                intent = Intent(this@SearchDoctor,DoctorProfilePageSearch::class.java)
+                intent = Intent(this@SearchDoctor, DoctorProfilePageSearch::class.java)
                 intent.putExtra("mcrNumber",filterArray[position].mcrNumber)
                 startActivity(intent)
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)

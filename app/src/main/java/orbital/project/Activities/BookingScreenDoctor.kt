@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.ImageView
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
+import orbital.project.activities.BookingScreenTiming
 
 class BookingScreenDoctor : AppCompatActivity() {
     private lateinit var nextButton: Button

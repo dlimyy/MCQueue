@@ -1,4 +1,4 @@
-package orbital.project
+package orbital.project.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,17 +7,16 @@ import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.util.Log
-import android.util.Patterns
 import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageView
-import android.widget.TextView
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
+import orbital.project.helper_classes.EmailValidator
+import orbital.project.helper_classes.PasswordValidator
+import orbital.project.R
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var registeremail : TextInputEditText
@@ -68,7 +67,7 @@ class RegisterActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        startActivity(Intent(this,Loginpage::class.java))
+        startActivity(Intent(this, Loginpage::class.java))
         finish()
     }
 

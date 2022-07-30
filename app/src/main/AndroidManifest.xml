@@ -33,17 +33,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MCQueue">
         <activity
-            android:name=".DataAnalytics"
+            android:name=".activities.DataAnalytics"
             android:exported="false" />
         <activity
-            android:name=".BookingCancellationConfirmationScreen"
+            android:name=".activities.BookingCancellationConfirmationScreen"
             android:exported="false" />
         <activity
-            android:name=".BookingCancellation"
+            android:name=".activities.BookingCancellation"
             android:exported="false" />
 
         <service
-            android:name=".NotificationService"
+            android:name=".helper_classes.NotificationService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -55,31 +55,31 @@
             android:value="@string/channel_id" />
 
         <activity
-            android:name=".BookingScreenDate"
+            android:name=".activities.BookingScreenDate"
             android:exported="false" />
         <activity
-            android:name=".DoctorProfilePageSearch"
+            android:name=".activities.DoctorProfilePageSearch"
             android:exported="false" />
         <activity
             android:name="com.canhub.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
         <activity
-            android:name=".AddDoctor"
+            android:name=".activities.AddDoctor"
             android:exported="true" />
         <activity
-            android:name=".DoctorsInfo"
+            android:name=".activities.DoctorsInfo"
             android:exported="false" />
         <activity
-            android:name=".BookingConfirmationScreen"
+            android:name=".activities.BookingConfirmationScreen"
             android:exported="false" />
         <activity
-            android:name=".BookingScreenTiming"
+            android:name=".Activities.BookingScreenTiming"
             android:exported="false" />
         <activity
             android:name=".BookingScreenDoctor"
             android:exported="false" />
         <activity
-            android:name=".BookingActivity"
+            android:name=".activities.BookingActivity"
             android:exported="false" />
 
         <meta-data
@@ -90,11 +90,11 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".QueueLocator"
+            android:name=".activities.QueueLocator"
             android:exported="false"
             android:label="@string/title_activity_queue_locator" />
         <activity
-            android:name=".StartScreen"
+            android:name=".activities.StartScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -103,31 +103,31 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".RegisterActivity"
+            android:name=".activities.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".ForgotPasswordActivity"
+            android:name=".activities.ForgotPasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".Loginpage"
+            android:name=".activities.Loginpage"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".DoctorLoginpage"
+            android:name=".activities.DoctorLoginpage"
             android:exported="false" />
         <activity
-            android:name=".DoctorRegisterActivity"
+            android:name=".activities.DoctorRegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".DoctorForgotPasswordActivity"
+            android:name=".activities.DoctorForgotPasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".DoctorHomePage"
+            android:name=".activities.DoctorHomePage"
             android:exported="false" />
         <activity
-            android:name=".SearchDoctor"
+            android:name=".activities.SearchDoctor"
             android:exported="true" />
 
         <meta-data

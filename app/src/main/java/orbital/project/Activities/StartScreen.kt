@@ -1,4 +1,4 @@
-package orbital.project
+package orbital.project.activities
 
 import android.app.Notification
 import android.app.NotificationChannel
@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.provider.Settings
 import android.widget.Button
 import androidx.core.app.NotificationCompat
+import orbital.project.R
 
 class StartScreen : AppCompatActivity() {
     private lateinit var patientlogin : Button

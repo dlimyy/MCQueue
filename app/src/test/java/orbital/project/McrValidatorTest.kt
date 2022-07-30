@@ -1,5 +1,6 @@
 package orbital.project
 
+import orbital.project.helper_classes.McrValidator
 import org.junit.Test
 import org.junit.Assert.*
 import org.junit.runner.RunWith
