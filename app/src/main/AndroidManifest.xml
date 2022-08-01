@@ -73,7 +73,7 @@
             android:name=".activities.BookingConfirmationScreen"
             android:exported="false" />
         <activity
-            android:name=".Activities.BookingScreenTiming"
+            android:name=".activities.BookingScreenTiming"
             android:exported="false" />
         <activity
             android:name=".BookingScreenDoctor"
