@@ -14,9 +14,11 @@
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/drawable/dataanalyticsicon.xml" value="0.136" />
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/drawable/doctor_button.xml" value="0.1275" />
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/drawable/doctoricon.xml" value="0.1295" />
+        <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.11" />
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/drawable/ic_baseline_arrow_back_ios_24.xml" value="0.1" />
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/drawable/ic_baseline_arrow_drop_down_24.xml" value="0.157" />
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/drawable/ic_baseline_calendar_month_24.xml" value="0.144" />
+        <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/drawable/ic_baseline_photo_24.xml" value="0.11" />
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.144" />
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1045" />
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/drawable/lock_48px.xml" value="0.1095" />
@@ -38,6 +40,7 @@
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/font/open_sans_bold.xml" value="0.137890625" />
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/font/open_sans_extrabold.xml" value="0.130078125" />
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/font/open_sans_semibold.xml" value="0.137109375" />
+        <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/font/roboto.xml" value="0.1" />
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/font/sora.xml" value="0.1864864864864865" />
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/font/sora_bold.xml" value="0.130078125" />
         <entry key="..\:/Users/Douglas/AndroidStudioProjects/MCQueue/app/src/main/res/font/work_sans.xml" value="0.130078125" />

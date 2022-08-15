@@ -36,8 +36,8 @@
                 android:iconifiedByDefault="false"
                 android:queryBackground="@android:color/transparent"
                 android:queryHint="Doctor's Name"
-                android:background="@drawable/white_rounded_searchview"
-                android:submitBackground="@drawable/white_rounded_searchview"
+                android:background="@drawable/purple_rounded_searchview"
+                android:submitBackground="@drawable/purple_rounded_searchview"
                 />
 
         </LinearLayout>

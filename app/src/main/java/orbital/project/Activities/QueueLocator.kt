@@ -33,7 +33,6 @@ class QueueLocator : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityQueueLocatorBinding
     private lateinit var db : FirebaseFirestore
-    private lateinit var currentlocation : Location
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private val defaultLocation = LatLng(1.340956, 103.841799)
     private var locationPermissionGranted = false
@@ -47,21 +46,11 @@ class QueueLocator : AppCompatActivity(), OnMapReadyCallback {
         db = FirebaseFirestore.getInstance()
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
@@ -71,10 +60,8 @@ class QueueLocator : AppCompatActivity(), OnMapReadyCallback {
         updateLocationUI()
         getDeviceLocation()
 
-        // creating a variable for document reference.
         val mapCollection = db.collection("Mapdata")
 
-        // calling document reference class with on snap shot listener.
         mapCollection
             .get()
             .addOnSuccessListener { result ->
@@ -105,11 +92,6 @@ class QueueLocator : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun getLocationPermission() {
-        /*
-         * Request location permission, so that we can get the location of the
-         * device. The result of the permission request is handled by a callback,
-         * onRequestPermissionsResult.
-         */
         if (ContextCompat.checkSelfPermission(this.applicationContext,
                 Manifest.permission.ACCESS_FINE_LOCATION)
             == PackageManager.PERMISSION_GRANTED) {
@@ -129,7 +111,6 @@ class QueueLocator : AppCompatActivity(), OnMapReadyCallback {
         when (requestCode) {
             PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION -> {
 
-                // If request is cancelled, the result arrays are empty.
                 if (grantResults.isNotEmpty() &&
                     grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     locationPermissionGranted = true
@@ -160,10 +141,6 @@ class QueueLocator : AppCompatActivity(), OnMapReadyCallback {
 
     @SuppressLint("MissingPermission")
     private fun getDeviceLocation() {
-        /*
-         * Get the best and most recent location of the device, which may be null in rare
-         * cases when a location is not available.
-         */
         try {
             if (locationPermissionGranted) {
                 val locationResult = fusedLocationProviderClient.lastLocation
@@ -194,14 +171,6 @@ class QueueLocator : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        mMap.let { map ->
-            outState.putParcelable(KEY_CAMERA_POSITION, map.cameraPosition)
-            outState.putParcelable(KEY_LOCATION, currentLocation)
-        }
-        super.onSaveInstanceState(outState)
-    }
-
     override fun onBackPressed() {
         super.onBackPressed()
         finish()
@@ -210,10 +179,7 @@ class QueueLocator : AppCompatActivity(), OnMapReadyCallback {
     companion object {
         private const val DEFAULT_ZOOM = 15
         private val TAG = QueueLocator::class.java.simpleName
-        private const val PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1
-
-        private const val KEY_CAMERA_POSITION = "camera_position"
-        private const val KEY_LOCATION = "location"
+        private const val PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 42
     }
 
 }

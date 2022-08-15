@@ -472,7 +472,7 @@ class AddDoctor : AppCompatActivity() {
         ) == PackageManager.PERMISSION_GRANTED
     }
 
-    // Requesting  gallery permission
+    // Requesting gallery permission
     @RequiresApi(api = Build.VERSION_CODES.M)
     private fun requestStoragePermission() {
         requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), STORAGE_REQUEST)

@@ -8,10 +8,8 @@ import com.firebase.ui.storage.images.FirebaseImageLoader
 import com.google.firebase.storage.StorageReference
 import java.io.InputStream
 
-
-// new since Glide v4
 @GlideModule
-class MyAppGlideModule : AppGlideModule() {
+class GlideMod : AppGlideModule() {
     override fun registerComponents(
         context: android.content.Context,
         glide: Glide,

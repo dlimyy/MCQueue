@@ -17,7 +17,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.storage.FirebaseStorage
 import orbital.project.helper_classes.Doctor
 import orbital.project.R
 import orbital.project.helper_classes.SearchDoctorAdaptor
@@ -25,11 +24,6 @@ import kotlin.collections.ArrayList
 
 
 class SearchDoctor : AppCompatActivity() {
-
-    interface MyCallback {
-        fun onCallback(docArray: ArrayList<Doctor>)
-    }
-
 
     private lateinit var doctorRecyclerView : RecyclerView
     private lateinit var adaptor: SearchDoctorAdaptor
@@ -42,7 +36,6 @@ class SearchDoctor : AppCompatActivity() {
     private lateinit var backButton : ImageView
     private var currentSearchText = ""
     private val db = FirebaseFirestore.getInstance()
-    private val storageRef = FirebaseStorage.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,10 +46,7 @@ class SearchDoctor : AppCompatActivity() {
         languagebutton = findViewById(R.id.searchDoctorLanguageButton)
         dayButton = findViewById(R.id.searchDoctorDayButton)
         backButton = findViewById(R.id.navigateSearchDoctorMainActivity)
-        readData(object : MyCallback {
-            override fun onCallback(docArray: ArrayList<Doctor>) {
-            }
-        })
+        readData()
         doctorRecyclerView.layoutManager = LinearLayoutManager(this)
         adaptor = SearchDoctorAdaptor(filterArray)
         doctorRecyclerView.adapter = adaptor
@@ -165,7 +155,7 @@ class SearchDoctor : AppCompatActivity() {
         bottomScreenDialog.show()
     }
 
-    private fun readData(myCallback: MyCallback) {
+    private fun readData() {
 
         db.collection("Doctors").get().addOnCompleteListener { task ->
             if (task.isSuccessful) {
@@ -184,7 +174,6 @@ class SearchDoctor : AppCompatActivity() {
                     adaptor.notifyItemInserted(counter)
                     counter++
                 }
-                myCallback.onCallback(docArray)
 
             } else {
                 Log.d("Error getting documents",task.exception.toString())

@@ -58,9 +58,6 @@ class DataAnalytics : AppCompatActivity() {
     private fun setupPieCharts() {
         agePieChart.isDrawHoleEnabled = true
         agePieChart.setUsePercentValues(true)
-//        agePieChart.setEntryLabelTextSize(resources.getDimension(com.intuit.ssp.R.dimen._8ssp) /
-//                resources.displayMetrics.scaledDensity)
-//        agePieChart.setEntryLabelColor(Color.BLACK)
         agePieChart.setDrawEntryLabels(false)
         agePieChart.centerText = "Age Category"
         agePieChart.setCenterTextSize(resources.getDimension(com.intuit.ssp.R.dimen._16ssp) /

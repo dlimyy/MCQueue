@@ -34,10 +34,7 @@ class DoctorsInfo : AppCompatActivity() {
         backButton = findViewById(R.id.navigateDoctorInfoToHome)
         noDoctorText = findViewById(R.id.noDoctorsIn)
         auth = FirebaseAuth.getInstance()
-        readData(object : SearchDoctor.MyCallback {
-            override fun onCallback(docArray: ArrayList<Doctor>) {
-            }
-        })
+        readData()
         doctorRecyclerView.layoutManager = LinearLayoutManager(this)
         adaptor = SearchDoctorAdaptor(docArray)
         doctorRecyclerView.adapter = adaptor
@@ -62,8 +59,7 @@ class DoctorsInfo : AppCompatActivity() {
         }
     }
 
-    private fun readData(myCallback: SearchDoctor.MyCallback) {
-
+    private fun readData() {
         db.collection("Doctors")
             .whereEqualTo("Clinic uid", auth.currentUser!!.uid).get()
             .addOnCompleteListener { task ->
@@ -79,7 +75,6 @@ class DoctorsInfo : AppCompatActivity() {
                         noDoctorText.visibility = View.GONE
                     }
                     }
-                myCallback.onCallback(docArray)
             } else {
                 Log.d("Error getting documents",task.exception.toString())
             }
